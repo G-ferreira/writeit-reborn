@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\AutorLeitorRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\GeneroRepository")
  */
-class AutorLeitor
+class Genero
 {
     /**
      * @ORM\Id()
@@ -21,20 +21,15 @@ class AutorLeitor
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nome;
+    private $titulo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $email;
+    private $descricao;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $senha;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Historia", mappedBy="idAutor")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Historia", mappedBy="idGenero")
      */
     private $historias;
 
@@ -48,38 +43,26 @@ class AutorLeitor
         return $this->id;
     }
 
-    public function getNome(): ?string
+    public function getTitulo(): ?string
     {
-        return $this->nome;
+        return $this->titulo;
     }
 
-    public function setNome(string $nome): self
+    public function setTitulo(string $titulo): self
     {
-        $this->nome = $nome;
+        $this->titulo = $titulo;
 
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getDescricao(): ?string
     {
-        return $this->email;
+        return $this->descricao;
     }
 
-    public function setEmail(string $email): self
+    public function setDescricao(?string $descricao): self
     {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getSenha(): ?string
-    {
-        return $this->senha;
-    }
-
-    public function setSenha(string $senha): self
-    {
-        $this->senha = $senha;
+        $this->descricao = $descricao;
 
         return $this;
     }
@@ -96,7 +79,7 @@ class AutorLeitor
     {
         if (!$this->historias->contains($historia)) {
             $this->historias[] = $historia;
-            $historia->setIdAutor($this);
+            $historia->addIdGenero($this);
         }
 
         return $this;
@@ -106,10 +89,7 @@ class AutorLeitor
     {
         if ($this->historias->contains($historia)) {
             $this->historias->removeElement($historia);
-            // set the owning side to null (unless already changed)
-            if ($historia->getIdAutor() === $this) {
-                $historia->setIdAutor(null);
-            }
+            $historia->removeIdGenero($this);
         }
 
         return $this;
