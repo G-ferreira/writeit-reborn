@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\AutorLeitor;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,6 +15,6 @@ class LivroController
      */
     public function number()
     {
-        return new JsonResponse(["kkkkkk"=>"kkkkkk"]);
+        return new JsonResponse(["vrum"=>"vrum"]);
     }
 }
