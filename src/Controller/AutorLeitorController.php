@@ -4,7 +4,6 @@
 namespace App\Controller;
 
 
-use App\Entity\AutorLeitor;
 use App\Service\AutorLeitorService\AutorLeitorData;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

@@ -20,10 +20,10 @@ class IndexController extends AbstractController
      */
     public function index()
     {
-        $data = $this->format($this->autorLeitorData->listAll());
+//        $data = $this->format($this->autorLeitorData->listAll());
         return $this->render('index/index.html.twig', [
             'variavel' => 'oiiiiiiiiiiiiiiii',
-            'users' => $data
+            'users' => []
         ]);
     }
 

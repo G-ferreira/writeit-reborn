@@ -39,11 +39,6 @@ class Historia
     private $classificacao;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\AutorLeitor", inversedBy="historias")
-     */
-    private $idAutor;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Categoria", inversedBy="historias")
      */
     private $idCategoria;
@@ -57,6 +52,12 @@ class Historia
      * @ORM\OneToMany(targetEntity="App\Entity\Capitulo", mappedBy="idHistoria")
      */
     private $capitulos;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\LeitorAutor", inversedBy="historias")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idAutor;
 
     public function __construct()
     {
@@ -114,18 +115,6 @@ class Historia
     public function setClassificacao(string $classificacao): self
     {
         $this->classificacao = $classificacao;
-
-        return $this;
-    }
-
-    public function getIdAutor(): ?AutorLeitor
-    {
-        return $this->idAutor;
-    }
-
-    public function setIdAutor(?AutorLeitor $idAutor): self
-    {
-        $this->idAutor = $idAutor;
 
         return $this;
     }
@@ -209,6 +198,18 @@ class Historia
                 $capitulo->setIdHistoria(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdAutor(): ?LeitorAutor
+    {
+        return $this->idAutor;
+    }
+
+    public function setIdAutor(?LeitorAutor $idAutor): self
+    {
+        $this->idAutor = $idAutor;
 
         return $this;
     }

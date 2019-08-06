@@ -3,7 +3,7 @@
 
 namespace App\Service\AutorLeitorService;
 
-use App\Entity\AutorLeitor;
+
 use Doctrine\ORM\EntityManagerInterface;
 
 class AutorLeitorData
@@ -17,19 +17,19 @@ class AutorLeitorData
 
     public function save($nome, $email, $senha)
     {
-        $autorLeitor = new AutorLeitor();
-
-        $autorLeitor->setNome($nome);
-        $autorLeitor->setEmail($email);
-        $autorLeitor->setSenha($senha);
-
-        $this->entityManager->persist($autorLeitor);
-        $this->entityManager->flush();
+//        $autorLeitor = new AutorLeitor();
+//
+//        $autorLeitor->setNome($nome);
+//        $autorLeitor->setEmail($email);
+//        $autorLeitor->setSenha($senha);
+//
+//        $this->entityManager->persist($autorLeitor);
+//        $this->entityManager->flush();
     }
 
     public function listAll()
     {
-        $users = $this->entityManager->getRepository(AutorLeitor::class)->findAll();
-        return $users;
+//        $users = $this->entityManager->getRepository(AutorLeitor::class)->findAll();
+//        return $users;
     }
 }
