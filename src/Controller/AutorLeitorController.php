@@ -5,16 +5,31 @@ namespace App\Controller;
 
 
 use App\Entity\AutorLeitor;
+use App\Service\AutorLeitorService\AutorLeitorData;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AutorLeitorController
 {
-    /**
-     * @Route("/")
-     */
-    public function number()
+    private $autorLeitorData;
+
+    public function __construct(AutorLeitorData $autorLeitorData)
     {
-        return new JsonResponse(["tamoFudido"=>"vrummmmm"]);
+        $this->autorLeitorData = $autorLeitorData;
     }
+
+    /**
+     * @Route("/user/create", methods={"POST"}, name="criaUsuario")
+     */
+    public function create(Request $request)
+    {
+
+        $data= json_decode($request->getContent());
+
+        $this->autorLeitorData->save($data->nome,$data->email,$data->senha);
+
+        return new JsonResponse(["msg"=>"sucesso"]);
+    }
+
 }

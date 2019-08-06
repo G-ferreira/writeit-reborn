@@ -15,5 +15,11 @@
     <ul>
         <li>vai ate o google <code><a href="https://www.google.com">google</a></code></li>
     </ul>
+
+    <ul>
+        {% for user in users %}
+            <li>{{ user.nome }} {{ user.email }}</li>
+        {% endfor %}
+    </ul>
 </div>
 {% endblock %}
