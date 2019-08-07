@@ -9,17 +9,21 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ variavel }}! ✅</h1>
 
+    {% if variavel%}
+        <h1>Hello {{ variavel.email}}! ✅</h1>
+    {% endif %}
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <p>Email: {{ app.user.email }}</p>
+    {% endif %}
     This friendly message is coming from:
     <ul>
         <li>vai ate o google <code><a href="https://www.google.com">google</a></code></li>
     </ul>
 
-    <ul>
-        {% for user in users %}
-            <li>{{ user.nome }} {{ user.email }}</li>
-        {% endfor %}
-    </ul>
 </div>
+    {% if app.user%}
+        <a href="{{path('logout')}}">app.user</a>
+    {% endif %}
 {% endblock %}
