@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'nav.html.twig' %}
 
 {% block title %}Teste{% endblock %}
 
@@ -21,7 +21,6 @@
     <ul>
         <li>vai ate o google <code><a href="https://www.google.com">google</a></code></li>
     </ul>
-
 </div>
     {% if app.user%}
         <a href="{{path('logout')}}">app.user</a>

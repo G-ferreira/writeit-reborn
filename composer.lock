@@ -1,11 +1,47 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3914648c6daa69572124b5c11e2c9714",
+    "content-hash": "c39960f4d4479712e79a6b28906f1d2e",
     "packages": [
+        {
+            "name": "awps/font-awesome-php",
+            "version": "4.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/awps/font-awesome-php.git",
+                "reference": "a395b3b7df3b6970b64cef086bbcc9686625bb60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/awps/font-awesome-php/zipball/a395b3b7df3b6970b64cef086bbcc9686625bb60",
+                "reference": "a395b3b7df3b6970b64cef086bbcc9686625bb60",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Awps\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Andrei Surdu",
+                    "homepage": "http://zerowp.com/"
+                }
+            ],
+            "description": "A PHP library for Font Awesome.",
+            "time": "2017-12-19T19:01:16+00:00"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.6.1",

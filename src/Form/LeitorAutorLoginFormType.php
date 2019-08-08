@@ -22,7 +22,7 @@ class LeitorAutorLoginFormType extends AbstractType
                 'first_options' => array('label'=>'Password'),
                 'second_options' => array('label'=>'Repeat Password')
             ])
-            ->add('save',SubmitType::class,['label' => 'Registar'])
+            ->add('save',SubmitType::class,['label' => 'Registrar'])
         ;
     }
 

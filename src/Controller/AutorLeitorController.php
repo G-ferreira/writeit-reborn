@@ -57,6 +57,7 @@ class AutorLeitorController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {
+
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
@@ -65,4 +66,5 @@ class AutorLeitorController extends AbstractController
             'error'         => $error,
         ));
     }
+
 }
