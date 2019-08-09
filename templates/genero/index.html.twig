@@ -1,0 +1,25 @@
+{% extends 'nav.html.twig' %}
+
+{% block title %}Generos{% endblock %}
+
+{% block body %}
+
+    <style>
+        .container{
+            padding-top: 30px;
+        }
+    </style>
+
+    <div class="container">
+        <h1>Generos</h1>
+        <ul class="list-group">
+            {% for genero in lista %}
+                <li class="list-group-item d-flex justify-content-between">
+                    <a href="/generos/{{ genero.id }}">
+                        {{ genero.titulo|e }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

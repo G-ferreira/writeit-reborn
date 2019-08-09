@@ -1,0 +1,25 @@
+{% extends 'nav.html.twig' %}
+
+{% block title %}Categorias{% endblock %}
+
+{% block body %}
+
+    <style>
+        .container{
+            padding-top: 30px;
+        }
+    </style>
+
+    <div class="container">
+        <h1>Categorias</h1>
+        <ul class="list-group">
+            {% for categoria in lista %}
+                <li class="list-group-item d-flex justify-content-between">
+                    <a href="/categorias/{{ categoria.id }}">
+                        {{ categoria.titulo|e }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

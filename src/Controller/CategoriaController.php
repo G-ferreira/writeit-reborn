@@ -2,42 +2,37 @@
 
 namespace App\Controller;
 
-use App\Repository\GeneroRepository;
+use App\Repository\CategoriaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class GeneroController extends AbstractController
+class CategoriaController extends AbstractController
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
-    private $repository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        GeneroRepository $repository)
+        CategoriaRepository $repository)
     {
         $this->entityManager = $entityManager;
         $this->repository = $repository;
     }
 
     /**
-     * @Route("/generos", methods={"GET"})
+     * @Route("/categorias", methods={"GET"})
      */
     public function buscarTodos(): Response
     {
-        $generoList = $this->repository->findAll();
-        return $this->render('genero/index.html.twig', [
-            'lista' => $generoList,
+        $categoriaList = $this->repository->findAll();
+        return $this->render('categoria/index.html.twig', [
+            'lista' => $categoriaList,
         ]);
     }
 
     /**
-     * @Route("/generos/{id}", methods={"GET"})
+     * @Route("/categorias/{id}", methods={"GET"})
      */
     public function buscarPorId(int $id): Response
     {

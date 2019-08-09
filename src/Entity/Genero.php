@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GeneroRepository")
  */
-class Genero implements \JsonSerializable
+class Genero
 {
     /**
      * @ORM\Id()
@@ -93,14 +93,5 @@ class Genero implements \JsonSerializable
         }
 
         return $this;
-    }
-
-    public function jsonSerialize()
-    {
-        return [
-            'id' => $this->getId(),
-            'titulo' => $this->getTitulo(),
-            'descricao' => $this->getDescricao()
-        ];
     }
 }
