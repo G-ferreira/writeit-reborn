@@ -41,7 +41,7 @@ class Historia
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Categoria", inversedBy="historias")
      */
-    private $idCategoria;
+    private $categoria;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Genero", inversedBy="historias")
@@ -61,7 +61,7 @@ class Historia
 
     public function __construct()
     {
-        $this->idCategoria = new ArrayCollection();
+        $this->categoria = new ArrayCollection();
         $this->genero = new ArrayCollection();
         $this->capitulos = new ArrayCollection();
     }
@@ -122,24 +122,24 @@ class Historia
     /**
      * @return Collection|Categoria[]
      */
-    public function getIdCategoria(): Collection
+    public function getCategoria(): Collection
     {
-        return $this->idCategoria;
+        return $this->categoria;
     }
 
-    public function addIdCategorium(Categoria $idCategorium): self
+    public function addCategorium(Categoria $categorium): self
     {
-        if (!$this->idCategoria->contains($idCategorium)) {
-            $this->idCategoria[] = $idCategorium;
+        if (!$this->categoria->contains($categorium)) {
+            $this->categoria[] = $categorium;
         }
 
         return $this;
     }
 
-    public function removeIdCategorium(Categoria $idCategorium): self
+    public function removeCategorium(Categoria $categorium): self
     {
-        if ($this->idCategoria->contains($idCategorium)) {
-            $this->idCategoria->removeElement($idCategorium);
+        if ($this->categoria->contains($categorium)) {
+            $this->categoria->removeElement($categorium);
         }
 
         return $this;

@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Categoria;
 use App\Entity\Genero;
 use App\Entity\Historia;
 use Symfony\Component\Form\AbstractType;
@@ -20,15 +21,20 @@ class HistoriaCadastroType extends AbstractType
         $builder
             ->add('titulo')
             ->add('sinopse')
-            ->add('status')
+            ->add('status',null ,array(
+                'label' => 'Historia ativa?'
+            ))
             ->add('classificacao')
-            //->add('idCategoria')
+            ->add('categoria', EntityType::class, [
+                'multiple' => true,
+                'expanded' => true,
+                'class'    => Categoria::class
+            ])
             ->add('genero', EntityType::class, [
                 'multiple' => true,
                 'expanded' => true,
                 'class'    => Genero::class
             ])
-            //->add('idAutor')
             ->add('save',SubmitType::class,['label' => 'Concluir'])
         ;
     }
