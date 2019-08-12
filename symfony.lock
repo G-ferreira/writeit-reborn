@@ -81,6 +81,15 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "friendsofsymfony/ckeditor-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "8eb1cd0962ded6a6d6e1e5a9b6d3e888f9f94ff6"
+        }
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -113,6 +122,9 @@
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "symfony/asset": {
+        "version": "v4.3.3"
     },
     "symfony/cache": {
         "version": "v4.3.2"
@@ -153,6 +165,9 @@
     },
     "symfony/event-dispatcher-contracts": {
         "version": "v1.1.5"
+    },
+    "symfony/expression-language": {
+        "version": "v4.3.3"
     },
     "symfony/filesystem": {
         "version": "v4.3.2"
