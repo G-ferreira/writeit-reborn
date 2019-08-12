@@ -56,10 +56,11 @@
         <form class="form-inline my-2 my-lg-0">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <a href="#">{{ app.user.email }} </a>
-            {% endif %}
-            <a href="/historia/create" class="btn btn-sm btn-info">Escrever História</a>
-            {% if app.user%}
+                <a href="{{ path('historiaCreate') }}" class="btn btn-sm btn-info">Escrever História</a>
                 <a href="{{path('logout')}}" class="btn btn-sm btn-primary">Sair</a>
+            {% endif %}
+            {% if not app.user%}
+                <a href="{{path('login')}}" class="btn btn-sm btn-primary">Entrar</a>
             {% endif %}
         </form>
     </div>

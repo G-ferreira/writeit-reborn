@@ -44,7 +44,7 @@ class AutorLeitorController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('autorLeitor/autorLeitor.html.twig',[

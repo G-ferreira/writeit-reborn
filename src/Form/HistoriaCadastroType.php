@@ -2,11 +2,16 @@
 
 namespace App\Form;
 
+use App\Entity\Genero;
 use App\Entity\Historia;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Form\FormInterface;
 
 class HistoriaCadastroType extends AbstractType
 {
@@ -18,7 +23,11 @@ class HistoriaCadastroType extends AbstractType
             ->add('status')
             ->add('classificacao')
             //->add('idCategoria')
-            //->add('idGenero')
+            ->add('genero', EntityType::class, [
+                'multiple' => true,
+                'expanded' => true,
+                'class'    => Genero::class
+            ])
             //->add('idAutor')
             ->add('save',SubmitType::class,['label' => 'Concluir'])
         ;
