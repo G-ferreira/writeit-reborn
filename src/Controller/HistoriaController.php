@@ -42,7 +42,7 @@ class HistoriaController extends AbstractController
     {
         $user = $this->security->getUser();
         if(!$user){
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('home');
         }
 
         $historia = new Historia();
