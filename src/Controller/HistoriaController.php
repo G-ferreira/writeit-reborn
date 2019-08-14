@@ -10,23 +10,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+use Doctrine\ORM\EntityManagerInterface;
 
 
 class HistoriaController extends AbstractController
 {
-
+    private $entityManager;
     private $autorLeitorData;
     private $security;
 
-    public function __construct(AutorLeitorData $autorLeitorData, Security $security)
+    public function __construct(EntityManagerInterface $entityManager, AutorLeitorData $autorLeitorData, Security $security)
     {
         $this->autorLeitorData = $autorLeitorData;
         $this->security = $security;
+        $this->entityManager = $entityManager;
     }
 
 
     /**
-     * @Route("/historia", name="historias")
+     * @Route("/historia", name="historia")
      */
     public function index()
     {
@@ -63,6 +65,35 @@ class HistoriaController extends AbstractController
 
         return $this->render('historia/historia.html.twig',[
            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/historias", name="historias")
+     */
+    public function list()
+    {
+        $historias = $this->entityManager->getRepository(Historia::class)->findAll();
+
+        return $this->render('historia/historiaslist.html.twig', [
+            'historias' => $historias
+        ]);
+    }
+
+    /**
+     * @Route("/myHistorias", name="myHistorias")
+     */
+    public function myList()
+    {
+        $user = $this->security->getUser();
+        if(!$user){
+            return $this->redirectToRoute('home');
+        }
+
+        $historias = $this->entityManager->getRepository(Historia::class)->findBy(["idAutor" => $user->getId()]);
+
+        return $this->render('historia/historiaslist.html.twig', [
+            'historias' => $historias
         ]);
     }
 }
