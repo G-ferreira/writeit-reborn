@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Genero;
 use App\Repository\GeneroRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,11 +19,9 @@ class GeneroController extends AbstractController
     private $repository;
 
     public function __construct(
-        EntityManagerInterface $entityManager,
-        GeneroRepository $repository)
+        EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->repository = $repository;
     }
 
     /**
@@ -30,7 +29,7 @@ class GeneroController extends AbstractController
      */
     public function buscarTodos(): Response
     {
-        $generoList = $this->repository->findAll();
+        $generoList = $this->entityManager->getRepository(Genero::class)->findAll();
         return $this->render('genero/index.html.twig', [
             'lista' => $generoList,
         ]);
@@ -41,6 +40,6 @@ class GeneroController extends AbstractController
      */
     public function buscarPorId(int $id): Response
     {
-        return new JsonResponse($this->repository->find($id));
+        return new JsonResponse($this->entityManager->getRepository(Genero::class)->find($id));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Categoria;
 use App\Repository\CategoriaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,11 +14,9 @@ class CategoriaController extends AbstractController
 {
 
     public function __construct(
-        EntityManagerInterface $entityManager,
-        CategoriaRepository $repository)
+        EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->repository = $repository;
     }
 
     /**
@@ -25,7 +24,7 @@ class CategoriaController extends AbstractController
      */
     public function buscarTodos(): Response
     {
-        $categoriaList = $this->repository->findAll();
+        $categoriaList = $this->entityManager->getRepository(Categoria::class)->findAll();
         return $this->render('categoria/index.html.twig', [
             'lista' => $categoriaList,
         ]);
@@ -36,6 +35,6 @@ class CategoriaController extends AbstractController
      */
     public function buscarPorId(int $id): Response
     {
-        return new JsonResponse($this->repository->find($id));
+        return new JsonResponse($this->entityManager->getRepository(Categoria::class)->find($id));
     }
 }
