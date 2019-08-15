@@ -4,22 +4,32 @@
 namespace App\Controller;
 
 
+use App\Entity\Historia;
 use App\Entity\LeitorAutor;
 use App\Form\LeitorAutorLoginFormType;
 use App\Service\AutorLeitorService\AutorLeitorData;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AutorLeitorController extends AbstractController
 {
 
-    public function __construct()
-    {
+    private $entityManager;
+    private $autorLeitorData;
+    private $security;
 
+    public function __construct(EntityManagerInterface $entityManager, AutorLeitorData $autorLeitorData, Security $security)
+    {
+        $this->autorLeitorData = $autorLeitorData;
+        $this->security = $security;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -65,6 +75,47 @@ class AutorLeitorController extends AbstractController
             'last_username' => $lastUsername,
             'error'         => $error,
         ));
+    }
+
+    /**
+     * @Route("/perfil", name="perfil")
+     */
+    public function perfil()
+    {
+        $user = $this->security->getUser();
+        if(!$user){
+            return $this->redirectToRoute('home');
+        }
+
+        $historias = $this->entityManager->getRepository(Historia::class)->findBy(["idAutor" => $user->getId()]);
+
+        return $this->render('autorLeitor/perfil.html.twig', [
+            'historias' => $historias
+        ]);
+
+    }
+
+    /**
+     * @Route("/autores", name="autores")
+     */
+    public function buscarTodos(): Response
+    {
+        $categoriaList = $this->entityManager->getRepository(LeitorAutor::class)->findAll();
+        return $this->render('autorLeitor/lista-autores.html.twig', [
+            'lista' => $categoriaList,
+        ]);
+    }
+
+    /**
+     * @Route("/autores/{id}", methods={"GET"})
+     */
+    public function buscarPorId(int $id): Response
+    {
+        $historias = $this->entityManager->getRepository(Historia::class)->findBy(["idAutor" => $id]);
+
+        return $this->render('autorLeitor/perfil.html.twig', [
+            'historias' => $historias
+        ]);
     }
 
 }

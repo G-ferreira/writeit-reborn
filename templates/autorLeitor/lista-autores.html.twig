@@ -1,0 +1,25 @@
+{% extends 'nav.html.twig' %}
+
+{% block title %}Autores{% endblock %}
+
+{% block body %}
+
+    <style>
+        .container{
+            padding-top: 30px;
+        }
+    </style>
+
+    <div class="container">
+        <h1>Autores</h1>
+        <ul class="list-group">
+            {% for autor in lista %}
+                <li class="list-group-item d-flex justify-content-between">
+                    <a href="/autores/{{ autor.id }}">
+                        {{ autor.email|e }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

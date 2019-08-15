@@ -16,7 +16,6 @@ class GeneroController extends AbstractController
      * @var EntityManagerInterface
      */
     private $entityManager;
-    private $repository;
 
     public function __construct(
         EntityManagerInterface $entityManager)

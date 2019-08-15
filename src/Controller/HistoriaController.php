@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Capitulo;
 use App\Entity\Historia;
 use App\Entity\LeitorAutor;
 use App\Form\HistoriaCadastroType;
@@ -94,6 +95,21 @@ class HistoriaController extends AbstractController
 
         return $this->render('historia/historiaslist.html.twig', [
             'historias' => $historias
+        ]);
+    }
+
+    /**
+     * @Route("/historia/{id}", name="historiaPorId")
+     */
+    public function historiaHome(int $id)
+    {
+        $historia = $this->entityManager->getRepository(Historia::class)->find($id);
+
+        $capitulos = $this->entityManager->getRepository(Capitulo::class)->findBy(["idHistoria" => $id]);
+
+        return $this->render('historia/index.html.twig', [
+            'historia' => $historia,
+            'capitulos' =>$capitulos
         ]);
     }
 }
