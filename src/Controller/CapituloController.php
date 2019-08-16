@@ -37,21 +37,21 @@ class CapituloController extends AbstractController
     }
 
     /**
-     * @Route("/capitulo/{id}", name="capituloPorId", methods={"GET"}))
-     */
-    public function capituloHome(int $id)
-    {
-        $capitulo = $this->entityManager->getRepository(Capitulo::class)->find($id);
-
-        return $this->render('capitulo/index.html.twig', [
-            'capitulo' => $capitulo,
-        ]);
-    }
+//     * @Route("/capitulo/{id}", name="capituloPorId", methods={"GET"}))
+//     */
+//    public function capituloHome(int $id)
+//    {
+//        $capitulo = $this->entityManager->getRepository(Capitulo::class)->find($id);
+//
+//        return $this->render('capitulo/index.html.twig', [
+//            'capitulo' => $capitulo,
+//        ]);
+//    }
 
     /**
-     * @Route("/capitulo/create/{id}", name="historiaCreate", methods={"POST"})
+     * @Route("/capitulo/create", name="cepituloCreate", methods={"GET"})
     */
-    public function create(Request $request,int $id)
+    public function create(Request $request)
     {
         $user = $this->security->getUser();
         if(!$user){
@@ -67,9 +67,9 @@ class CapituloController extends AbstractController
         {
             $entityManager = $this->getDoctrine()->getManager();
 
-            $historia = $this->entityManager->getRepository(Historia::class)->find($id);
+            $historia = $this->entityManager->getRepository(Historia::class)->find(1);
 
-            $capitulo->setIdHistoria($historia);
+            $capitulo->setIdHistoria($historia->getId());
 
             $entityManager->persist($capitulo);
             $entityManager->flush();
