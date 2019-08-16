@@ -188,85 +188,85 @@
         }
 
     </style>
-    <div class="container">
-        <div class="row">
-            {% for historia in historias %}
-                <div class="col">
-                    <div class="card">
-                        <div class="additional">
-                            <div class="user-card">
-                                <div class="level center">
-                                    vrummmmmm
-                                </div>
-                                <div class="points center">
-                                    5,312 Points
-                                </div>
-                                <img width="110" height="200" src="https://webkit.org/demos/srcset/image-src.png" class="center logo">
-
+<div class="container">
+    <div class="row">
+        {% for historia in historias %}
+            <div class="col">
+                <div class="card">
+                    <div class="additional">
+                        <div class="user-card">
+                            <div class="level center">
+                                vrummmmmm
                             </div>
-                            <a href="/historia/{{ historia.getId }}">
-                                <div class="more-info">
-                                    <h1>{{ historia.getTitulo }}</h1>
-                                    <div class="coords">
-                                        <span>Group Name</span>
-                                        <span>Joined January 2019</span>
+                            <div class="points center">
+                                5,312 Points
+                            </div>
+                            <img width="110" height="200" src="https://webkit.org/demos/srcset/image-src.png" class="center logo">
+
+                        </div>
+                        <a href="/historia/{{ historia.getId }}">
+                            <div class="more-info">
+                                <h1>{{ historia.getTitulo }}</h1>
+                                <div class="coords">
+                                    <span>Group Name</span>
+                                    <span>Joined January 2019</span>
+                                </div>
+                                <div class="coords">
+                                    <span>Position/Role</span>
+                                    <span>City, Country</span>
+                                </div>
+                                <div class="stats">
+                                    <div>
+                                        <div class="title">Finalizada?</div>
+                                        <i class="fa fa-trophy"></i>
+                                        <div class="value">{% if  historia.getStatus == 1 %}
+                                                Sim
+                                            {% else %}
+                                                Nao
+                                            {% endif %}
+                                        </div>
                                     </div>
-                                    <div class="coords">
-                                        <span>Position/Role</span>
-                                        <span>City, Country</span>
+                                    <div>
+                                        <div class="title">Matches</div>
+                                        <i class="fa fa-gamepad"></i>
+                                        <div class="value">27</div>
                                     </div>
-                                    <div class="stats">
-                                        <div>
-                                            <div class="title">Finalizada?</div>
-                                            <i class="fa fa-trophy"></i>
-                                            <div class="value">{% if  historia.getStatus == 1 %}
-                                                    Sim
-                                                {% else %}
-                                                    Nao
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="title">Matches</div>
-                                            <i class="fa fa-gamepad"></i>
-                                            <div class="value">27</div>
-                                        </div>
-                                        <div>
-                                            <div class="title">Pals</div>
-                                            <i class="fa fa-group"></i>
-                                            <div class="value">123</div>
-                                        </div>
-                                        <div>
-                                            <div class="title">Coffee</div>
-                                            <i class="fa fa-coffee"></i>
-                                            <div class="value infinity">∞</div>
-                                        </div>
+                                    <div>
+                                        <div class="title">Pals</div>
+                                        <i class="fa fa-group"></i>
+                                        <div class="value">123</div>
+                                    </div>
+                                    <div>
+                                        <div class="title">Coffee</div>
+                                        <i class="fa fa-coffee"></i>
+                                        <div class="value infinity">∞</div>
                                     </div>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="general">
-                            <h1>{{ historia.getTitulo }}</h1>
-                            <p>{{ historia.getSinopse }}.</p>
-                            <span class="more">Mouse over the card for more info</span>
-                        </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="general">
+                        <h1>{{ historia.getTitulo }}</h1>
+                        <p>{{ historia.getSinopse }}.</p>
+                        <span class="more">Mouse over the card for more info</span>
+                    </div>
 
 
-                        <div>
-                            <h2></h2><br>
-                            <h3>Sinopse</h3>
-                            <p></p><br>
-                            <h3>Status</h3>
-                            <p></p><br>
-                            <h3>Classificacao</h3>
-                            <p>{{ historia.getClassificacao }}</p><br>
-                        </div>
+                    <div>
+                        <h2></h2><br>
+                        <h3>Sinopse</h3>
+                        <p></p><br>
+                        <h3>Status</h3>
+                        <p></p><br>
+                        <h3>Classificacao</h3>
+                        <p>{{ historia.getClassificacao }}</p><br>
                     </div>
                 </div>
-            {% endfor %}
-            {% endblock %}
-        </div>
+            </div>
+        {% endfor %}
+        {% endblock %}
     </div>
+</div>
 {% endblock %}
 </body>
 </html>

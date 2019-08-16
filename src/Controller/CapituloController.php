@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Capitulo;
+use App\Entity\Historia;
 use App\Form\CapituloCadastroFormType;
 use App\Service\AutorLeitorService\AutorLeitorData;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,7 +27,7 @@ class CapituloController extends AbstractController
     }
 
     /**
-     * @Route("/capitulo", name="capitulo")
+     * @Route("/capitulo", name="capitulo", methods={"GET"})
      */
     public function index()
     {
@@ -36,7 +37,7 @@ class CapituloController extends AbstractController
     }
 
     /**
-     * @Route("/capitulo/{id}", name="capituloPorId")
+     * @Route("/capitulo/{id}", name="capituloPorId", methods={"GET"}))
      */
     public function capituloHome(int $id)
     {
@@ -48,8 +49,8 @@ class CapituloController extends AbstractController
     }
 
     /**
-     * @Route("/capitulo/create/{id}", name="capituloPorId")
-
+     * @Route("/capitulo/create/{id}", name="historiaCreate", methods={"POST"})
+    */
     public function create(Request $request,int $id)
     {
         $user = $this->security->getUser();
@@ -65,7 +66,10 @@ class CapituloController extends AbstractController
         if ($form->isSubmitted() && $form->isValid())
         {
             $entityManager = $this->getDoctrine()->getManager();
-            $capitulo->setIdHistoria($id);
+
+            $historia = $this->entityManager->getRepository(Historia::class)->find($id);
+
+            $capitulo->setIdHistoria($historia);
 
             $entityManager->persist($capitulo);
             $entityManager->flush();
@@ -77,5 +81,5 @@ class CapituloController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-     * */
+
 }

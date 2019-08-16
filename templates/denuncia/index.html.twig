@@ -1,0 +1,33 @@
+{% extends 'nav.html.twig' %}
+
+{% block title %}Denúncia{% endblock %}
+
+{% block body %}
+
+    <style>
+        .container{
+            padding-top: 30px;
+        }
+
+        h4{
+            padding-bottom: 10px;
+        }
+
+        button{
+           float: right;
+        }
+    </style>
+
+    <div class="container">
+        <h4>Denúncia</h4>
+        <form>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Explique o motivo da denúncia</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+
+            <button class="btn btn-primary">Enviar Denúncia</button>
+        </form>
+    </div>
+
+{% endblock %}

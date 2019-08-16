@@ -4,6 +4,16 @@
 
 {% block body %}
 
+    <style>
+        h4,h5{
+            text-align: center;
+        }
+
+        p{
+            text-align: center;
+        }
+    </style>
+
     <div class="d-flex flex-column bd-highlight mb-3">
         <div class="p-2 bd-highlight">
             <ul class="list-group">
@@ -12,7 +22,7 @@
                         Historia
                     </h4>
                     <span>
-                    <a href="" class="btn btn-info btn-sm">
+                    <a href="/denuncia" class="btn btn-info btn-sm">
                         Denunciar História
                     </a>
                 </span>
@@ -42,27 +52,23 @@
                     </h4>
                     <span>
                     <h4>
-                        Status: {{ historia.getStatus }}
+                        Status:{% if  historia.getStatus == 1 %}
+                            Concluída
+                        {% else %}
+                            Em andamento
+                        {% endif %}
                     </h4>
                 </span>
                 </li>
             </ul>
         </div>
         <div class="p-2 bd-highlight">
-            <div class="p-2 bd-highlight">
-                <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between">
-                        <ul class="list-group">
-                            {% for capitulo in capitulos %}
-                                <li class="list-group-item d-flex justify-content-between">
-                                    <a href="/capitulo/{{ capitulo.id }}">
-                                        {{ capitulo.titulo|e }}
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                </ul>
+            <div class="list-group">
+                {% for capitulo in capitulos %}
+                    <a href="/capitulo/{{ capitulo.id }}" class="list-group-item list-group-item-action">
+                        {{ capitulo.titulo|e }}
+                    </a>
+                {% endfor %}
             </div>
         </div>
     </div>
