@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use \DateTime;
 use App\Entity\Capitulo;
 use App\Entity\Historia;
 use App\Form\CapituloCadastroFormType;
@@ -37,7 +36,7 @@ class CapituloController extends AbstractController
         ]);
     }
 
-     /**
+    /**
      * @Route("/capitulo/{id}", name="capituloPorId", methods={"GET"}))
      */
     public function capituloHome(int $id)
@@ -50,7 +49,7 @@ class CapituloController extends AbstractController
     }
 
     /**
-     * @Route("/capitulo/create", name="cepituloCreate", methods={"POST"})
+     * @Route("/capitulos/create", name="cepituloCreate", methods={"GET"})
     */
     public function create(Request $request)
     {
@@ -68,7 +67,10 @@ class CapituloController extends AbstractController
         {
             $entityManager = $this->getDoctrine()->getManager();
 
-            $capitulo->setDataPublicacao( new DateTime("now"));
+            $historia = $this->entityManager->getRepository(Historia::class)->find(1);
+
+            $capitulo->setIdHistoria($historia->getId());
+
             $entityManager->persist($capitulo);
             $entityManager->flush();
 
