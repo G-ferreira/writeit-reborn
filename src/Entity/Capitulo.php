@@ -33,6 +33,7 @@ class Capitulo
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Historia", inversedBy="capitulos")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $idHistoria;
 

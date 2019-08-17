@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use \DateTime;
 use App\Entity\Capitulo;
 use App\Entity\Historia;
 use App\Form\CapituloCadastroFormType;
@@ -39,17 +40,17 @@ class CapituloController extends AbstractController
     /**
 //     * @Route("/capitulo/{id}", name="capituloPorId", methods={"GET"}))
 //     */
-//    public function capituloHome(int $id)
-//    {
-//        $capitulo = $this->entityManager->getRepository(Capitulo::class)->find($id);
-//
-//        return $this->render('capitulo/index.html.twig', [
-//            'capitulo' => $capitulo,
-//        ]);
-//    }
+    public function capituloHome(int $id)
+    {
+        $capitulo = $this->entityManager->getRepository(Capitulo::class)->find($id);
+
+        return $this->render('capitulo/index.html.twig', [
+            'capitulo' => $capitulo,
+        ]);
+    }
 
     /**
-     * @Route("/capitulo/create", name="cepituloCreate", methods={"GET"})
+     * @Route("/capitulo/create", name="cepituloCreate", methods={"POST"})
     */
     public function create(Request $request)
     {
@@ -67,10 +68,7 @@ class CapituloController extends AbstractController
         {
             $entityManager = $this->getDoctrine()->getManager();
 
-            $historia = $this->entityManager->getRepository(Historia::class)->find(1);
-
-            $capitulo->setIdHistoria($historia->getId());
-
+            $capitulo->setDataPublicacao( new DateTime("now"));
             $entityManager->persist($capitulo);
             $entityManager->flush();
 
