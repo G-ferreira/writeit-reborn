@@ -16,4 +16,14 @@ class DenunciaController extends AbstractController
             'controller_name' => 'DenunciaController',
         ]);
     }
+
+    /**
+     * @Route("/denuncia/sucesso", name="denunciaSucesso")
+     */
+    public function denunciaSucesso()
+    {
+        return $this->render('denuncia/denuncia-sucesso.html.twig', [
+
+        ]);
+    }
 }

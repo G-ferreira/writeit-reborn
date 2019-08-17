@@ -118,4 +118,14 @@ class AutorLeitorController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/configuracao", name="configuracao")
+     */
+    public function configuracao()
+    {
+        return $this->render('autorLeitor/configuracao-autor.html.twig', [
+
+        ]);
+    }
+
 }

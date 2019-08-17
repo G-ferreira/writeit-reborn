@@ -37,16 +37,16 @@ class CapituloController extends AbstractController
     }
 
     /**
-//     * @Route("/capitulo/{id}", name="capituloPorId", methods={"GET"}))
-//     */
-//    public function capituloHome(int $id)
-//    {
-//        $capitulo = $this->entityManager->getRepository(Capitulo::class)->find($id);
-//
-//        return $this->render('capitulo/index.html.twig', [
-//            'capitulo' => $capitulo,
-//        ]);
-//    }
+     * @Route("/capitulo/{id}", name="capituloPorId", methods={"GET"}))
+     */
+    public function capituloHome(int $id)
+    {
+        $capitulo = $this->entityManager->getRepository(Capitulo::class)->find($id);
+
+        return $this->render('capitulo/index.html.twig', [
+            'capitulo' => $capitulo,
+        ]);
+    }
 
     /**
      * @Route("/capitulo/create", name="cepituloCreate", methods={"GET"})
