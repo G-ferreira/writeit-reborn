@@ -15,11 +15,14 @@
                     <h4>
                         Capitulo
                     </h4>
-                    <span>
-                    <h4>
-                        customizacao
-                    </h4>
-                </span>
+                    <ul class="nav justify-content-end">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#"><i class="fas fa-font"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fas fa-adjust"></i></a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -33,10 +36,15 @@
                 </p>
             </div>
         </div>
-        <div class="d-flex justify-content-end">
-            <a href="" class="btn btn-info btn-sm">
-                Próximo Capítulo
-            </a>
+        <div class="d-flex flex-column bd-highlight mb-3">
+            <div class="p-2 bd-highlight">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <a href=""><i class="fas fa-arrow-left"></i></a>
+                        <a href=""><i class="fas fa-arrow-right"></i></a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 {% endblock %}

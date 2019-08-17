@@ -37,9 +37,9 @@ class CapituloController extends AbstractController
         ]);
     }
 
-    /**
-//     * @Route("/capitulo/{id}", name="capituloPorId", methods={"GET"}))
-//     */
+     /**
+     * @Route("/capitulo/{id}", name="capituloPorId", methods={"GET"}))
+     */
     public function capituloHome(int $id)
     {
         $capitulo = $this->entityManager->getRepository(Capitulo::class)->find($id);
