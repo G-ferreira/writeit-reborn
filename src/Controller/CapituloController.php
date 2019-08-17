@@ -6,6 +6,7 @@ use App\Entity\Capitulo;
 use App\Entity\Historia;
 use App\Form\CapituloCadastroFormType;
 use App\Service\AutorLeitorService\AutorLeitorData;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -49,7 +50,7 @@ class CapituloController extends AbstractController
     }
 
     /**
-     * @Route("/capitulos/create", name="cepituloCreate", methods={"GET"})
+     * @Route("/capitulos/create", name="cepituloCreate")
     */
     public function create(Request $request)
     {
@@ -67,10 +68,7 @@ class CapituloController extends AbstractController
         {
             $entityManager = $this->getDoctrine()->getManager();
 
-            $historia = $this->entityManager->getRepository(Historia::class)->find(1);
-
-            $capitulo->setIdHistoria($historia->getId());
-
+            $capitulo->setDataPublicacao( new DateTime("now"));
             $entityManager->persist($capitulo);
             $entityManager->flush();
 
