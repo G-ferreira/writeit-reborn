@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Genero;
+use App\Entity\Historia;
 use App\Repository\GeneroRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,6 +40,10 @@ class GeneroController extends AbstractController
      */
     public function buscarPorId(int $id): Response
     {
-        return new JsonResponse($this->entityManager->getRepository(Genero::class)->find($id));
+        $historias = $this->entityManager->getRepository(Historia::class)->findAll();
+
+        return $this->render('genero/generos-historias.html.twig', [
+            'historias' => $historias
+        ]);
     }
 }

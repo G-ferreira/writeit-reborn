@@ -7,44 +7,145 @@
         h4,h5,p{
             text-align: center;
         }
+
+        ul.nav.justify-content-end{
+            margin: 20px;
+        }
+
+        :root {
+            --background: var(--white);
+            --content: var(--dark);
+            --content-alt: var(--gray);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background: var(--dark);
+                --content: var(--white);
+                --content-alt: var(--gray);
+            }
+        }
+
+        body.theme--light {
+            --background: var(--white);
+        }
+        body.theme--dark {
+            --background: var(--dark);
+            color: #ffffff;
+        }
+
+        body.theme {
+            background-color: var(--background);
+        }
+
     </style>
+
+    <div class="container">
     <div class="d-flex flex-column bd-highlight mb-3">
-        <div class="p-2 bd-highlight">
-            <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between">
-                    <h4>
-                        Capitulo
-                    </h4>
-                    <ul class="nav justify-content-end">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#"><i class="fas fa-font"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fas fa-adjust"></i></a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
         <div class="d-flex justify-content-center">
             <div class="d-flex flex-column bd-highlight mb-3">
+
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <button class="btn btn-outline-secondary" id="up"><i class="fas fa-plus"></i></button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-secondary" id="down"><i class="fas fa-minus"></i></button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-secondary" id="escuro"><i class="fas fa-moon"></i></button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-secondary" id="claro"><i class="far fa-lightbulb"></i></button>
+                    </li>
+                </ul>
+                <div id="divContent">
                 <h4>{{ capitulo.getTitulo }}</h4>
                 <h5 class="font-weight-light">01/01/2001</h5>
 
                 <p>
                     {{ capitulo.getTexto | raw }}
                 </p>
-            </div>
-        </div>
-        <div class="d-flex flex-column bd-highlight mb-3">
-            <div class="p-2 bd-highlight">
-                <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between">
-                        <a href=""><i class="fas fa-arrow-left"></i></a>
-                        <a href=""><i class="fas fa-arrow-right"></i></a>
+                </div>
+                <ul class="nav justify-content-between">
+                    <li class="nav-item">
+                        <button class="btn btn-outline-secondary"><i class="fas fa-arrow-left"></i></button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-secondary" id="escuro"><i class="fas fa-arrow-right"></i></button>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
+    </div>
+
+    <script type="text/javascript">
+        {
+            let currentTheme = "light";
+
+            const updateBtn = (className, theme) => {
+                let btns = [...document.querySelectorAll(className)];
+                let currentTheme = className.split("-").pop();
+                let classNameText = className.replace(/\./g, "");
+                let classNameUpdated = classNameText.replace(currentTheme, theme);
+                btns.forEach((btn) => {
+                    btn.classList.remove(classNameText);
+                    btn.classList.add(classNameUpdated);
+                });
+            }
+
+            const setLightTheme = () => {
+                currentTheme = 'light';
+                document.body.classList.add('theme--light');
+                document.body.classList.remove('theme--dark');
+                updateBtn('.btn-light', 'dark');
+                updateBtn('.btn-outline-light', 'dark');
+            }
+
+            const setDarkTheme = () => {
+                currentTheme = 'dark';
+                document.body.classList.add('theme--dark');
+                document.body.classList.remove('theme--light');
+                updateBtn('.btn-dark', 'light');
+                updateBtn('.btn-outline-dark', 'light');
+            }
+
+
+
+            document.body.classList.add("theme");
+
+            document.getElementById('claro')
+                .addEventListener('click', setLightTheme);
+            document.getElementById('escuro')
+                .addEventListener('click', setDarkTheme);
+
+        }
+
+        function getSize() {
+            size = $( "p" ).css( "font-size" );
+            size = parseInt(size, 10);
+            $( "#font-size" ).text(  size  );
+        }
+
+        //get inital font size
+        getSize();
+
+        $( "#up" ).on( "click", function() {
+
+            // parse font size, if less than 50 increase font size
+            if ((size + 2) <= 50) {
+                $( "p" ).css( "font-size", "+=2" );
+                $( "#font-size" ).text(  size += 2 );
+            }
+        });
+
+        $( "#down" ).on( "click", function() {
+            if ((size - 2) >= 12) {
+                $( "p" ).css( "font-size", "-=2" );
+                $( "#font-size" ).text(  size -= 2  );
+            }
+        });
+
+    </script>
 {% endblock %}

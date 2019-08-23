@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Categoria;
+use App\Entity\Historia;
 use App\Repository\CategoriaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,6 +36,10 @@ class CategoriaController extends AbstractController
      */
     public function buscarPorId(int $id): Response
     {
-        return new JsonResponse($this->entityManager->getRepository(Categoria::class)->find($id));
+        $historias = $this->entityManager->getRepository(Historia::class)->findAll();
+
+        return $this->render('categoria/categorias-historias.html.twig', [
+            'historias' => $historias
+        ]);
     }
 }

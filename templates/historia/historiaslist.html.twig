@@ -38,7 +38,7 @@
             position: absolute;
             width: 150px;
             height: 100%;
-            background: linear-gradient(#744e89, #842489);
+            background: linear-gradient(#744e89, #fccdf3);
             transition: width 0.4s;
             overflow: hidden;
             z-index: 2;
@@ -192,11 +192,16 @@
         h1,h4{
             text-align: center;
         }
+
+        botao-capitulo{
+            text-align: center;
+        }
         
     </style>
 
     <div class="container">
         <h1 class="display-4">Minhas Histórias</h1>
+        <a href="/capitulos/create" class="btn btn-primary" id="botao-capitulo">Inserir Capítulo</a>
         <div class="row">
             {% for historia in historias %}
                 <div class="col">

@@ -1,7 +1,4 @@
 {
-    "awps/font-awesome-php": {
-        "version": "4.7.0"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {

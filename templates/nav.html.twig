@@ -26,11 +26,11 @@
     </style>
 
     <!-- example 7 - center on mobile 2-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="d-flex flex-grow-1">
             <span class="w-100 d-lg-none d-block"><!-- hidden spacer to center brand on mobile --></span>
-            <a class="navbar-brand" href="#">
-                Navbar 7
+            <a class="navbar-brand" href="/">
+                Write It
             </a>
             <div class="w-100 text-right">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar7">
@@ -40,6 +40,7 @@
         </div>
         <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar7">
             <ul class="navbar-nav ml-auto flex-nowrap">
+                {#
                 <li class="nav-item">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item dropdown">
@@ -71,12 +72,24 @@
                         <a class="dropdown-item" href="#">Another action</a>
                     </div>
                 </li>
+                #}
+                <li class="nav-item">
+                    <a href="/categorias" class="nav-link dropdown-toggle">Categorias</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/generos" class="nav-link dropdown-toggle">Generos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/autores" class="nav-link dropdown-toggle">Autores</a>
+                </li>
+
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
                             {#{{ app.user.email }}#}
                             <i class="fas fa-user-circle"></i>
-                        {% endif %}
+
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/myHistorias">Minhas Histórias</a>
@@ -84,11 +97,12 @@
                         <a class="dropdown-item" href="#">Rascunhos</a>
                         <a class="dropdown-item" href="/configuracao">Configurações</a>
                         <div class="dropdown-divider"></div>
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
                             <a href="{{path('logout')}}" class="dropdown-item">Sair</a>
-                        {% endif %}
+
                     </div>
                 </li>
+                {% endif %}
                 <li class="nav-item">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <a href="{{ path('historiaCreate') }}" class="btn btn-info">Escrever História</a>
