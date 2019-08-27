@@ -1,6 +1,6 @@
 {% extends 'nav.html.twig' %}
 
-{% block title %}Teste{% endblock %}
+{% block title %}História{% endblock %}
 
 {% block body %}
 
@@ -8,9 +8,15 @@
                 .container{
                         padding-top: 30px;
                 }
+
         </style>
 
         <div class="container">
+
+                <div class="alert alert-warning" role="alert">
+                        Para publicar história é necessário publicar pelo menos um capítulo!
+                </div>
+
                 {{ form(form) }}
         </div>
 

@@ -61,7 +61,7 @@ class HistoriaController extends AbstractController
             $entityManager->persist($historia);
             $entityManager->flush();
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('create');
         }
 
         return $this->render('historia/historia.html.twig',[

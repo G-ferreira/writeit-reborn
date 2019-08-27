@@ -47,6 +47,16 @@ class LeitorAutor implements UserInterface
      */
     private $historias;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $apelido;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\DadosPagamento", mappedBy="idAutorLeitor", cascade={"persist", "remove"})
+     */
+    private $dadosPagamento;
+
     public function __construct()
     {
         $this->historias = new ArrayCollection();
@@ -156,6 +166,36 @@ class LeitorAutor implements UserInterface
             if ($historia->getIdAutor() === $this) {
                 $historia->setIdAutor(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getApelido(): ?string
+    {
+        return $this->apelido;
+    }
+
+    public function setApelido(string $apelido): self
+    {
+        $this->apelido = $apelido;
+
+        return $this;
+    }
+
+    public function getDadosPagamento(): ?DadosPagamento
+    {
+        return $this->dadosPagamento;
+    }
+
+    public function setDadosPagamento(?DadosPagamento $dadosPagamento): self
+    {
+        $this->dadosPagamento = $dadosPagamento;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newIdAutorLeitor = $dadosPagamento === null ? null : $this;
+        if ($newIdAutorLeitor !== $dadosPagamento->getIdAutorLeitor()) {
+            $dadosPagamento->setIdAutorLeitor($newIdAutorLeitor);
         }
 
         return $this;

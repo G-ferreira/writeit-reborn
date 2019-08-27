@@ -36,6 +36,7 @@ class CapituloCadastroFormType extends AbstractType
                     'uiColor' => '#ffffff'
                 )))
             ->add('idHistoria',ChoiceType::class,[
+                'label' => "Historia",
                 'choices' => $historias,
                 'choice_label' => function(Historia $category, $key, $value) {
                     return strtoupper($category->getTitulo());

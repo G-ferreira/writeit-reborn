@@ -6,6 +6,7 @@ use App\Entity\Categoria;
 use App\Entity\Genero;
 use App\Entity\Historia;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Button;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,7 +23,7 @@ class HistoriaCadastroType extends AbstractType
             ->add('titulo')
             ->add('sinopse')
             ->add('status',null ,array(
-                'label' => 'Historia ativa?'
+                'label' => 'História Completa?'
             ))
             ->add('classificacao')
             ->add('categoria', EntityType::class, [
@@ -35,7 +36,7 @@ class HistoriaCadastroType extends AbstractType
                 'expanded' => true,
                 'class'    => Genero::class
             ])
-            ->add('save',SubmitType::class,['label' => 'Concluir'])
+            ->add('save',SubmitType::class,['label' => 'Cadastrar Capitulo'])
         ;
     }
 

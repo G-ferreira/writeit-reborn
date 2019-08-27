@@ -4,8 +4,10 @@
 namespace App\Controller;
 
 
+use App\Entity\DadosPagamento;
 use App\Entity\Historia;
 use App\Entity\LeitorAutor;
+use App\Form\DadosPagamentoCadastroFormType;
 use App\Form\LeitorAutorLoginFormType;
 use App\Service\AutorLeitorService\AutorLeitorData;
 use Doctrine\ORM\EntityManagerInterface;
@@ -123,8 +125,76 @@ class AutorLeitorController extends AbstractController
      */
     public function configuracao()
     {
-        return $this->render('autorLeitor/configuracao-autor.html.twig', [
+        $user = $this->security->getUser();
+        if(!$user){
+            return $this->redirectToRoute('home');
+        }
 
+        $dados = $this->entityManager->getRepository(DadosPagamento::class)->findOneBy(["idAutorLeitor" => $user->getId()]);
+
+        return $this->render('autorLeitor/configuracao-autor.html.twig', [
+            'dados' => $dados
+        ]);
+    }
+
+    /**
+     * @Route("/dados/create", name="dadosPagamentoCreate")
+     */
+    public function createDadosPagamento(Request $request)
+    {
+        $user = $this->security->getUser();
+        if(!$user){
+            return $this->redirectToRoute('home');
+        }
+
+        $dadosPagamento = new DadosPagamento();
+
+        $form = $this->createForm(DadosPagamentoCadastroFormType::class,$dadosPagamento);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $dadosPagamento->setValor(0);
+            $dadosPagamento->setIdAutorLeitor($user);
+
+            $entityManager->persist($dadosPagamento);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('autorLeitor/dados-pagamento-form.html.twig',[
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/dados/update", name="dadosPagamentoAtualiza")
+     */
+    public function updateDadosPagamento(Request $request)
+    {
+        $user = $this->security->getUser();
+        if(!$user){
+            return $this->redirectToRoute('home');
+        }
+
+        $dados = $this->entityManager->getRepository(DadosPagamento::class)->findOneBy(["idAutorLeitor" => $user->getId()]);
+
+        $form = $this->createForm(DadosPagamentoCadastroFormType::class,$dados);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('configuracao');
+        }
+
+        return $this->render('autorLeitor/dados-pagamento-form.html.twig',[
+            'form' => $form->createView()
         ]);
     }
 

@@ -80,4 +80,35 @@ class CapituloController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("create", name="create")
+     */
+    public function createPrimeiroCapitulo(Request $request)
+    {
+        $user = $this->security->getUser();
+        if(!$user){
+            return $this->redirectToRoute('home');
+        }
+
+        $capitulo = new Capitulo();
+
+        $form = $this->createForm(CapituloCadastroFormType::class,$capitulo);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $capitulo->setDataPublicacao( new DateTime("now"));
+            $entityManager->persist($capitulo);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('capitulo/capitulo-form.html.twig',[
+            'form' => $form->createView()
+        ]);
+    }
+
 }

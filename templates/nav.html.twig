@@ -40,54 +40,19 @@
         </div>
         <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar7">
             <ul class="navbar-nav ml-auto flex-nowrap">
-                {#
                 <li class="nav-item">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Gêneros
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Categorias
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Autores
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                    </div>
-                </li>
-                #}
-                <li class="nav-item">
-                    <a href="/categorias" class="nav-link dropdown-toggle">Categorias</a>
+                    <a href="/categorias" class="nav-link">Categorias</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/generos" class="nav-link dropdown-toggle">Generos</a>
+                    <a href="/generos" class="nav-link">Generos</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/autores" class="nav-link dropdown-toggle">Autores</a>
+                    <a href="/autores" class="nav-link">Autores</a>
                 </li>
 
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                            {#{{ app.user.email }}#}
                             <i class="fas fa-user-circle"></i>
 
                     </a>

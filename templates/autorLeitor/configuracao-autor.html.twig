@@ -5,70 +5,80 @@
 {% block body %}
     <style>
 
-        img{
+        img.card-img-top{
+            padding-top: 15px;
+        }
+
+        div.col{
             padding-top: 50px;
-            padding-bottom: 5px;
-            align-content: center;
         }
+
+        div#texto{
+            padding-left: 30px;
+        }
+
+        div#texto-corpo{
+            padding-top: 15px;
+        }
+
         h4{
+            padding-top: 10px;
             text-align: center;
-        }
-        div#dados{
-            padding-top: 30px;
-            padding-left: 50px;
-            align-content: center;
         }
 
     </style>
 
     <div class="container">
-        <div class="d-flex flex-row bd-highlight mb-3">
-            <div class="p-2 bd-highlight">
-                <img src="https://webkit.org/demos/srcset/image-src.png" class="card-img-top">
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <h4 class="font-weight-light">Nome</h4>
-                {% endif %}
-            </div>
-            <div class="p-2 bd-highlight">
-                <div id="dados">
-                    <div class="d-flex flex-column bd-highlight mb-3">
-                        <div class="p-2 bd-highlight">
-                            <div class="d-flex justify-content-center">
+        <div class="row">
+           <div class="col">
+               <img src="https://webkit.org/demos/srcset/image-src.png" class="card-img-top">
+               {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                   <h4 class="font-weight-light">{{ app.user.apelido }}</h4>
+               {% endif %}
+           </div>
+            <div class="col">
+                <div id="texto">
+                <h3 class="font-weight-light">Meus Dados</h3>
 
-                                    <h3 class="font-weight-light">Meus Dados</h3>
-
-                                    <button class="btn btn-light">
-                                        <i class="fas fa-pen"></i>
-                                    </button>
-
-                            </div>
-
-
-                        </div>
-                        <div class="p-2 bd-highlight">
-                            <label for="">Email
-                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <div id="texto-corpo">
+                        <label for="">Email</label>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                             <h5 class="font-weight-light">{{ app.user.email }}</h5>
-                                {% endif %}
-                        </div>
-                        <div class="p-2 bd-highlight">
-                            <label for="">CPF</label>
-                            <h5 class="font-weight-light">123.456.789-10</h5>
-                        </div>
-                        <div class="p-2 bd-highlight">
-                            <label for="">Agência</label>
-                            <h5 class="font-weight-light">0001</h5>
-                        </div>
-                        <div class="p-2 bd-highlight">
-                            <label for="">Banco</label>
-                            <h5 class="font-weight-light">100</h5>
-                        </div>
-                        <div class="p-2 bd-highlight">
-                            <label for="">Conta</label>
-                            <h5 class="font-weight-light">1234567-8</h5>
-                        </div>
+                        {% endif %}
+
+                        {% if dados != null %}
+                        <label for="">CPF</label>
+                        <h5 class="font-weight-light">{{ dados.cpf }}</h5>
+
+                        <label for="">Agência</label>
+                        <h5 class="font-weight-light">{{ dados.agencia }}</h5>
+
+                        <label for="">Banco</label>
+                        <h5 class="font-weight-light">{{ dados.banco }}</h5>
+
+                        <label for="">Conta</label>
+                        <h5 class="font-weight-light">{{ dados.numeroConta }}</h5>
+                        {% endif %}
                     </div>
                 </div>
             </div>
+            <div class="col">
+
+                <div class="float-right">
+                    {% if dados != null %}
+                        <a href="/dados/update" class="btn btn-light">
+                            <i class="fas fa-pen"></i>
+                            Alterar Dados
+                        </a>
+                    {% endif %}
+                    {% if dados == null%}
+                        <a href="/dados/create" class="btn btn-light">
+                            <i class="fas fa-pen"></i>
+                            Inserir Dados
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
         </div>
+    </div>
 {% endblock %}
