@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
 
- {#   {% block stylesheets %}
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    #}
-
     {% block head_css %}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     {% endblock %}
@@ -22,6 +17,13 @@
 </head>
 <body>
     <style>
+
+        @import url('https://fonts.googleapis.com/css?family=Abel');
+
+        html, body {
+            background: #f3eaff;
+            font-family: Abel, Arial, Verdana, sans-serif;
+        }
 
     </style>
 
@@ -60,7 +62,7 @@
                         <a class="dropdown-item" href="/myHistorias">Minhas Histórias</a>
                         <a class="dropdown-item" href="#">Histórico</a>
                         <a class="dropdown-item" href="#">Rascunhos</a>
-                        <a class="dropdown-item" href="/configuracao">Configurações</a>
+                        <a class="dropdown-item" href="/configuracao">Meus Dados</a>
                         <div class="dropdown-divider"></div>
 
                             <a href="{{path('logout')}}" class="dropdown-item">Sair</a>

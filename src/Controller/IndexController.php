@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Historia;
+use App\Entity\LeitorAutor;
 use App\Service\AutorLeitorService\AutorLeitorData;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\LeitorAutorLoginFormType;
@@ -13,10 +16,11 @@ class IndexController extends AbstractController
     private $autorLeitorData;
     private $security;
 
-    public function __construct(AutorLeitorData $autorLeitorData, Security $security)
+    public function __construct(AutorLeitorData $autorLeitorData, Security $security,EntityManagerInterface $entityManager)
     {
         $this->autorLeitorData = $autorLeitorData;
         $this->security = $security;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -24,16 +28,24 @@ class IndexController extends AbstractController
      */
     public function index()
     {
+        $autores = $this->entityManager->getRepository(LeitorAutor::class)->findAll();
+
+        $historias = $this->entityManager->getRepository(Historia::class)->findAll();
+
         $user = $this->security->getUser();
         if($user){
             return $this->render('index/index.html.twig', [
-                'variavel' => $user
+                'variavel' => $user,
+                'autores' => $autores,
+                'historias' => $historias
             ]);
         }
 //      $data = $this->format($this->autorLeitorData->listAll());
 
         return $this->render('index/index.html.twig', [
-            'variavel' => []
+            'variavel' => [],
+            'autores' => $autores,
+            'historias' => $historias
         ]);
     }
 

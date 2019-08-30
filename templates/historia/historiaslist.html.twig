@@ -7,7 +7,7 @@
         @import url('https://fonts.googleapis.com/css?family=Abel');
 
         html, body {
-            background: #fbd4fc;
+            background: #f8eefc;
             font-family: Abel, Arial, Verdana, sans-serif;
         }
 
@@ -38,7 +38,7 @@
             position: absolute;
             width: 150px;
             height: 100%;
-            background: linear-gradient(#744e89, #fccdf3);
+            background: linear-gradient(#744e89, #9065a7);
             transition: width 0.4s;
             overflow: hidden;
             z-index: 2;
@@ -196,11 +196,15 @@
         botao-capitulo{
             text-align: center;
         }
+
+        h1#titulo{
+            padding-top: 20px;
+        }
         
     </style>
 
     <div class="container">
-        <h1 class="display-4">Minhas Histórias</h1>
+        <h1 class="display-4" id="titulo">Minhas Histórias</h1>
         <a href="/capitulos/create" class="btn btn-primary" id="botao-capitulo">Inserir Capítulo</a>
         <div class="row">
             {% for historia in historias %}
@@ -209,30 +213,29 @@
                         <div class="additional">
                             <div class="user-card">
                                 <div class="level center">
-                                    vrummmmmm
+                                    Autor
                                 </div>
                                 <div class="points center">
-                                    5,312 Points
+
                                 </div>
-                                <img width="110" height="200" src="https://webkit.org/demos/srcset/image-src.png"
-                                     class="center logo">
+                                <img width="110" height="200" src="https://webkit.org/demos/srcset/image-src.png" class="center logo">
 
                             </div>
                             <a href="/historia/{{ historia.getId }}">
                                 <div class="more-info">
                                     <h1>{{ historia.getTitulo }}</h1>
                                     <div class="coords">
-                                        <span>Group Name</span>
-                                        <span>Joined January 2019</span>
+                                        <span>Gênero</span>
+                                        <span>Gênero</span>
                                     </div>
                                     <div class="coords">
-                                        <span>Position/Role</span>
-                                        <span>City, Country</span>
+                                        <span>Categoria</span>
+                                        <span>Categoria</span>
                                     </div>
                                     <div class="stats">
                                         <div>
                                             <div class="title">Finalizada?</div>
-                                            <i class="fa fa-trophy"></i>
+                                            <i class="fas fa-check-circle"></i>
                                             <div class="value">{% if  historia.getStatus == 1 %}
                                                     Sim
                                                 {% else %}
@@ -241,20 +244,16 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <div class="title">Matches</div>
-                                            <i class="fa fa-gamepad"></i>
+                                            <div class="title">Capitulos</div>
+                                            <i class="fas fa-file-alt"></i>
                                             <div class="value">27</div>
                                         </div>
                                         <div>
-                                            <div class="title">Classificacao</div>
+                                            <div class="title">Visualizações</div>
                                             <i class="fa fa-group"></i>
-                                            <div class="value">{{ historia.getClassificacao }}</div>
+                                            <div class="value">123</div>
                                         </div>
-                                        <div>
-                                            <div class="title">Coffee</div>
-                                            <i class="fa fa-coffee"></i>
-                                            <div class="value infinity">∞</div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </a>
@@ -262,7 +261,7 @@
                         <div class="general">
                             <h1>{{ historia.getTitulo }}</h1>
                             <p>{{ historia.getSinopse }}.</p>
-                            <span class="more">Mouse over the card for more info</span>
+                            <span class="more">Passe o mouse por cima para mais informações</span>
                         </div>
 
 
