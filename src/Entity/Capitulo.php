@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,16 @@ class Capitulo
      * @ORM\JoinColumn(nullable=false)
      */
     private $idHistoria;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Historico", mappedBy="capitulo")
+     */
+    private $historicos;
+
+    public function __construct()
+    {
+        $this->historicos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +98,34 @@ class Capitulo
     public function setIdHistoria(?Historia $idHistoria): self
     {
         $this->idHistoria = $idHistoria;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Historico[]
+     */
+    public function getHistoricos(): Collection
+    {
+        return $this->historicos;
+    }
+
+    public function addHistorico(Historico $historico): self
+    {
+        if (!$this->historicos->contains($historico)) {
+            $this->historicos[] = $historico;
+            $historico->addCapitulo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistorico(Historico $historico): self
+    {
+        if ($this->historicos->contains($historico)) {
+            $this->historicos->removeElement($historico);
+            $historico->removeCapitulo($this);
+        }
 
         return $this;
     }

@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Capitulo;
 use App\Entity\Historia;
+use App\Entity\Historico;
+use App\Entity\LeitorAutor;
 use App\Form\CapituloCadastroFormType;
 use App\Service\AutorLeitorService\AutorLeitorData;
 use DateTime;
@@ -43,6 +45,24 @@ class CapituloController extends AbstractController
     public function capituloHome(int $id)
     {
         $capitulo = $this->entityManager->getRepository(Capitulo::class)->find($id);
+
+        $user = $this->security->getUser();
+        if($user){
+            $entityManager = $this->getDoctrine()->getManager();
+            $leitor = $this->entityManager->getRepository(Historico::class)->findOneBy(["autor"=>$user]);
+            if($leitor){
+                $leitor->addCapitulo($capitulo);
+                $entityManager->persist($leitor);
+                $entityManager->flush();
+            }else{
+                $historico = new Historico();
+                $historico->setAutor($user);
+                $historico->addCapitulo($capitulo);
+                $entityManager->persist($leitor);
+                $entityManager->flush();
+            }
+
+        }
 
         return $this->render('capitulo/index.html.twig', [
             'capitulo' => $capitulo,
