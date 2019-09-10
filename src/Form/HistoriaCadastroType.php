@@ -7,6 +7,7 @@ use App\Entity\Genero;
 use App\Entity\Historia;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Button;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,7 +26,6 @@ class HistoriaCadastroType extends AbstractType
             ->add('status',null ,array(
                 'label' => 'História Completa?'
             ))
-            ->add('classificacao')
             ->add('categoria', EntityType::class, [
                 'multiple' => true,
                 'expanded' => true,
@@ -36,6 +36,17 @@ class HistoriaCadastroType extends AbstractType
                 'expanded' => true,
                 'class'    => Genero::class
             ])
+            ->add('classificacao',ChoiceType::class,array(
+                'choices' => array(
+                    'Conteúdo livre' => 'Livre',
+                    'Conteúdo violento ou linguagem inapropriada' => '10',
+                    'Agressão física, consumo de drogas e insinuação sexual' => '12',
+                    'Conteúdo mais violento e/ou de linguagem sexual' => '14',
+                    'Tortura, suicídio ou estupro' => '16',
+                    'Sexo, tortura ou abuso sexual' => '18'
+                ),
+                'label' => 'Tipo de conteúdo'
+            ))
             ->add('save',SubmitType::class,['label' => 'Cadastrar Capitulo'])
         ;
     }

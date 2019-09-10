@@ -12,11 +12,11 @@
         }
 
         .center {
-            position: absolute;
-            top: 53%;
-            left: 50%;
-            -webkit-transform: translate(-50%, -50%);
-        }
+                     position: absolute;
+                     top: 53%;
+                     left: 50%;
+                     -webkit-transform: translate(-50%, -50%);
+                 }
 
         .card {
             width: 450px;
@@ -200,12 +200,24 @@
         h1#titulo{
             padding-top: 20px;
         }
+        .container{
+            padding-top: 20px;
+        }
         
     </style>
 
     <div class="container">
-        <h1 class="display-4" id="titulo">Minhas Histórias</h1>
-        <a href="/capitulos/create" class="btn btn-primary" id="botao-capitulo">Inserir Capítulo</a>
+
+
+        <div class="row">
+            <div class="col">
+                <h1>Minhas Histórias</h1>
+            </div>
+            <div class="col">
+                <a href="/capitulos/create" class="btn btn-primary" id="botao-capitulo" style="float: right">Inserir Capítulo</a>
+            </div>
+        </div>
+
         <div class="row">
             {% for historia in historias %}
                 <div class="col">
