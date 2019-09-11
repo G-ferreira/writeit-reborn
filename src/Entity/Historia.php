@@ -59,11 +59,17 @@ class Historia
      */
     private $idAutor;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $data_publicacao;
+
     public function __construct()
     {
         $this->categoria = new ArrayCollection();
         $this->genero = new ArrayCollection();
         $this->capitulos = new ArrayCollection();
+        $this->data_publicacao = new \DateTime();
     }
 
     public function getId(): ?int
@@ -219,5 +225,17 @@ class Historia
         return $this->titulo;
         // to show the id of the Category in the select
         // return $this->id;
+    }
+
+    public function getDataPublicacao(): ?\DateTimeInterface
+    {
+        return $this->data_publicacao;
+    }
+
+    public function setDataPublicacao(\DateTimeInterface $data_publicacao): self
+    {
+        $this->data_publicacao = $data_publicacao;
+
+        return $this;
     }
 }

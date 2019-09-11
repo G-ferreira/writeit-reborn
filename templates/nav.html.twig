@@ -18,11 +18,21 @@
 <body>
     <style>
 
-        @import url('https://fonts.googleapis.com/css?family=Abel');
+        @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700');
 
         html, body {
-            background: #f3eaff;
-            font-family: Abel, Arial, Verdana, sans-serif;
+            background: #fffffc;
+            font-family: 'Roboto Slab', serif;
+        }
+
+        a#button-escrever{
+            color: white;
+            background-color: #9452c7;
+            margin-right: 5px;
+        }
+
+        a#title-nav{
+            color: #9452c7;
         }
 
     </style>
@@ -31,7 +41,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="d-flex flex-grow-1">
             <span class="w-100 d-lg-none d-block"><!-- hidden spacer to center brand on mobile --></span>
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" id="title-nav" href="/">
                 Write It
             </a>
             <div class="w-100 text-right">
@@ -46,7 +56,7 @@
                     <a href="/categorias" class="nav-link">Categorias</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/generos" class="nav-link">Generos</a>
+                    <a href="/generos" class="nav-link">Gêneros</a>
                 </li>
                 <li class="nav-item">
                     <a href="/autores" class="nav-link">Autores</a>
@@ -72,17 +82,17 @@
                 {% endif %}
                 <li class="nav-item">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <a href="{{ path('historiaCreate') }}" class="btn btn-info">Escrever História</a>
+                        <a href="{{ path('historiaCreate') }}" class="btn btn-default" id="button-escrever">Escrever História</a>
                     {% endif %}
                     {% if not app.user%}
                         <a href="{{path('login')}}" class="btn btn-primary">Entrar</a>
                     {% endif %}
                 </li>
-                <li class="nav-item">
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <a href="{{path('logout')}}" class="btn btn-primary">Sair</a>
-                    {% endif %}
-                </li>
+{#                <li class="nav-item">#}
+{#                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}#}
+{#                        <a href="{{path('logout')}}" class="btn btn-default" id="button-sair">Sair</a>#}
+{#                    {% endif %}#}
+{#                </li>#}
             </ul>
         </div>
     </nav>

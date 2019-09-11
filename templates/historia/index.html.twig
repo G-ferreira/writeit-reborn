@@ -13,63 +13,114 @@
             text-align: center;
         }
 
+        img{
+            padding-top: 10px;
+            padding-bottom: 20px;
+        }
+
+        div#divTitulo{
+            padding-top: 40px;
+            padding-bottom: 20px;
+        }
+
+        a#button-denunciar{
+            font-size: small;
+            height: min-content;
+        }
+
+        div#box{
+            width: 100%;
+            height: 2px;
+            background-color: #9452c7;
+        }
+
     </style>
 
     <div class="d-flex flex-column bd-highlight mb-3">
-        <div class="p-2 bd-highlight">
-            <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between">
-                    <h4>
-                        Historia
-                    </h4>
-                    <span>
-                    <a href="/denuncia" class="btn btn-info btn-sm">
+{#        <div class="p-2 bd-highlight">#}
+{#            <ul class="list-group">#}
+{#                <li class="list-group-item d-flex justify-content-between">#}
+{#                    <h4>#}
+{#                        Historia#}
+{#                    </h4>#}
+{#                    <span>#}
+{#                    <a href="/denuncia" class="btn btn-info btn-sm">#}
+{#                        Denunciar História#}
+{#                    </a>#}
+{#                </span>#}
+{#                </li>#}
+{#            </ul>#}
+{#        </div>#}
+
+            <div class="container-fluid" id="divTitulo">
+                <div class="d-flex justify-content-between">
+                    <h4>Historia</h4>
+                    <a href="/denuncia" class="btn btn-secondary" id="button-denunciar">
                         Denunciar História
                     </a>
-                </span>
-                </li>
-            </ul>
-        </div>
-        <div class="d-flex justify-content-center">
-            <div class="d-flex flex-column bd-highlight mb-3">
-                <h4>{{ historia.getTitulo }}</h4>
-                <h4 class="font-weight-light">Autor</h4>
-                <img src="https://webkit.org/demos/srcset/image-src.png" alt="">
-                <h5 class="font-weight-light">01/01/2000</h5>
+                </div>
+                <div id="box"></div>
+            </div>
+
+        <div class="container-fluid" id="divCorpo">
+            <div class="d-flex justify-content-center">
+                <div class="d-flex flex-column bd-highlight mb-3">
+                    <h4>{{ historia.getTitulo }}</h4>
+                    <h4 class="font-weight-light">Autor</h4>
+                    <img src="https://webkit.org/demos/srcset/image-src.png" alt="">
+                    <h5 class="font-weight-light">{{ historia.getDataPublicacao|date('d/m/Y') }}</h5>
+                </div>
+            </div>
+            <div class="p-2 bd-highlight">
+                <div>
+                    <p>
+                        {{ historia.getSinopse }}
+                    </p>
+                </div>
             </div>
         </div>
-        <div class="p-2 bd-highlight">
-            <div>
-                <p>
-                    {{ historia.getSinopse }}
-                </p>
+
+        <div class="container-fluid" id="divTitulo">
+            <div class="d-flex justify-content-between">
+                <h4>Capítulos</h4>
+                <h4>
+                    Status:{% if  historia.getStatus == 1 %}
+                        Concluída
+                    {% else %}
+                        Em andamento
+                    {% endif %}
+                </h4>
             </div>
+            <div id="box"></div>
         </div>
-        <div class="p-2 bd-highlight">
-            <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between">
-                    <h4>
-                        Capitulos
-                    </h4>
-                    <span>
-                    <h4>
-                        Status:{% if  historia.getStatus == 1 %}
-                            Concluída
-                        {% else %}
-                            Em andamento
-                        {% endif %}
-                    </h4>
-                </span>
-                </li>
-            </ul>
-        </div>
+
+{#        <div class="p-2 bd-highlight">#}
+{#            <ul class="list-group">#}
+{#                <li class="list-group-item d-flex justify-content-between">#}
+{#                    <h4>#}
+{#                        Capitulos#}
+{#                    </h4>#}
+{#                    <span>#}
+{#                    <h4>#}
+{#                        Status:{% if  historia.getStatus == 1 %}#}
+{#                            Concluída#}
+{#                        {% else %}#}
+{#                            Em andamento#}
+{#                        {% endif %}#}
+{#                    </h4>#}
+{#                </span>#}
+{#                </li>#}
+{#            </ul>#}
+{#        </div>#}
         <div class="p-2 bd-highlight">
             <div class="list-group">
+                <div class="d-flex justify-content-between">
                 {% for capitulo in capitulos %}
                     <a href="/capitulo/{{ capitulo.id }}" class="list-group-item list-group-item-action">
                         {{ capitulo.titulo|e }}
                     </a>
                 {% endfor %}
+                </div>
             </div>
         </div>
     </div>

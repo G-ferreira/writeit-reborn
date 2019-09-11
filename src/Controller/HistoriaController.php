@@ -58,6 +58,7 @@ class HistoriaController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $classif = $form->get('classificacao')->getData();
             $historia->setClassificacao($classif);
+
             $historia->setIdAutor($user);
 
             $entityManager->persist($historia);
