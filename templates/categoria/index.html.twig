@@ -5,21 +5,35 @@
 {% block body %}
 
     <style>
-        .container{
+        div#box{
+            width: 100%;
+            height: 2px;
+            background-color: #9452c7;
+        }
+
+        div.container-fluid{
+            padding: 30px 30px 10px 30px;
+        }
+
+        div#lista{
             padding-top: 30px;
         }
+
     </style>
 
-    <div class="container">
+    <div class="container-fluid">
         <h1>Categorias</h1>
+        <div id="box"></div>
+        <div id="lista">
         <ul class="list-group">
             {% for categoria in lista %}
-                <li class="list-group-item d-flex justify-content-between">
-                    <a href="/categorias/{{ categoria.id }}">
+                <li class="d-flex justify-content-between">
+                    <a href="/categorias/{{ categoria.id }}" class="list-group-item list-group-item-action">
                         {{ categoria.titulo|e }}
                     </a>
                 </li>
             {% endfor %}
         </ul>
+        </div>
     </div>
 {% endblock %}

@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Capitulo;
+use App\Entity\Genero;
 use App\Entity\Historia;
 use App\Entity\LeitorAutor;
+use App\Form\HistoriaAtualizaFormType;
 use App\Form\HistoriaCadastroType;
 use App\Service\AutorLeitorService\AutorLeitorData;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -108,11 +110,16 @@ class HistoriaController extends AbstractController
     {
         $historia = $this->entityManager->getRepository(Historia::class)->find($id);
 
+        $autor = $historia->getIdAutor();
+
+        $nome_autor = $autor->getApelido();
+
         $capitulos = $this->entityManager->getRepository(Capitulo::class)->findBy(["idHistoria" => $id]);
 
         return $this->render('historia/index.html.twig', [
             'historia' => $historia,
-            'capitulos' =>$capitulos
+            'capitulos' =>$capitulos,
+            'autor' => $nome_autor
         ]);
     }
 }
