@@ -16,4 +16,14 @@ class ContribuicaoController extends AbstractController
             'controller_name' => 'ContribuicaoController',
         ]);
     }
+
+    /**
+     * @Route("/contribuicao/lista", name="contribuicaoLista")
+     */
+    public function listaContribuição()
+    {
+        return $this->render('contribuicao/contribuicao-lista.html.twig', [
+
+        ]);
+    }
 }

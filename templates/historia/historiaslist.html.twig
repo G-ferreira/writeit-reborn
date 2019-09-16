@@ -219,7 +219,7 @@
         }
 
         div.overflow-hidden{
-            height: 30px;
+            height: 25px;
         }
 
         a#button-adicionarCap{
@@ -314,7 +314,7 @@
 {#            {% endfor %}#}
 {#        </div>#}
 
-        <h1>Minhas Historias</h1>
+        <h1>Minhas Histórias</h1>
         <div id="box"></div>
 
         <ul class="list-group" id="list-historias">
@@ -334,7 +334,7 @@
                         <div class="col-md-2">
                             <div id="button-editar">
                                 <ul class="list-group">
-                                    <a href="/capitulos/create" class="btn btn-default" id="button-adicionarCap">Adicionar Capitulo</a>
+                                    <a href="/capitulos/create/{{ historia.getId }}" class="btn btn-default" id="button-adicionarCap">Adicionar Capitulo</a>
                                     <a href="#" class="btn btn-secondary">Atualizar Historia</a>
                                 </ul>
                             </div>

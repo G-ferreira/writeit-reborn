@@ -7,6 +7,7 @@ use App\Entity\Historia;
 use App\Entity\Historico;
 use App\Entity\LeitorAutor;
 use App\Form\CapituloCadastroFormType;
+use App\Form\CapituloFormType;
 use App\Service\AutorLeitorService\AutorLeitorData;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -124,6 +125,40 @@ class CapituloController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('home');
+        }
+
+        return $this->render('capitulo/capitulo-form.html.twig',[
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/capitulos/create/{id}", name="cepituloCreatePorId")
+     */
+    public function createCapituloPorId(Request $request,int $id)
+    {
+        $user = $this->security->getUser();
+        if(!$user){
+            return $this->redirectToRoute('home');
+        }
+
+        $id_historia = $this->entityManager->getRepository(Historia::class)->find($id);
+
+        $capitulo = new Capitulo();
+
+        $form = $this->createForm(CapituloFormType::class,$capitulo);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $capitulo->setDataPublicacao( new DateTime("now"));
+            $capitulo->setIdHistoria($id_historia);
+            $entityManager->persist($capitulo);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('myHistorias');
         }
 
         return $this->render('capitulo/capitulo-form.html.twig',[

@@ -1,0 +1,50 @@
+{% extends 'nav.html.twig' %}
+
+{% block title %}Rascunhos{% endblock %}
+
+{% block body %}
+
+    <style>
+        div#box{
+            width: 100%;
+            height: 2px;
+            background-color: #9452c7;
+        }
+
+        .container{
+            padding-top: 20px;
+        }
+
+        div#lista{
+            padding-top: 30px;
+        }
+
+        a#button-rascunho{
+            color: white;
+            background-color: #9452C7;
+            height: 40px;
+        }
+
+    </style>
+
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            <h1>Rascunhos</h1>
+            <a href="#" class="btn btn-default" id="button-rascunho">Inserir Rascunho</a>
+        </div>
+
+        <div id="box"></div>
+        <div id="lista">
+            <ul class="list-group">
+                {#                {% for genero in lista %}#}
+                {#                    <li class="d-flex justify-content-between">#}
+                {#                        <a href="/generos/{{ genero.id }}" class="list-group-item list-group-item-action">#}
+                {#                            {{ genero.titulo|e }}#}
+                {#                        </a>#}
+                {#                    </li>#}
+                {#                {% endfor %}#}
+                <a href="#" class="list-group-item list-group-item-action">Rascunho 1</a>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
