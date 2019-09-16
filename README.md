@@ -1,7 +1,5 @@
 # writeit-reborn
 
-Dentro de seu *php.ini* tire o ; da linha *extension=pdo_mysql* e reinicie sua maquina
-
 Voce precisara de um banco local, no windowns instalar o xampp com mysql e apache.
 
 De start do apache depois o mysql. 
@@ -14,4 +12,4 @@ Execute o *bin/console doctrine:schema:update --force* comando para criar as tab
 
 Dentro da pasta public do projeto executar *php -S localhost:8080* em um terminal separa.
 
-No navegador entrar em localhost:8080 e ver se a messagem se encontra.
+

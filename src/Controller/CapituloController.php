@@ -59,7 +59,7 @@ class CapituloController extends AbstractController
                 $historico = new Historico();
                 $historico->setAutor($user);
                 $historico->addCapitulo($capitulo);
-                $entityManager->persist($leitor);
+                $entityManager->persist($historico);
                 $entityManager->flush();
             }
 
