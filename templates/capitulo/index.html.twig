@@ -41,11 +41,11 @@
     </style>
 
     <div class="container">
-    <div class="d-flex flex-column bd-highlight mb-3">
-        <div class="d-flex justify-content-center">
-            <div class="d-flex flex-column bd-highlight mb-3">
+{#    <div class="d-flex flex-column bd-highlight mb-3">#}
+{#        <div class="d-flex justify-content-center">#}
+{#            <div class="d-flex flex-column bd-highlight mb-3">#}
 
-                <ul class="nav justify-content-end">
+                <ul class="nav justify-content-end" id="menu-cust">
                     <li class="nav-item">
                         <button class="btn btn-outline-secondary" id="up"><i class="fas fa-plus"></i></button>
                     </li>
@@ -61,11 +61,12 @@
                 </ul>
                 <div id="divContent">
                 <h4>{{ capitulo.getTitulo }}</h4>
-                <h5 class="font-weight-light">01/01/2001</h5>
-
-                <p>
-                    {{ capitulo.getTexto | raw }}
-                </p>
+                <h5 class="font-weight-light">{{ capitulo.getDataPublicacao|date('d/m/Y') }}</h5>
+                    <div id="divFont">
+                        <p>
+                            {{ capitulo.getTexto | raw }}
+                        </p>
+                    </div>
                 </div>
                 <ul class="nav justify-content-between">
                     <li class="nav-item">
@@ -75,9 +76,9 @@
                         <button class="btn btn-outline-secondary" id="escuro"><i class="fas fa-arrow-right"></i></button>
                     </li>
                 </ul>
-            </div>
-        </div>
-    </div>
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
     </div>
 
     <script type="text/javascript">
@@ -123,7 +124,7 @@
         }
 
         function getSize() {
-            size = $( "p" ).css( "font-size" );
+            size = $( "div#divFont" ).css( "font-size" );
             size = parseInt(size, 10);
             $( "#font-size" ).text(  size  );
         }
@@ -135,14 +136,14 @@
 
             // parse font size, if less than 50 increase font size
             if ((size + 2) <= 50) {
-                $( "p" ).css( "font-size", "+=2" );
+                $( "div#divFont" ).css( "font-size", "+=2" );
                 $( "#font-size" ).text(  size += 2 );
             }
         });
 
         $( "#down" ).on( "click", function() {
             if ((size - 2) >= 12) {
-                $( "p" ).css( "font-size", "-=2" );
+                $( "div#divFont" ).css( "font-size", "-=2" );
                 $( "#font-size" ).text(  size -= 2  );
             }
         });
