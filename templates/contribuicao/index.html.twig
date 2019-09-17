@@ -2,6 +2,13 @@
 
 {% block title %}Contribuição{% endblock %}
 
+{% block javascripts %}
+
+    <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
+    <script>paypal.Buttons().render('body');</script>
+
+{% endblock %}
+
 {% block body %}
 
     <style>
@@ -11,63 +18,90 @@
             padding-bottom: 30px;
             align-content: center;
         }
-        h4{
-            text-align: center;
-        }
         label{
             float: left;
         }
+
+        .container{
+            padding-top: 60px;
+            padding-bottom: 80px;
+        }
+
+        img.rounded-circle{
+            width: 50%;
+            height: auto;
+        }
+
     </style>
 
-    <div class="wrapper">
-        <div class="d-flex justify-content-center">
-            <div class="d-flex flex-column bd-highlight mb-3">
-                <img src="https://webkit.org/demos/srcset/image-src.png" class="card-img-top">
-                <h4 class="font-weight-light">Autor</h4>
+    <div class="container">
+{#        <div class="d-flex justify-content-center">#}
+{#            <div class="d-flex flex-column bd-highlight mb-3">#}
+{#                <img src="https://webkit.org/demos/srcset/image-src.png" class="card-img-top">#}
+{#                <h4 class="font-weight-light">{{ autor.getApelido }}</h4>#}
+{#            </div>#}
+{#        </div>#}
+
+{#        <div class="d-flex justify-content-center">#}
+{#            <div class="p-2 bd-highlight">#}
+{#                <div class="card text-center" id="card">#}
+{#                    <div class="card-body">#}
+{#                        <h4 class="card-title">Pagamento</h4>#}
+{#                        <form action="" class="form-group">#}
+
+{#                            <div class="form-row">#}
+{#                                <div class="form-group col-md-4">#}
+{#                                    <label for="numeroCartao">Número do Cartão</label>#}
+{#                                    <input type="text" class="form-control" id="numeroCartao" placeholder="xxxx xxxx xxxx xxxx">#}
+
+{#                                </div>#}
+{#                                <div class="form-group col-md-4">#}
+{#                                    <label for="dataVencimento">Data de Vencimento</label>#}
+{#                                    <input type="text" class="form-control" id="dataVencimento" placeholder="MM / AAAA"/>#}
+{#                                </div>#}
+{#                                <div class="form-group col-md-4">#}
+{#                                    <label for="numeroCvv">CVV</label>#}
+{#                                    <input type="text" class="form-control" id="numeroCvv" placeholder="CVV">#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="form-row">#}
+{#                                <div class="form-group col-md-6">#}
+{#                                    <label for="nomeTitular">Nome do Titular</label>#}
+{#                                    <input type="text" class="form-control" id="nomeTitular" placeholder="Nome do Titular">#}
+{#                                </div>#}
+{#                                <div class="form-group col-md-6">#}
+{#                                    <label for="numeroCpf">CPF do Titular</label>#}
+{#                                    <input type="text" class="form-control" id="numeroCpf" placeholder="CPF do Titular">#}
+{#                                </div>#}
+{#                                <br>#}
+{#                                <button class="btn btn-primary btn-md">#}
+{#                                    Concluir#}
+{#                                </button>#}
+{#                            </div>#}
+{#                        </form>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+
+
+
+
+        <div class="row">
+            <div class="col" id="col-img">
+                <div class="text-center">
+                    <h1>Contribuição</h1>
+                    <img src="https://webkit.org/demos/srcset/image-src.png" class="rounded-circle">
+                    <h4 class="font-weight-light">{{ autor.getApelido }}</h4>
+                </div>
             </div>
-        </div>
-
-        <div class="d-flex justify-content-center">
-            <div class="p-2 bd-highlight">
-                <div class="card text-center" id="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Pagamento</h4>
-                        <form action="" class="form-group">
-
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="numeroCartao">Número do Cartão</label>
-                                    <input type="number" class="form-control" id="numeroCartao" placeholder="xxxx xxxx xxxx xxxx">
-
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="dataVencimento">Data de Vencimento</label>
-                                    <input type="date" class="form-control" id="dataVencimento">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="numeroCvv">CVV</label>
-                                    <input type="number" class="form-control" id="numeroCvv" placeholder="CVV">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="nomeTitular">Nome do Titular</label>
-                                    <input type="text" class="form-control" id="nomeTitular" placeholder="Nome do Titular">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="numeroCpf">CPF do Titular</label>
-                                    <input type="number" class="form-control" id="numeroCpf" placeholder="CPF do Titular">
-                                </div>
-                                <br>
-                                <button class="btn btn-primary btn-md">
-                                    Concluir
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+            <div class="col">
+                <div class="shadow p-3 mb-5 bg-white rounded">
+                        {{ form(form) }}
                 </div>
             </div>
         </div>
+
     </div>
 
 {% endblock %}

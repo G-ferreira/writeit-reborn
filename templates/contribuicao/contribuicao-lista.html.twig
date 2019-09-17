@@ -25,18 +25,14 @@
         <div id="box"></div>
         <div id="lista">
             <ul class="list-group">
-{#                {% for genero in lista %}#}
-{#                    <li class="d-flex justify-content-between">#}
-{#                        <a href="/generos/{{ genero.id }}" class="list-group-item list-group-item-action">#}
-{#                            {{ genero.titulo|e }}#}
-{#                        </a>#}
-{#                    </li>#}
-{#                {% endfor %}#}
-                    <a href="#" class="list-group-item list-group-item-action">Contribuição 1</a>
-                    <a href="#" class="list-group-item list-group-item-action">Contribuição 2</a>
-                    <a href="#" class="list-group-item list-group-item-action">Contribuição 3</a>
-                    <a href="#" class="list-group-item list-group-item-action">Contribuição 4</a>
-                    <a href="#" class="list-group-item list-group-item-action">Contribuição 5</a>
+                {% for item in lista %}
+                    <li  class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            <div class="p-2 bd-highlight">R${{ item.getValor }}</div>
+                            <div class="p-2 bd-highlight">{{ item.getNomePagador }}</div>
+                        </div>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
     </div>

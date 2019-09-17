@@ -115,8 +115,11 @@ class AutorLeitorController extends AbstractController
     {
         $historias = $this->entityManager->getRepository(Historia::class)->findBy(["idAutor" => $id]);
 
+        $autor = $this->entityManager->getRepository(LeitorAutor::class)->find($id);
+
         return $this->render('autorLeitor/perfil.html.twig', [
-            'historias' => $historias
+            'historias' => $historias,
+            'autor' => $autor
         ]);
     }
 

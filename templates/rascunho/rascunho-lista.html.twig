@@ -19,12 +19,10 @@
             padding-top: 30px;
         }
 
-        a#button-rascunho{
+        a#button-nav{
             color: white;
-            background-color: #9452C7;
-            height: 40px;
+            background-color: #a782c4;
         }
-
     </style>
 
     <div class="container">
@@ -39,17 +37,17 @@
                 <div class="card-header">
                     <ul class="nav nav-pills card-header-pills">
                         <li class="nav-item">
-                            <a class="nav-link active" href="/rascunho/historias">Historias</a>
+                            <a class="nav-link active" href="/rascunho/historias" id="button-nav">Histórias</a>
                         </li>
-                        <li class="nav-link">
-                            <a class="nav-link" href="/rascunho/capitulos">Capitulo</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/rascunho/capitulos">Capítulos</a>
                         </li>
                     </ul>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
                         {% for historia in historias %}
-                            <li class="d-flex justify-content-between">
+                            <li class="d-flex p-2 bd-highlight">
                                 <a href="/historia/update/{{ historia.getId }}" class="list-group-item list-group-item-action">
                                     {{ historia.getTitulo }}
                                 </a>

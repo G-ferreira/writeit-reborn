@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -119,6 +121,37 @@ class DadosPagamento
     public function setIdAutorLeitor(?LeitorAutor $idAutorLeitor): self
     {
         $this->idAutorLeitor = $idAutorLeitor;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Contribuicao[]
+     */
+    public function getContribuicaos(): Collection
+    {
+        return $this->contribuicaos;
+    }
+
+    public function addContribuicao(Contribuicao $contribuicao): self
+    {
+        if (!$this->contribuicaos->contains($contribuicao)) {
+            $this->contribuicaos[] = $contribuicao;
+            $contribuicao->setDadosPagamento($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContribuicao(Contribuicao $contribuicao): self
+    {
+        if ($this->contribuicaos->contains($contribuicao)) {
+            $this->contribuicaos->removeElement($contribuicao);
+            // set the owning side to null (unless already changed)
+            if ($contribuicao->getDadosPagamento() === $this) {
+                $contribuicao->setDadosPagamento(null);
+            }
+        }
 
         return $this;
     }
