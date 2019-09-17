@@ -69,7 +69,7 @@ class DenunciaController extends AbstractController
             $entityManager->persist($denuncia);
             $entityManager->flush();
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('denunciaSucesso');
         }
 
         return $this->render('denuncia/denuncia-form.html.twig', [

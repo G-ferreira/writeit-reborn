@@ -66,7 +66,8 @@
             <div class="d-flex justify-content-center">
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <h4>{{ historia.getTitulo }}</h4>
-                    <h4 class="font-weight-light">{{ autor }}</h4>
+                    <h4 class="font-weight-light"><a href="/autores/{{ autor.getId }}" class="font-weight-light">{{ nome_autor }}</a></h4>
+
                     <img src="https://webkit.org/demos/srcset/image-src.png" alt="">
                     <h5 class="font-weight-light">{{ historia.getDataPublicacao|date('d/m/Y') }}</h5>
                 </div>

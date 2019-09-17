@@ -1,6 +1,6 @@
 {% extends 'nav.html.twig' %}
 
-{% block title %}Historia{% endblock %}
+{% block title %}Minhas Histórias{% endblock %}
 
 {% block body %}
     <style>
@@ -201,7 +201,7 @@
         /*    padding-top: 20px;*/
         /*}*/
         .container{
-            padding-top: 20px;
+            padding-top: 60px;
         }
 
         div#box{
@@ -225,6 +225,13 @@
         a#button-adicionarCap{
             color: white;
             background-color: #9452C7;
+            font-size: small;
+            height: min-content;
+        }
+
+        a#button-atualizar{
+            font-size: small;
+            height: min-content;
         }
 
     </style>
@@ -314,7 +321,11 @@
 {#            {% endfor %}#}
 {#        </div>#}
 
-        <h1>Minhas Histórias</h1>
+
+        <div class="d-flex justify-content-between">
+            <h1>Minhas Histórias</h1>
+            <a href="" id="icon-add"><i class="fas fa-plus"></i></a>
+        </div>
         <div id="box"></div>
 
         <ul class="list-group" id="list-historias">
@@ -335,7 +346,7 @@
                             <div id="button-editar">
                                 <ul class="list-group">
                                     <a href="/capitulos/create/{{ historia.getId }}" class="btn btn-default" id="button-adicionarCap">Adicionar Capitulo</a>
-                                    <a href="#" class="btn btn-secondary">Atualizar Historia</a>
+                                    <a href="/historia/update/{{ historia.getId }}" class="btn btn-secondary" id="button-atualizar">Atualizar Historia</a>
                                 </ul>
                             </div>
                         </div>

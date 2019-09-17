@@ -64,6 +64,11 @@ class Historia
      */
     private $data_publicacao;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $rascunho;
+
     public function __construct()
     {
         $this->categoria = new ArrayCollection();
@@ -235,6 +240,18 @@ class Historia
     public function setDataPublicacao(\DateTimeInterface $data_publicacao): self
     {
         $this->data_publicacao = $data_publicacao;
+
+        return $this;
+    }
+
+    public function getRascunho(): ?bool
+    {
+        return $this->rascunho;
+    }
+
+    public function setRascunho(bool $rascunho): self
+    {
+        $this->rascunho = $rascunho;
 
         return $this;
     }

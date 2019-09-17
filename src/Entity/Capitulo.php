@@ -44,6 +44,17 @@ class Capitulo
      */
     private $historicos;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $status;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\LeitorAutor", inversedBy="capitulos")
+     */
+    private $idAutor;
+    
+
     public function __construct()
     {
         $this->historicos = new ArrayCollection();
@@ -126,6 +137,30 @@ class Capitulo
             $this->historicos->removeElement($historico);
             $historico->removeCapitulo($this);
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(bool $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getIdAutor(): ?LeitorAutor
+    {
+        return $this->idAutor;
+    }
+
+    public function setIdAutor(?LeitorAutor $idAutor): self
+    {
+        $this->idAutor = $idAutor;
 
         return $this;
     }

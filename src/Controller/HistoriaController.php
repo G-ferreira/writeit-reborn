@@ -119,7 +119,39 @@ class HistoriaController extends AbstractController
         return $this->render('historia/index.html.twig', [
             'historia' => $historia,
             'capitulos' =>$capitulos,
-            'autor' => $nome_autor
+            'nome_autor' => $nome_autor,
+            'autor' => $autor
         ]);
+    }
+
+    /**
+     * @Route("/historia/update/{id}", name="updateHistoria")
+     */
+    public function update(Request $request, int $id)
+    {
+        $user = $this->security->getUser();
+
+        $historia = $this->entityManager->getRepository(Historia::class)->find($id);
+
+        if ($user == $historia->getIdAutor()){
+            $form = $this->createForm(HistoriaAtualizaFormType::class,$historia);
+
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid())
+            {
+                $entityManager = $this->getDoctrine()->getManager();
+
+                $entityManager->flush();
+
+                return $this->redirectToRoute('myHistorias');
+            }
+
+            return $this->render('historia/historia-atualiza.html.twig',[
+                'form' => $form->createView()
+            ]);
+        }else{
+            return $this->redirectToRoute('home');
+        }
+
     }
 }

@@ -23,8 +23,11 @@ class HistoriaCadastroType extends AbstractType
         $builder
             ->add('titulo')
             ->add('sinopse')
-            ->add('status',null ,array(
-                'label' => 'História Completa?'
+            ->add('status',ChoiceType::class,array(
+                'choices' => array(
+                    'Concluída' => '1',
+                    'Em andamento' => 0
+                )
             ))
             ->add('categoria', EntityType::class, [
                 'multiple' => true,
@@ -46,6 +49,12 @@ class HistoriaCadastroType extends AbstractType
                     'Sexo, tortura ou abuso sexual' => '18'
                 ),
                 'label' => 'Tipo de conteúdo'
+            ))
+            ->add('rascunho', ChoiceType::class,array(
+                'choices' => array(
+                    'Publicar' => '1',
+                    'Rascunho' => '0'
+                )
             ))
             ->add('save',SubmitType::class,['label' => 'Cadastrar Capitulo'])
         ;

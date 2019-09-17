@@ -57,9 +57,20 @@ class LeitorAutor implements UserInterface
      */
     private $dadosPagamento;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Capitulo", mappedBy="idAutor", cascade={"persist", "remove"})
+     */
+    private $capitulo;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Capitulo", mappedBy="idAutor")
+     */
+    private $capitulos;
+
     public function __construct()
     {
         $this->historias = new ArrayCollection();
+        $this->capitulos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -196,6 +207,55 @@ class LeitorAutor implements UserInterface
         $newIdAutorLeitor = $dadosPagamento === null ? null : $this;
         if ($newIdAutorLeitor !== $dadosPagamento->getIdAutorLeitor()) {
             $dadosPagamento->setIdAutorLeitor($newIdAutorLeitor);
+        }
+
+        return $this;
+    }
+
+    public function getCapitulo(): ?Capitulo
+    {
+        return $this->capitulo;
+    }
+
+    public function setCapitulo(?Capitulo $capitulo): self
+    {
+        $this->capitulo = $capitulo;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newIdAutor = $capitulo === null ? null : $this;
+        if ($newIdAutor !== $capitulo->getIdAutor()) {
+            $capitulo->setIdAutor($newIdAutor);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Capitulo[]
+     */
+    public function getCapitulos(): Collection
+    {
+        return $this->capitulos;
+    }
+
+    public function addCapitulo(Capitulo $capitulo): self
+    {
+        if (!$this->capitulos->contains($capitulo)) {
+            $this->capitulos[] = $capitulo;
+            $capitulo->setIdAutor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCapitulo(Capitulo $capitulo): self
+    {
+        if ($this->capitulos->contains($capitulo)) {
+            $this->capitulos->removeElement($capitulo);
+            // set the owning side to null (unless already changed)
+            if ($capitulo->getIdAutor() === $this) {
+                $capitulo->setIdAutor(null);
+            }
         }
 
         return $this;

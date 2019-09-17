@@ -39,19 +39,19 @@
                 <div class="card-header">
                     <ul class="nav nav-pills card-header-pills">
                         <li class="nav-item">
-                            <a class="nav-link active" href="/rascunho/historias">Historias</a>
+                            <a class="nav-link" href="/rascunho/historias">Historias</a>
                         </li>
                         <li class="nav-link">
-                            <a class="nav-link" href="/rascunho/capitulos">Capitulo</a>
+                            <a class="nav-link active" href="/rascunho/capitulos">Capitulo</a>
                         </li>
                     </ul>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
-                        {% for historia in historias %}
+                        {% for capitulo in capitulos %}
                             <li class="d-flex justify-content-between">
-                                <a href="/historia/update/{{ historia.getId }}" class="list-group-item list-group-item-action">
-                                    {{ historia.getTitulo }}
+                                <a href="/capitulos/update/{{ capitulo.getId }}" class="list-group-item list-group-item-action">
+                                    {{ capitulo.getTitulo }}
                                 </a>
                             </li>
                         {% endfor %}

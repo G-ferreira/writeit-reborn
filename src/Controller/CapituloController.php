@@ -6,6 +6,7 @@ use App\Entity\Capitulo;
 use App\Entity\Historia;
 use App\Entity\Historico;
 use App\Entity\LeitorAutor;
+use App\Form\CapituloAtualizaFormType;
 use App\Form\CapituloCadastroFormType;
 use App\Form\CapituloFormType;
 use App\Service\AutorLeitorService\AutorLeitorData;
@@ -90,6 +91,7 @@ class CapituloController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
 
             $capitulo->setDataPublicacao( new DateTime("now"));
+            $capitulo->setIdAutor($user);
             $entityManager->persist($capitulo);
             $entityManager->flush();
 
@@ -121,6 +123,7 @@ class CapituloController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
 
             $capitulo->setDataPublicacao( new DateTime("now"));
+            $capitulo->setIdAutor($user);
             $entityManager->persist($capitulo);
             $entityManager->flush();
 
@@ -133,7 +136,7 @@ class CapituloController extends AbstractController
     }
 
     /**
-     * @Route("/capitulos/create/{id}", name="cepituloCreatePorId")
+     * @Route("/capitulos/create/{id}", name="capituloCreatePorId")
      */
     public function createCapituloPorId(Request $request,int $id)
     {
@@ -155,6 +158,7 @@ class CapituloController extends AbstractController
 
             $capitulo->setDataPublicacao( new DateTime("now"));
             $capitulo->setIdHistoria($id_historia);
+            $capitulo->setIdAutor($user);
             $entityManager->persist($capitulo);
             $entityManager->flush();
 
@@ -164,6 +168,40 @@ class CapituloController extends AbstractController
         return $this->render('capitulo/capitulo-form.html.twig',[
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/capitulos/update/{id}", name="capituloUpdate")
+     */
+    public function update(Request $request, int $id)
+    {
+        $user = $this->security->getUser();
+        if(!$user){
+            return $this->redirectToRoute('home');
+        }
+
+        $capitulo = $this->entityManager->getRepository(Capitulo::class)->find($id);
+
+        if ($user == $capitulo->getIdAutor()){
+            $form = $this->createForm(CapituloAtualizaFormType::class,$capitulo);
+
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()){
+
+                $entityManager = $this->getDoctrine()->getManager();
+
+                $entityManager->flush();
+
+                return $this->redirectToRoute('rascunhoCapitulos');
+            }
+
+            return $this->render('historia/historia-atualiza.html.twig',[
+                'form' => $form->createView()
+            ]);
+        }else{
+            return $this->redirectToRoute('home');
+        }
+
     }
 
 }
