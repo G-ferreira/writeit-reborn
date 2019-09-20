@@ -154,4 +154,60 @@ class HistoriaController extends AbstractController
         }
 
     }
+
+    /**
+     * @Route("/historia/show/{id}", name="showHistoria")
+     */
+    public function show(int $id)
+    {
+        $user = $this->security->getUser();
+
+        $historia = $this->entityManager->getRepository(Historia::class)->find($id);
+
+        $autor = $historia->getIdAutor();
+
+        $nome_autor = $autor->getApelido();
+
+        $capitulos = $this->entityManager->getRepository(Capitulo::class)->findBy(["idHistoria" => $id]);
+
+        if ($user == $historia->getIdAutor()){
+
+            return $this->render('historia/historia-autor.html.twig',[
+                'historia' => $historia,
+                'capitulos' => $capitulos,
+                'nome_autor' => $nome_autor,
+                'autor' => $autor
+            ]);
+        }else{
+            return $this->redirectToRoute('home');
+        }
+    }
+
+    /**
+     * @Route("/historia/delete/{id}", name="deleteHistoria")
+     */
+    public function delete(int $id)
+    {
+        $user = $this->security->getUser();
+
+        $historia = $this->entityManager->getRepository(Historia::class)->find($id);
+
+        $capitulos = $this->entityManager->getRepository(Capitulo::class)->findBy(["idHistoria" => $id]);
+
+        if ($user == $historia->getIdAutor()){
+
+            $entityManager = $this->getDoctrine()->getManager();
+
+            foreach ($capitulos as $capitulo){
+                $entityManager->remove($capitulo);
+            }
+
+            $entityManager->remove($historia);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('myHistorias');
+        }else{
+            return $this->redirectToRoute('home');
+        }
+    }
 }

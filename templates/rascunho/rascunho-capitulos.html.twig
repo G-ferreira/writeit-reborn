@@ -11,8 +11,8 @@
             background-color: #7e80c9;
         }
 
-        .container{
-            padding-top: 20px;
+        div.container{
+            padding-top: 60px;
         }
 
         div#lista{
@@ -49,7 +49,7 @@
                     <ul class="list-group">
                         {% for capitulo in capitulos %}
                             <li class="d-flex p-2 bd-highlight">
-                                <a href="/capitulos/update/{{ capitulo.getId }}" class="list-group-item list-group-item-action">
+                                <a href="/capitulos/rascunho/update/{{ capitulo.getId }}" class="list-group-item list-group-item-action">
                                     {{ capitulo.getTitulo }}
                                 </a>
                             </li>

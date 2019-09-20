@@ -45,7 +45,7 @@ class GeneroController extends AbstractController
         $genero = $this->entityManager->getRepository(Genero::class)->find($id);
 
         $query = $this->entityManager->createQuery('SELECT h FROM App\Entity\Historia h, App\Entity\Genero g WHERE g.id= 5 ');
-        $query->setParameter('id',$id);
+//        $query->setParameter('id',$id);
         $lista = $query->getResult();
 
         return $this->render('genero/generos-historias.html.twig', [

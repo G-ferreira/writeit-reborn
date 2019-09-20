@@ -171,9 +171,9 @@ class CapituloController extends AbstractController
     }
 
     /**
-     * @Route("/capitulos/update/{id}", name="capituloUpdate")
+     * @Route("/capitulos/rascunho/update/{id}", name="rascunhoCapituloUpdate")
      */
-    public function update(Request $request, int $id)
+    public function updateRascunhoCapitulo(Request $request, int $id)
     {
         $user = $this->security->getUser();
         if(!$user){
@@ -189,15 +189,75 @@ class CapituloController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()){
 
                 $entityManager = $this->getDoctrine()->getManager();
-
                 $entityManager->flush();
-
                 return $this->redirectToRoute('rascunhoCapitulos');
             }
 
             return $this->render('historia/historia-atualiza.html.twig',[
                 'form' => $form->createView()
             ]);
+        }else{
+            return $this->redirectToRoute('home');
+        }
+
+    }
+
+    /**
+     * @Route("/capitulos/update/{id}", name="capituloUpdate")
+     */
+    public function updateCapitulo(Request $request, int $id)
+    {
+        $user = $this->security->getUser();
+        if(!$user){
+            return $this->redirectToRoute('home');
+        }
+
+        $capitulo = $this->entityManager->getRepository(Capitulo::class)->find($id);
+
+        if ($user == $capitulo->getIdAutor()){
+            $form = $this->createForm(CapituloAtualizaFormType::class,$capitulo);
+
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()){
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->flush();
+                return $this->redirectToRoute('myHistorias');
+            }
+
+            return $this->render('historia/historia-atualiza.html.twig',[
+                'form' => $form->createView()
+            ]);
+        }else{
+            return $this->redirectToRoute('home');
+        }
+
+    }
+
+    /**
+     * @Route("/capitulos/delete/{id}", name="capituloDelete")
+     */
+    public function delete(int $id)
+    {
+        $user = $this->security->getUser();
+
+        $capitulo = $this->entityManager->getRepository(Capitulo::class)->find($id);
+
+        $historia = $this->entityManager->getRepository(Historia::class)->findOneBy(["id" => $capitulo->getIdHistoria()]);
+
+        $autor = $historia->getIdAutor();
+
+        $nome_autor = $autor->getApelido();
+
+        $capitulos = $this->entityManager->getRepository(Capitulo::class)->findBy(["idHistoria" => $historia->getId()]);
+
+        if ($user == $capitulo->getIdAutor()){
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($capitulo);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('myHistorias');
         }else{
             return $this->redirectToRoute('home');
         }

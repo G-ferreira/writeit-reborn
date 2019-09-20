@@ -1,0 +1,107 @@
+{% extends 'nav.html.twig' %}
+
+{% block title %}História{% endblock %}
+
+{% block body %}
+
+    <style>
+        h4,h5{
+            text-align: center;
+        }
+
+        p{
+            text-align: center;
+        }
+
+        img{
+            padding-top: 10px;
+            padding-bottom: 20px;
+        }
+
+        div#divTitulo{
+            padding-top: 40px;
+            padding-bottom: 20px;
+        }
+
+        a#button-editar{
+            font-size: small;
+            height: min-content;
+        }
+
+        div#box{
+            width: 100%;
+            height: 2px;
+            background-color: #7e80c9;
+        }
+
+        div#divCapitulos{
+            padding: 10px 20px 50px 20px;
+        }
+
+    </style>
+
+    <div class="d-flex flex-column bd-highlight mb-3">
+
+        <div class="container-fluid" id="divTitulo">
+            <div class="d-flex justify-content-between">
+                <h4>História</h4>
+                <a href="/historia/update/{{ historia.getId }}" class="btn btn-secondary" id="button-editar">
+                    Editar História
+                </a>
+            </div>
+            <div id="box"></div>
+        </div>
+
+        <div class="container-fluid" id="divCorpo">
+            <div class="d-flex justify-content-center">
+                <div class="d-flex flex-column bd-highlight mb-3">
+                    <h4>{{ historia.getTitulo }}</h4>
+                    <h4 class="font-weight-light"><a href="/autores/{{ autor.getId }}" class="font-weight-light">{{ nome_autor }}</a></h4>
+
+                    <img src="https://webkit.org/demos/srcset/image-src.png" alt="">
+                    <h5 class="font-weight-light">{{ historia.getDataPublicacao|date('d/m/Y') }}</h5>
+                </div>
+            </div>
+            <div class="p-2 bd-highlight">
+                <div>
+                    <p>
+                        {{ historia.getSinopse }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid" id="divTitulo">
+            <div class="d-flex justify-content-between">
+                <h4>Capítulos</h4>
+                <h4>
+                    Status:{% if  historia.getStatus == 1 %}
+                    Concluída
+                {% else %}
+                    Em andamento
+                    {% endif %}
+                </h4>
+            </div>
+            <div id="box"></div>
+        </div>
+
+        <div id="divCapitulos">
+            <ul class="list-group">
+                {% for capitulo in capitulos %}
+                    <li  class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            <div class="p-2 bd-highlight">{{ capitulo.titulo }}</div>
+                            <div class="p-2 bd-highlight">
+                                <a href="/capitulos/delete/{{ capitulo.getId }}">Delete</a>
+                                <a href="/capitulos/update/{{ capitulo.getId }}">Editar</a>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    </div>
+
+{% endblock %}
