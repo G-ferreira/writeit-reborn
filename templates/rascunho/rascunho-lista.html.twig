@@ -23,6 +23,21 @@
             color: white;
             background-color: #7e80c9;
         }
+
+        a#btn-delete{
+            background-color: #8db580;
+            color: #f5f2ef;
+        }
+
+        a#btn-editar{
+            background-color: #8db580;
+            color: #f5f2ef;
+        }
+
+        div#historia-titulo{
+            margin-top: 5px;
+        }
+
     </style>
 
     <div class="container">
@@ -45,15 +60,21 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <ul class="list-group">
-                        {% for historia in historias %}
-                            <li class="d-flex p-2 bd-highlight">
-                                <a href="/historia/update/{{ historia.getId }}" class="list-group-item list-group-item-action">
-                                    {{ historia.getTitulo }}
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
+                    <div id="divHistoria">
+                        <ul class="list-group">
+                            {% for historia in historias %}
+                                <li  class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="p-2 bd-highlight" id="historia-titulo">{{ historia.titulo }}</div>
+                                        <div class="p-2 bd-highlight">
+                                            <a href="/historia/rascunho/delete/{{ historia.getId }}" class="btn btn-default" id="btn-delete">Delete</a>
+                                            <a href="/historia/rascunho/update/{{ historia.getId }}" class="btn btn-default" id="btn-editar">Editar</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

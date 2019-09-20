@@ -79,7 +79,7 @@ class HistoriaController extends AbstractController
      */
     public function list()
     {
-        $historias = $this->entityManager->getRepository(Historia::class)->findAll();
+        $historias = $this->entityManager->getRepository(Historia::class)->findBy(["rascunho" => 1]);
 
         return $this->render('historia/historiaslist.html.twig', [
             'historias' => $historias
@@ -114,7 +114,7 @@ class HistoriaController extends AbstractController
 
         $nome_autor = $autor->getApelido();
 
-        $capitulos = $this->entityManager->getRepository(Capitulo::class)->findBy(["idHistoria" => $id]);
+        $capitulos = $this->entityManager->getRepository(Capitulo::class)->findBy(["idHistoria" => $id, "status" => 1]);
 
         return $this->render('historia/index.html.twig', [
             'historia' => $historia,
@@ -144,6 +144,37 @@ class HistoriaController extends AbstractController
                 $entityManager->flush();
 
                 return $this->redirectToRoute('myHistorias');
+            }
+
+            return $this->render('historia/historia-atualiza.html.twig',[
+                'form' => $form->createView()
+            ]);
+        }else{
+            return $this->redirectToRoute('home');
+        }
+
+    }
+
+    /**
+     * @Route("/historia/rascunho/update/{id}", name="updateRascunhoHistoria")
+     */
+    public function updateRascunho(Request $request, int $id)
+    {
+        $user = $this->security->getUser();
+
+        $historia = $this->entityManager->getRepository(Historia::class)->find($id);
+
+        if ($user == $historia->getIdAutor()){
+            $form = $this->createForm(HistoriaAtualizaFormType::class,$historia);
+
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid())
+            {
+                $entityManager = $this->getDoctrine()->getManager();
+
+                $entityManager->flush();
+
+                return $this->redirectToRoute('rascunhoHistorias');
             }
 
             return $this->render('historia/historia-atualiza.html.twig',[
@@ -206,6 +237,34 @@ class HistoriaController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('myHistorias');
+        }else{
+            return $this->redirectToRoute('home');
+        }
+    }
+
+    /**
+     * @Route("/historia/rascunho/delete/{id}", name="deleteRascunhoHistoria")
+     */
+    public function deleteRascunho(int $id)
+    {
+        $user = $this->security->getUser();
+
+        $historia = $this->entityManager->getRepository(Historia::class)->find($id);
+
+        $capitulos = $this->entityManager->getRepository(Capitulo::class)->findBy(["idHistoria" => $id]);
+
+        if ($user == $historia->getIdAutor()){
+
+            $entityManager = $this->getDoctrine()->getManager();
+
+            foreach ($capitulos as $capitulo){
+                $entityManager->remove($capitulo);
+            }
+
+            $entityManager->remove($historia);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('rascunhoHistorias');
         }else{
             return $this->redirectToRoute('home');
         }

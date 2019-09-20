@@ -17,39 +17,24 @@
         background-color: #7e80c9;
     }
 
-    div#button-editar{
-        padding-top: 25px;
-    }
-
     ul#list-historias.list-group{
         padding-top: 30px;
-    }
-
-    div.overflow-hidden{
-        height: 25px;
-    }
-
-    a#button-adicionarCap{
-        color: white;
-        background-color: #9452C7;
     }
 
     div.container{
         padding-top: 60px;
     }
 
-</style>
+    a#link-historia{
+        color: #666666;
+    }
 
-{#<div class="example-wrapper">#}
-{#    {% for item in historico.getCapitulo %}#}
-{#        <a href="/capitulo/{{ item.getId }}">#}
-{#            <p>{{ item.getIdHistoria }}</p>#}
-{#            <p>{{ item.getTitulo }}</p>#}
-{#        </a>#}
-{#        <p>---------------------------</p>#}
-{#    {% endfor %}#}
-{#</div>#}
-{#{% endblock %}#}
+    a#link-historia:hover{
+        color: #313131;
+        text-decoration: none;
+    }
+
+</style>
 
 <div class="container">
     <h1>Histórico</h1>
@@ -60,13 +45,11 @@
             <div class="card mb-3" style="width: auto">
                 <div class="row no-gutters">
                     <div class="col-md-2">
-                        <img src="http://2.bp.blogspot.com/-JytFHxae52w/VM0_FmMBREI/AAAAAAAAAJ8/nnony8vtisI/s1600/pacman.png" class="card-img" alt="...">
+                        <img src="https://dummyimage.com/600x400/f5f2ef/fff" class="card-img" alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <a href="/historia/{{ item.getIdHistoria }}" class="card-title">{{ item.getTitulo }}</a>
-{#                            <div class="overflow-hidden">{{ item.getSinopse }}</div>#}
-{#                            <p class="card-text"><small class="text-muted">{{ item.getClassificacao }}</small></p>#}
+                            <a href="/capitulo/{{ item.getId }}" class="card-title" id="link-historia">{{ item.getTitulo }}</a>
                         </div>
                     </div>
                 </div>
