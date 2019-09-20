@@ -207,7 +207,7 @@
         div#box{
             width: 100%;
             height: 2px;
-            background-color: #9452c7;
+            background-color: #7e80c9;
         }
 
         div#button-editar{
@@ -224,14 +224,29 @@
 
         a#button-adicionarCap{
             color: white;
-            background-color: #9452C7;
+            background-color: #7e80c9;
             font-size: small;
             height: min-content;
+        }
+
+        a#button-atualizar.btn.btn-secondary{
+            margin: 5px;
         }
 
         a#button-atualizar{
             font-size: small;
             height: min-content;
+        }
+
+        i.fas.fa-plus{
+            font-size: x-large;
+            color: dimgray;
+            margin-right: 10px;
+            margin-top: 20px;
+        }
+
+        a:hover{
+           text-decoration: none;
         }
 
     </style>
@@ -324,13 +339,13 @@
 
         <div class="d-flex justify-content-between">
             <h1>Minhas Histórias</h1>
-            <a href="" id="icon-add"><i class="fas fa-plus"></i></a>
+            <a href="{{ path('historiaCreate') }}" id="icon-add"><i class="fas fa-plus"></i></a>
         </div>
         <div id="box"></div>
 
         <ul class="list-group" id="list-historias">
             {% for historia in historias %}
-                <div class="card mb-3" style="width: auto">
+                <div class="card mb-3 shadow-sm p-3 mb-5 bg-white rounded" style="width: auto">
                     <div class="row no-gutters">
                         <div class="col-md-2">
                             <img src="http://2.bp.blogspot.com/-JytFHxae52w/VM0_FmMBREI/AAAAAAAAAJ8/nnony8vtisI/s1600/pacman.png" class="card-img" alt="...">

@@ -1,6 +1,6 @@
 {% extends 'nav.html.twig' %}
 
-{% block title %}Genero{% endblock %}
+{% block title %}Histórias{% endblock %}
 
 {% block body %}
 
@@ -8,7 +8,7 @@
         div#box{
             width: 100%;
             height: 2px;
-            background-color: #9452c7;
+            background-color: #7e80c9;
         }
 
         div.container-fluid{
@@ -18,14 +18,19 @@
         div#lista{
             padding-top: 30px;
         }
+
+        .card{
+            width: 200px;
+            height: auto;
+        }
     </style>
 
     <div class="container-fluid">
-        <h1>Historias</h1>
+        <h1>Histórias</h1>
         <div id="box"></div>
         <div id="lista">
             <ul class="list-group">
-                {% for historia in historias %}
+                {% for historia in lista %}
                     <li class="d-flex justify-content-between">
                         <a href="/historia/{{ historia.id }}" class="list-group-item list-group-item-action">
                             {{ historia.titulo }}

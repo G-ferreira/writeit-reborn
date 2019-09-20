@@ -10,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\Common\Collections;
 
 class GeneroController extends AbstractController
 {
@@ -41,14 +40,17 @@ class GeneroController extends AbstractController
      */
     public function buscarPorId(int $id): Response
     {
-        $historias = $this->entityManager->getRepository(Historia::class)->findAll();
+//        $historias = $this->entityManager->getRepository(Historia::class)->findBy(["genero.id" => $id]);
 
         $genero = $this->entityManager->getRepository(Genero::class)->find($id);
 
-        //$historias = $this->entityManager->getRepository(Historia::class)->findBy(["genero" => $genero]);
+        $query = $this->entityManager->createQuery('SELECT h FROM App\Entity\Historia h, App\Entity\Genero g WHERE g.id= 5 ');
+        $query->setParameter('id',$id);
+        $lista = $query->getResult();
 
         return $this->render('genero/generos-historias.html.twig', [
-            'historias' => $historias
+//            'historias' => $historias,
+                'lista' => $lista
         ]);
     }
 }

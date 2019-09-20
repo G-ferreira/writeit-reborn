@@ -30,6 +30,7 @@ class Genero
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Historia", mappedBy="idGenero")
+     * @ORM\JoinTable(name="id_genero")
      */
     private $historias;
 
@@ -100,5 +101,9 @@ class Genero
         return $this->titulo;
         // to show the id of the Category in the select
         // return $this->id;
+    }
+
+    public function getHistoriasGeneros(){
+        return $this->historias->toArray();
     }
 }

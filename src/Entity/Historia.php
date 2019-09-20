@@ -255,4 +255,8 @@ class Historia
 
         return $this;
     }
+
+    public function getGeneros(){
+        return $this->genero;
+    }
 }

@@ -8,7 +8,7 @@
     @import url('https://fonts.googleapis.com/css?family=Abel');
 
     html, body {
-        background: #f3eaff;
+        background: #fffffc;
         font-family: Abel, Arial, Verdana, sans-serif;
     }
 
@@ -187,29 +187,122 @@
         right: 1rem;
         font-size: 0.9em;
     }
-    
 
-    .example-wrapper { margin: 1em auto; max-width: 1000px; width: 95%; font: 14px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    div#autores{
+        padding: 50px 30px 50px 30px;
+    }
+
+    .card2 {
+        display: block;
+        top: 0px;
+        position: relative;
+        max-width: 262px;
+        background-color: #f2f8f9;
+        border-radius: 4px;
+        padding: 32px 24px;
+        margin: 12px;
+        text-decoration: none;
+        z-index: 0;
+        overflow: hidden;
+        border: 1px solid #f2f8f9;
+    }
+
+    .card2:hover {
+         transition: all 0.2s ease-out;
+         box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+         top: -4px;
+         border: 1px solid #cccccc;
+         background-color: white;
+     }
+
+    .card2:before {
+         content: "";
+         position: absolute;
+         /*z-index: -1;*/
+         /*top: -16px;*/
+         /*right: -16px;*/
+         /*background: #00838d;*/
+         /*height: 32px;*/
+         /*width: 32px;*/
+         border-radius: 32px;
+         transform: scale(2);
+         transform-origin: 50% 50%;
+         transition: transform 0.15s ease-out;
+     }
+
+    .card2:hover:before {
+         transform: scale(2.15);
+     }
+
+    h3 {
+        color: #262626;
+        font-size: 17px;
+        line-height: 24px;
+        font-weight: 700;
+        margin-bottom: 4px;
+    }
+
+    p {
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 20px;
+        color: #666666;
+    }
+    p.small {
+         font-size: 14px;
+     }
+
+
+    /*.go-corner {*/
+    /*    display: flex;*/
+    /*    align-items: center;*/
+    /*    justify-content: center;*/
+    /*    position: absolute;*/
+    /*    width: 32px;*/
+    /*    height: 32px;*/
+    /*    overflow: hidden;*/
+    /*    top: 0;*/
+    /*    right: 0;*/
+    /*    background-color: #00838d;*/
+    /*    border-radius: 0 4px 0 32px;*/
+    /*}*/
+
+    /*.go-arrow {*/
+    /*    margin-top: -4px;*/
+    /*    margin-right: -4px;*/
+    /*    color: white;*/
+    /*    font-family: courier, sans;*/
+    /*}*/
+
 </style>
 
 <div class="container-fluid">
 
-    {% if variavel%}
-        <h2>Bem-vindo, {{ variavel.apelido }}</h2>
-    {% endif %}
-
-    <h2>Autores</h2>
-    <div class="row">
-        {% for autor in autores %}
-            <div class="card">
-                <img src="" class="card-img" alt="">
-                <div class="card-body">
-                    <a href="/autores/{{ autor.getId }}">
-                        {{ autor.getApelido }}
-                    </a>
-                </div>
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://dummyimage.com/1000x300/f5f2ef/fff" class="d-block w-100" alt="...">
             </div>
+            <div class="carousel-item">
+                <img src="https://dummyimage.com/1000x300/f5f2ef/fff" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://dummyimage.com/1000x300/f5f2ef/fff" class="d-block w-100" alt="...">
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="autores">
+        {% for autor in autores %}
+            <a class="card2" href="/autores/{{ autor.id }}">
+                <h3>{{ autor.apelido }}</h3>
+                <p class="small">Card description with lots of great facts and interesting details.</p>
+
+                <div class="go-corner" href="/autores/{{ autor.id }}">
+                    <div class="go-arrow">
+                    </div>
+                </div>
+            </a>
         {% endfor %}
     </div>
 
