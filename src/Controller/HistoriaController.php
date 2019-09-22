@@ -8,8 +8,10 @@ use App\Entity\Historia;
 use App\Entity\LeitorAutor;
 use App\Form\HistoriaAtualizaFormType;
 use App\Form\HistoriaCadastroType;
+use Gedmo\Sluggable\Util\Urlizer;
 use App\Service\AutorLeitorService\AutorLeitorData;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
@@ -62,6 +64,18 @@ class HistoriaController extends AbstractController
             $historia->setClassificacao($classif);
 
             $historia->setIdAutor($user);
+
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $form['image']->getData();
+
+            $destination = $this->getParameter('kernel.project_dir').'/public/uploads/images/historias';
+            $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $newFilename = Urlizer::urlize($originalFilename).'-'.uniqid().'.'.$uploadedFile->guessExtension();
+            $uploadedFile->move(
+                $destination,
+                $newFilename
+            );
+            $historia->setImage($newFilename);
 
             $entityManager->persist($historia);
             $entityManager->flush();

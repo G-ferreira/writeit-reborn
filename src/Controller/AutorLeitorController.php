@@ -11,6 +11,8 @@ use App\Form\DadosPagamentoCadastroFormType;
 use App\Form\LeitorAutorLoginFormType;
 use App\Service\AutorLeitorService\AutorLeitorData;
 use Doctrine\ORM\EntityManagerInterface;
+use Gedmo\Sluggable\Util\Urlizer;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,6 +54,18 @@ class AutorLeitorController extends AbstractController
             $user->setEmail($form->get('email')->getData());
 
             $entityManager = $this->getDoctrine()->getManager();
+
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $form['image']->getData();
+
+            $destination = $this->getParameter('kernel.project_dir').'/public/uploads/images/autores';
+            $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $newFilename = Urlizer::urlize($originalFilename).'-'.uniqid().'.'.$uploadedFile->guessExtension();
+            $uploadedFile->move(
+                $destination,
+                $newFilename
+            );
+            $user->setImage($newFilename);
 
             $entityManager->persist($user);
             $entityManager->flush();

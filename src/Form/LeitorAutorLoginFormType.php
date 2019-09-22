@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\LeitorAutor;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -17,6 +18,11 @@ class LeitorAutorLoginFormType extends AbstractType
     {
         $builder
             ->add('apelido')
+            ->add('image', FileType::class, [
+                'mapped' => false,
+                'label' => false,
+                'attr' => ['placeholder' => 'Choose file']
+            ])
             ->add('email', EmailType::class)
             ->add('password', RepeatedType::class,[
                 'type' => PasswordType::class,

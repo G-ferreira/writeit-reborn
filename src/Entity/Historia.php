@@ -69,6 +69,11 @@ class Historia
      */
     private $rascunho;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
     public function __construct()
     {
         $this->categoria = new ArrayCollection();
@@ -258,5 +263,17 @@ class Historia
 
     public function getGeneros(){
         return $this->genero;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }

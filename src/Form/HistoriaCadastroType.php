@@ -23,6 +23,11 @@ class HistoriaCadastroType extends AbstractType
     {
         $builder
             ->add('titulo')
+            ->add('image', FileType::class, [
+                'mapped' => false,
+                'label' => false,
+                'attr' => ['placeholder' => 'Choose file']
+            ])
             ->add('sinopse')
             ->add('status',ChoiceType::class,array(
                 'choices' => array(

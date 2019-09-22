@@ -38,6 +38,10 @@
             text-align: center;
         }
 
+        .card h2 {
+            text-align: center;
+        }
+
         .card .additional {
             position: absolute;
             width: 150px;
@@ -105,7 +109,7 @@
             height: 100%;
         }
 
-        .card .additional .more-info h1 {
+        .card .additional .more-info h2 {
             color: #fff;
             margin-bottom: 0;
         }
@@ -196,29 +200,29 @@
                     <div class="additional">
                         <div class="user-card">
                             <div class="level center">
-                                Autor
+                                {{ historia.getIdAutor.getApelido }}
                             </div>
-                            <div class="points center">
-
-                            </div>
-                            <img width="110" height="200" src="https://webkit.org/demos/srcset/image-src.png" class="center logo">
+                            <img width="110" height="200" src="/uploads/images/historias/{{ historia.image }}" class="center logo">
 
                         </div>
                         <a href="/historia/{{ historia.getId }}">
                             <div class="more-info">
-                                <h1>{{ historia.getTitulo }}</h1>
+                                <h2>{{ historia.getTitulo }}</h2>
                                 <div class="coords">
                                     <span>Gênero</span>
-                                    <span>Gênero</span>
+                                    <span>Categoria</span>
                                 </div>
                                 <div class="coords">
+                                    <span>Gênero</span>
                                     <span>Categoria</span>
+                                </div>
+                                <div class="coords">
+                                    <span>Gênero</span>
                                     <span>Categoria</span>
                                 </div>
                                 <div class="stats">
                                     <div>
                                         <div class="title">Finalizada?</div>
-                                        <i class="fas fa-check-circle"></i>
                                         <div class="value">{% if  historia.getStatus == 1 %}
                                                 Sim
                                             {% else %}
@@ -228,35 +232,18 @@
                                     </div>
                                     <div>
                                         <div class="title">Capitulos</div>
-                                        <i class="fas fa-file-alt"></i>
-                                        <div class="value">27</div>
+                                        <div class="value">{{ historia.getCapitulos|length }}</div>
                                     </div>
-                                    <div>
-                                        <div class="title">Visualizações</div>
-                                        <i class="fa fa-group"></i>
-                                        <div class="value">123</div>
-                                    </div>
-
                                 </div>
                             </div>
                         </a>
                     </div>
                     <div class="general">
-                        <h1>{{ historia.getTitulo }}</h1>
-                        <p>{{ historia.getSinopse }}.</p>
+                        <h2>{{ historia.getTitulo }}</h2>
+                        <p style="float: left; height: 50%; overflow: hidden;">{{ historia.getSinopse }}</p>
                         <span class="more">Passe o mouse por cima para mais informações</span>
                     </div>
 
-
-                    <div>
-                        <h2></h2><br>
-                        <h3>Sinopse</h3>
-                        <p></p><br>
-                        <h3>Status</h3>
-                        <p></p><br>
-                        <h3>Classificacao</h3>
-                        <p>{{ historia.getClassificacao }}</p><br>
-                    </div>
                 </div>
             </div>
         {% endfor %}
