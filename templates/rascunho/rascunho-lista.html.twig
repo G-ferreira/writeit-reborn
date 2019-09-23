@@ -38,12 +38,23 @@
             margin-top: 5px;
         }
 
+        i.fas.fa-plus{
+            font-size: x-large;
+            margin-right: 10px;
+            margin-top: 20px;
+            color: #212529;
+        }
+
+        i.fas.fa-plus:hover{
+            color: #666666;
+        }
+
     </style>
 
     <div class="container">
         <div class="d-flex justify-content-between">
             <h1>Rascunhos</h1>
-{#            <a href="#" class="btn btn-default" id="button-rascunho">Inserir Rascunho</a>#}
+            <a href="{{ path('historiaCreate') }}" id="icon-add"><i class="fas fa-plus"></i></a>
         </div>
 
         <div id="box"></div>
