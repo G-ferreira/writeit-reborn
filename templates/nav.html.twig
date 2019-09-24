@@ -18,21 +18,44 @@
 <body>
     <style>
 
-        @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700');
+        /*@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700');*/
+
+        /*html, body {*/
+        /*    background: #ffffff;*/
+        /*    font-family: 'Roboto Slab', serif;*/
+        /*}*/
+
+        @import url('https://fonts.googleapis.com/css?family=Abel');
 
         html, body {
-            background: #ffffff;
-            font-family: 'Roboto Slab', serif;
+            background: #fffffc;
+            font-family: Abel, Arial, Verdana, sans-serif;
         }
 
         a#button-escrever{
             color: white;
-            background-color: #7e80c9;
+            background-color: #744e89;
             margin-right: 5px;
         }
 
         a#title-nav{
-            color: #7e80c9;
+            color: #744e89;
+        }
+
+        a.nav-link#nav-link{
+            color: #313131;
+        }
+
+        a.nav-link#nav-link:hover{
+            color: #666666;
+        }
+
+        a#navbarDropdown{
+            color: #313131;
+        }
+
+        a#navbarDropdown:hover{
+            color: #666666;
         }
 
     </style>
@@ -53,13 +76,13 @@
         <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar7">
             <ul class="navbar-nav ml-auto flex-nowrap">
                 <li class="nav-item">
-                    <a href="/categorias" class="nav-link">Categorias</a>
+                    <a href="/categorias" class="nav-link" id="nav-link">Categorias</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/generos" class="nav-link">Gêneros</a>
+                    <a href="/generos" class="nav-link" id="nav-link">Gêneros</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/autores" class="nav-link">Autores</a>
+                    <a href="/autores" class="nav-link" id="nav-link">Autores</a>
                 </li>
 
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}

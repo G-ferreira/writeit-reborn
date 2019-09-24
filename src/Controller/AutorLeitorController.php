@@ -9,6 +9,7 @@ use App\Entity\Historia;
 use App\Entity\LeitorAutor;
 use App\Form\DadosPagamentoCadastroFormType;
 use App\Form\LeitorAutorLoginFormType;
+use App\Form\PerfilAtualizaType;
 use App\Service\AutorLeitorService\AutorLeitorData;
 use Doctrine\ORM\EntityManagerInterface;
 use Gedmo\Sluggable\Util\Urlizer;

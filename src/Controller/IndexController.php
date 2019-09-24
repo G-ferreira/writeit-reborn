@@ -32,11 +32,31 @@ class IndexController extends AbstractController
 
         $historias = $this->entityManager->getRepository(Historia::class)->findBy(["rascunho" => 1]);
 
+        $historiasAcao = $this->entityManager->createQueryBuilder()
+            ->select('h')
+            ->from('App\Entity\Historia','h')
+            ->setMaxResults(4)
+            ->getQuery()->getResult();
+
+        $historiasAventura = $this->entityManager->createQueryBuilder()
+            ->select('h')
+            ->from('App\Entity\Historia','h')
+            ->setMaxResults(4)
+            ->getQuery()->getResult();
+
+        $autoresRecomendados = $this->entityManager->createQueryBuilder()
+            ->select('a')
+            ->from('App\Entity\LeitorAutor','a')
+            ->setMaxResults(3)
+            ->getQuery()->getResult();
+
         $user = $this->security->getUser();
         if($user){
             return $this->render('index/index.html.twig', [
                 'variavel' => $user,
-                'autores' => $autores,
+                'autores' => $autoresRecomendados,
+                'historiasAcao' => $historiasAcao,
+                'historiasAventura' => $historiasAventura,
                 'historias' => $historias
             ]);
         }
@@ -44,7 +64,9 @@ class IndexController extends AbstractController
 
         return $this->render('index/index.html.twig', [
             'variavel' => [],
-            'autores' => $autores,
+            'autores' => $autoresRecomendados,
+            'historiasAcao' => $historiasAcao,
+            'historiasAventura' => $historiasAventura,
             'historias' => $historias
         ]);
     }
