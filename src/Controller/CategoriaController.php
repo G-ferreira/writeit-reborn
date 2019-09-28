@@ -50,17 +50,6 @@ class CategoriaController extends AbstractController
     }
 
     /**
-     * @Route("/admin/categorias", methods={"GET"}, name="adminCategorias")
-     */
-    public function listaCategorias()
-    {
-        $categoriaList = $this->entityManager->getRepository(Categoria::class)->findAll();
-        return $this->render('categoria/lista-categorias.html.twig',[
-           'lista' => $categoriaList
-        ]);
-    }
-
-    /**
      * @Route("/categorias/delete/{id}")
      */
     public function delete(int $id)

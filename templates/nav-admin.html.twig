@@ -17,12 +17,110 @@
 </head>
 <body>
 <style>
+    /*@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700');*/
 
+    /*html, body {*/
+    /*    background: #ffffff;*/
+    /*    font-family: 'Roboto Slab', serif;*/
+    /*}*/
+
+    @import url('https://fonts.googleapis.com/css?family=Abel');
+
+    html, body {
+        background: #fffffc;
+        font-family: Abel, Arial, Verdana, sans-serif;
+    }
+
+    a#button-escrever{
+        color: white;
+        background-color: #744e89;
+        margin-right: 5px;
+    }
+
+    a#title-nav{
+        color: #744e89;
+    }
+
+    a.nav-link#nav-link{
+        color: #313131;
+    }
+
+    a.nav-link#nav-link:hover{
+        color: #666666;
+    }
+
+    a#navbarDropdown{
+        color: #313131;
+    }
+
+    a#navbarDropdown:hover{
+        color: #666666;
+    }
 
 </style>
 
 
 <div class="container-fluid">
+
+    <!-- example 7 - center on mobile 2-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="d-flex flex-grow-1">
+            <span class="w-100 d-lg-none d-block"><!-- hidden spacer to center brand on mobile --></span>
+            <a class="navbar-brand" id="title-nav" href="/">
+                Write It
+            </a>
+            <div class="w-100 text-right">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar7">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar7">
+            <ul class="navbar-nav ml-auto flex-nowrap">
+                <li class="nav-item">
+                    <a href="/categorias" class="nav-link" id="nav-link">Categorias</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/generos" class="nav-link" id="nav-link">Gêneros</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/autores" class="nav-link" id="nav-link">Autores</a>
+                </li>
+
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user-circle"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/myHistorias">Minhas Histórias</a>
+                            <a class="dropdown-item" href="/historico">Histórico</a>
+                            <a class="dropdown-item" href="/rascunho/capitulos">Rascunhos</a>
+                            <a class="dropdown-item" href="/contribuicao/lista">Contribuições</a>
+                            <a class="dropdown-item" href="/configuracao">Meus Dados</a>
+                            <div class="dropdown-divider"></div>
+
+                            <a href="{{path('logout')}}" class="dropdown-item">Sair</a>
+
+                        </div>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <a href="{{ path('historiaCreate') }}" class="btn btn-default" id="button-escrever">Escrever História</a>
+                    {% endif %}
+                    {% if not app.user%}
+                        <a href="{{path('login')}}" class="btn btn-primary">Entrar</a>
+                    {% endif %}
+                </li>
+                {#                <li class="nav-item">#}
+                {#                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}#}
+                {#                        <a href="{{path('logout')}}" class="btn btn-default" id="button-sair">Sair</a>#}
+                {#                    {% endif %}#}
+                {#                </li>#}
+            </ul>
+        </div>
+    </nav>
     <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">

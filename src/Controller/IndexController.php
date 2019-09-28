@@ -71,20 +71,4 @@ class IndexController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/admin", name="adminHome")
-     */
-    public function indexAdmin()
-    {
-
-        $autores = $this->entityManager->getRepository(LeitorAutor::class)->findAll();
-
-        $historias = $this->entityManager->getRepository(Historia::class)->findAll();
-
-        return $this->render('index/index-admin.html.twig',[
-            'autores' => $autores,
-            'historias' => $historias
-        ]);
-    }
-
 }

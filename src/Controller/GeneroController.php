@@ -53,19 +53,6 @@ class GeneroController extends AbstractController
         ]);
     }
 
-
-    /**
-     * @Route("/admin/generos", methods={"GET"}, name="adminGeneros")
-     */
-    public function listaGeneros()
-    {
-        $generoList = $this->entityManager->getRepository(Genero::class)->findAll();
-        return $this->render('genero/lista-generos.html.twig',[
-            'lista' => $generoList
-        ]);
-    }
-
-
     /**
      * @Route("/generos/delete/{id}")
      */
