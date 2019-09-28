@@ -31,6 +31,13 @@ class AdminController extends AbstractController
      */
     public function buscarAutores()
     {
+        $user = $this->security->getUser();
+        if(!$user){
+            return $this->redirectToRoute('home');
+        }
+        if($user->getSMFA() == null){
+            return $this->redirectToRoute('home');
+        }
         $autores = $this->entityManager->getRepository(LeitorAutor::class)->findAll();
         return $this->render('autorLeitor/autores-admin.html.twig', [
             'lista' => $autores
@@ -42,7 +49,13 @@ class AdminController extends AbstractController
      */
     public function indexAdmin()
     {
-
+        $user = $this->security->getUser();
+        if(!$user){
+            return $this->redirectToRoute('home');
+        }
+        if($user->getSMFA() == null){
+            return $this->redirectToRoute('home');
+        }
         $autores = $this->entityManager->getRepository(LeitorAutor::class)->findAll();
 
         $historias = $this->entityManager->getRepository(Historia::class)->findAll();
@@ -58,6 +71,13 @@ class AdminController extends AbstractController
      */
     public function listaCategorias()
     {
+        $user = $this->security->getUser();
+        if(!$user){
+            return $this->redirectToRoute('home');
+        }
+        if($user->getSMFA() == null){
+            return $this->redirectToRoute('home');
+        }
         $categoriaList = $this->entityManager->getRepository(Categoria::class)->findAll();
         return $this->render('categoria/lista-categorias.html.twig',[
             'lista' => $categoriaList
@@ -69,6 +89,13 @@ class AdminController extends AbstractController
      */
     public function listaGeneros()
     {
+        $user = $this->security->getUser();
+        if(!$user){
+            return $this->redirectToRoute('home');
+        }
+        if($user->getSMFA() == null){
+            return $this->redirectToRoute('home');
+        }
         $generoList = $this->entityManager->getRepository(Genero::class)->findAll();
         return $this->render('genero/lista-generos.html.twig',[
             'lista' => $generoList

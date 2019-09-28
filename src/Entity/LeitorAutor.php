@@ -72,6 +72,11 @@ class LeitorAutor implements UserInterface
      */
     private $image;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $SMFA;
+
     public function __construct()
     {
         $this->historias = new ArrayCollection();
@@ -274,6 +279,18 @@ class LeitorAutor implements UserInterface
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getSMFA(): ?string
+    {
+        return $this->SMFA;
+    }
+
+    public function setSMFA(?string $SMFA): self
+    {
+        $this->SMFA = $SMFA;
 
         return $this;
     }
