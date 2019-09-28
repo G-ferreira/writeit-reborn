@@ -321,7 +321,7 @@
     }
 
     h3#autores-titulo{
-        margin-top: 20px;
+        margin-top: 40px;
     }
 
 
@@ -353,13 +353,7 @@
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="https://dummyimage.com/1000x300/f5f2ef/fff" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="https://dummyimage.com/1000x300/f5f2ef/fff" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="https://dummyimage.com/1000x300/f5f2ef/fff" class="d-block w-100" alt="...">
+                <img src="/uploads/images/icons/banner.jpg" class="d-block w-100" alt="...">
             </div>
         </div>
     </div>
@@ -369,7 +363,7 @@
     <div class="row">
         {% for autor in autores %}
             <a class="card2" href="/autores/{{ autor.id }}" id="autores">
-                <img src="/uploads/images/autores/{{ autor.image }}" id="image_autor" class="rounded-circle" alt="">
+{#                <img src="/uploads/images/autores/{{ autor.image }}" id="image_autor" class="rounded-circle" alt="">#}
                 <h3 id="autores-titulo">{{ autor.apelido }}</h3>
                 <p class="small"></p>
 
@@ -403,13 +397,13 @@
 {#                        <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>#}
 {#                    </div>#}
                 </a>
-                <a class="card2" href="/autores/">
+                <a class="card2" href="/genero/">
                     <div class="text-center">
                         <h3>Games</h3>
                         <img src="/uploads/images/icons/gamepad.png" alt="">
                     </div>
                 </a>
-                <a class="card2" href="/autores/">
+                <a class="card2" href="/genero/">
                     <div class="text-center">
                         <h3>Filmes</h3>
                         <img src="/uploads/images/icons/film.png" alt="">
@@ -421,12 +415,12 @@
                         <img src="/uploads/images/icons/piano.png" alt="">
                     </div>
                 </a>
-                <a class="card2" href="/autores/">
-                    <div class="text-center">
-                        <h3>Desenhos</h3>
-                        <img src="/uploads/images/icons/michaelangelo.png" alt="">
-                    </div>
-                </a>
+{#                <a class="card2" href="/autores/">#}
+{#                    <div class="text-center">#}
+{#                        <h3>Desenhos</h3>#}
+{#                        <img src="/uploads/images/icons/michaelangelo.png" alt="">#}
+{#                    </div>#}
+{#                </a>#}
                 <a class="card2" href="/autores/">
                     <div class="text-center">
                         <h3>Originais</h3>
