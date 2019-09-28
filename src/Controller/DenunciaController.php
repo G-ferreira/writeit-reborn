@@ -66,6 +66,7 @@ class DenunciaController extends AbstractController
 
             $denuncia->setUser($user->getUsername());
             $denuncia->setIdHistoria($id);
+            $denuncia->setStatus(0);
 
             $entityManager->persist($denuncia);
             $entityManager->flush();
@@ -79,14 +80,44 @@ class DenunciaController extends AbstractController
     }
 
     /**
-     * @Route("/denuncia/list", methods={"GET"})
+     * @Route("/denuncia/list", methods={"GET"}, name="denuncias")
      */
     public function list()
     {
-        $denunciaList = $this->entityManager->getRepository(Denuncia::class)->findAll();
+        $denunciaList = $this->entityManager->getRepository(Denuncia::class)->findBy(["status" => 0]);
 
         return $this->render('denuncia/lista-denuncia.html.twig',[
            'lista' => $denunciaList
         ]);
     }
+
+    /**
+     * @Route("/denuncia/list/aprovadas", methods={"GET"})
+     */
+    public function listaAprovadas()
+    {
+        $denunciaList = $this->entityManager->getRepository(Denuncia::class)->findBy(["status" => 1]);
+
+        return $this->render('denuncia/lista-denuncia-aprovadas.html.twig',[
+            'lista' => $denunciaList
+        ]);
+    }
+
+    /**
+     * @Route("/denuncia/{id}")
+     */
+    public function aprovarDenuncia(int $id)
+    {
+        $denuncia = $this->entityManager->getRepository(Denuncia::class)->find($id);
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $denuncia->setStatus(1);
+
+        $entityManager->persist($denuncia);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('denuncias');
+    }
+
 }

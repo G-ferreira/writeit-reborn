@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Denuncia;
 use App\Entity\Historia;
 use App\Entity\LeitorAutor;
 use App\Service\AutorLeitorService\AutorLeitorData;
@@ -16,7 +17,7 @@ class IndexController extends AbstractController
     private $autorLeitorData;
     private $security;
 
-    public function __construct(AutorLeitorData $autorLeitorData, Security $security,EntityManagerInterface $entityManager)
+    public function __construct(AutorLeitorData $autorLeitorData, Security $security, EntityManagerInterface $entityManager)
     {
         $this->autorLeitorData = $autorLeitorData;
         $this->security = $security;
@@ -34,24 +35,24 @@ class IndexController extends AbstractController
 
         $historiasAcao = $this->entityManager->createQueryBuilder()
             ->select('h')
-            ->from('App\Entity\Historia','h')
+            ->from('App\Entity\Historia', 'h')
             ->setMaxResults(4)
             ->getQuery()->getResult();
 
         $historiasAventura = $this->entityManager->createQueryBuilder()
             ->select('h')
-            ->from('App\Entity\Historia','h')
+            ->from('App\Entity\Historia', 'h')
             ->setMaxResults(4)
             ->getQuery()->getResult();
 
         $autoresRecomendados = $this->entityManager->createQueryBuilder()
             ->select('a')
-            ->from('App\Entity\LeitorAutor','a')
+            ->from('App\Entity\LeitorAutor', 'a')
             ->setMaxResults(5)
             ->getQuery()->getResult();
 
         $user = $this->security->getUser();
-        if($user){
+        if ($user) {
             return $this->render('index/index.html.twig', [
                 'variavel' => $user,
                 'autores' => $autoresRecomendados,
@@ -64,7 +65,7 @@ class IndexController extends AbstractController
 
         return $this->render('index/index.html.twig', [
             'variavel' => [],
-            'autores' => $autoresRecomendados,
+            'autores' => $autores,
             'historiasAcao' => $historiasAcao,
             'historiasAventura' => $historiasAventura,
             'historias' => $historias

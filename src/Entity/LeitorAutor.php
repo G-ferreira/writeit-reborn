@@ -283,6 +283,7 @@ class LeitorAutor implements UserInterface
         return $this;
     }
 
+
     public function getSMFA(): ?string
     {
         return $this->SMFA;
