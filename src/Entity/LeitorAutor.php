@@ -72,6 +72,11 @@ class LeitorAutor implements UserInterface
      */
     private $image;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $sma;
+
     public function __construct()
     {
         $this->historias = new ArrayCollection();
@@ -276,5 +281,21 @@ class LeitorAutor implements UserInterface
         $this->image = $image;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSma()
+    {
+        return $this->sma;
+    }
+
+    /**
+     * @param mixed $sma
+     */
+    public function setSma($sma): void
+    {
+        $this->sma = $sma;
     }
 }

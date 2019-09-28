@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Denuncia;
 use App\Entity\Historia;
 use App\Entity\LeitorAutor;
 use App\Service\AutorLeitorService\AutorLeitorData;
@@ -64,7 +65,7 @@ class IndexController extends AbstractController
 
         return $this->render('index/index.html.twig', [
             'variavel' => [],
-            'autores' => $autoresRecomendados,
+            'autores' => $autores,
             'historiasAcao' => $historiasAcao,
             'historiasAventura' => $historiasAventura,
             'historias' => $historias
@@ -76,15 +77,18 @@ class IndexController extends AbstractController
      */
     public function indexAdmin()
     {
-
         $autores = $this->entityManager->getRepository(LeitorAutor::class)->findAll();
 
         $historias = $this->entityManager->getRepository(Historia::class)->findAll();
 
+        $denunciasAprovadas = $this->entityManager->getRepository(Denuncia::class)->findBy(["status" => 1]);
+        $denunciasPendentes = $this->entityManager->getRepository(Denuncia::class)->findBy(["status" => 0]);
+
         return $this->render('index/index-admin.html.twig',[
             'autores' => $autores,
-            'historias' => $historias
+            'historias' => $historias,
+            'denunciasAprovadas' => $denunciasAprovadas,
+            'denunciasPendentes' => $denunciasPendentes
         ]);
     }
-
 }

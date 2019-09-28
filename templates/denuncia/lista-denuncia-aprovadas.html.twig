@@ -40,10 +40,10 @@
 
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" href="/denuncia/list">Pendentes</a>
+                <a class="nav-link" href="/denuncia/list">Pendentes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/denuncia/list/aprovadas">Concluídas</a>
+                <a class="nav-link active" href="/denuncia/list/aprovadas">Concluídas</a>
             </li>
         </ul>
 
@@ -55,8 +55,6 @@
                     <th scope="col">Usuário</th>
                     <th scope="col">Texto</th>
                     <th scope="col">Status</th>
-
-
                 </tr>
                 </thead>
                 <tbody>
@@ -65,12 +63,8 @@
 {#                    <th scope="row">{{ denuncia.id }}</th>#}
                     <td>{{ denuncia.user|e }}</td>
                     <td>{{ denuncia.texto }}</td>
-                    <td><a href="/denuncia/{{ denuncia.id }}" class="btn btn-primary">Aprovar</a></td>
-{#                    <td>{% if  denuncia.status == 1 %}</td>#}
-{#                            Concluída#}
-{#                            {% else %}#}
-{#                            Pendente#}
-{#                            {% endif %}#}
+                    <td>{% if  denuncia.status == 1 %}Concluída{% endif %}</td>
+
                     {% endfor %}
                 </tr>
                 </tbody>

@@ -18,6 +18,11 @@
 
         div#indicadores.row{
             padding-top: 50px;
+            padding-bottom: 30px;
+        }
+
+        h3{
+            font-weight: lighter;
         }
 
     </style>
@@ -41,6 +46,21 @@
                         <div class="text-center">
                             <h3>Quantidade de Histórias</h3>
                             <h2>{{ historias|length }}</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="text-center">
+                            <h3>Denúncias Pendentes</h3>
+                            <h2>{{ denunciasPendentes|length }}</h2>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="text-center">
+                            <h3>Denúncias Resolvidas</h3>
+                            <h2>{{ denunciasAprovadas|length }}</h2>
                         </div>
                     </div>
                 </div>
