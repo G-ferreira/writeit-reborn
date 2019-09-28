@@ -64,13 +64,13 @@ class HistoriaController extends AbstractController
             $historia->setClassificacao($classif);
 
             $generos = $form->get('genero')->getData();
-            $categorias = $form->get('classificacao')->getData();
+            $categoria = $form->get('categoria')->getData();
 
             foreach ( $generos as $item) {
                 $historia->addGenero($item);
             }
 
-            foreach ( $categorias as $item) {
+            foreach ( $categoria as $item) {
                 $historia->addCategoria($item);
             }
 
