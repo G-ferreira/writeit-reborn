@@ -216,4 +216,15 @@ class AutorLeitorController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin/autores")
+     */
+    public function buscarAutores()
+    {
+        $autores = $this->entityManager->getRepository(LeitorAutor::class)->findAll();
+        return $this->render('autorLeitor/autores-admin.html.twig', [
+            'lista' => $autores
+        ]);
+    }
+
 }

@@ -1,0 +1,49 @@
+{% extends 'nav-admin.html.twig' %}
+
+{% block title %}Categorias{% endblock %}
+
+{% block body %}
+
+    <style>
+
+        main{
+            padding-top: 30px;
+        }
+
+        div#box{
+            width: 100%;
+            height: 2px;
+            background-color: #744e89;
+        }
+
+        div#lista{
+            padding-top: 30px;
+        }
+
+
+    </style>
+
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between">
+            <h1>Categorias</h1>
+            <span>
+                    <a href="/admin/categorias/create" class="btn btn-secondary">Nova Categoria</a>
+                </span>
+        </div>
+
+        <div id="box"></div>
+        <div id="lista">
+            <ul class="list-group">
+                {% for categoria in lista %}
+                    <li class="list-group-item d-flex justify-content-between">
+                        {{ categoria.titulo|e }}
+                        <span>
+                            <a href="/categorias/delete/{{ categoria.id }}" class="btn btn-danger btn-sm">Remover</a>
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </main>
+{% endblock %}

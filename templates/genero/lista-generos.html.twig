@@ -1,0 +1,47 @@
+{% extends 'nav-admin.html.twig' %}
+
+{% block title %}Gêneros{% endblock %}
+
+{% block body %}
+
+    <style>
+
+        main{
+            padding-top: 30px;
+        }
+
+        div#box{
+            width: 100%;
+            height: 2px;
+            background-color: #744e89;
+        }
+
+        div#lista{
+            padding-top: 30px;
+        }
+
+    </style>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between">
+            <h1>Gêneros</h1>
+            <span>
+                    <a href="/admin/generos/create" class="btn btn-secondary">Novo Gênero</a>
+                </span>
+        </div>
+
+        <div id="box"></div>
+        <div id="lista">
+            <ul class="list-group">
+                {% for genero in lista %}
+                    <li class="list-group-item d-flex justify-content-between">
+                        {{ genero.titulo|e }}
+                        <span>
+                            <a href="/generos/delete/{{ genero.id }}" class="btn btn-danger btn-sm">Remover</a>
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </main>
+{% endblock %}

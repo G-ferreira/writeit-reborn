@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Denuncia;
+use App\Entity\Historia;
 use App\Entity\LeitorAutor;
 use App\Form\DenunciaFormType;
 use Doctrine\ORM\EntityManagerInterface;;
@@ -74,6 +75,18 @@ class DenunciaController extends AbstractController
 
         return $this->render('denuncia/denuncia-form.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/denuncia/list", methods={"GET"})
+     */
+    public function list()
+    {
+        $denunciaList = $this->entityManager->getRepository(Denuncia::class)->findAll();
+
+        return $this->render('denuncia/lista-denuncia.html.twig',[
+           'lista' => $denunciaList
         ]);
     }
 }

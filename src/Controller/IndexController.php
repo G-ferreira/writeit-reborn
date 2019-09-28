@@ -47,7 +47,7 @@ class IndexController extends AbstractController
         $autoresRecomendados = $this->entityManager->createQueryBuilder()
             ->select('a')
             ->from('App\Entity\LeitorAutor','a')
-            ->setMaxResults(3)
+            ->setMaxResults(5)
             ->getQuery()->getResult();
 
         $user = $this->security->getUser();
@@ -71,5 +71,20 @@ class IndexController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin", name="adminHome")
+     */
+    public function indexAdmin()
+    {
+
+        $autores = $this->entityManager->getRepository(LeitorAutor::class)->findAll();
+
+        $historias = $this->entityManager->getRepository(Historia::class)->findAll();
+
+        return $this->render('index/index-admin.html.twig',[
+            'autores' => $autores,
+            'historias' => $historias
+        ]);
+    }
 
 }

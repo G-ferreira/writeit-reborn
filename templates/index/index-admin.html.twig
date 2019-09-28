@@ -1,0 +1,51 @@
+{% extends 'nav-admin.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+    <style>
+
+        main{
+            padding-top: 30px;
+        }
+
+        div#box{
+            width: 100%;
+            height: 2px;
+            background-color: #744e89;
+        }
+
+        div#indicadores.row{
+            padding-top: 50px;
+        }
+
+    </style>
+
+
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="d-flex justify-content-between">
+                    <h1>Dashboard</h1>
+                </div>
+                <div id="box"></div>
+
+                <div class="row" id="indicadores">
+                    <div class="col">
+                        <div class="text-center">
+                            <h3>Quantidade de Usuarios</h3>
+                            <h2>{{ autores|length }}</h2>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="text-center">
+                            <h3>Quantidade de Histórias</h3>
+                            <h2>{{ historias|length }}</h2>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+
+
+{% endblock %}

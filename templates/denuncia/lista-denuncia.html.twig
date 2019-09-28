@@ -1,0 +1,48 @@
+{% extends 'nav-admin.html.twig' %}
+
+{% block title %}Denúncias{% endblock %}
+
+{% block body %}
+
+    <style>
+
+        main{
+            padding-top: 30px;
+        }
+
+        div#box{
+            width: 100%;
+            height: 2px;
+            background-color: #744e89;
+        }
+
+    </style>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between">
+            <h1>Denúncias</h1>
+        </div>
+
+        <div id="box"></div>
+        <div class="table-responsive-md">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Usuário</th>
+                    <th scope="col">Texto</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for denuncia in lista %}
+                <tr>
+                    <th scope="row">{{ denuncia.id }}</th>
+                    <td>{{ denuncia.user|e }}</td>
+                    <td>{{ denuncia.texto }}</td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+{% endblock %}

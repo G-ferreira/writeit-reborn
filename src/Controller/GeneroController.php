@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Genero;
 use App\Entity\Historia;
+use App\Form\GeneroFormType;
 use App\Repository\GeneroRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -48,53 +50,53 @@ class GeneroController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("/generos/id/5", methods={"GET"})
+     * @Route("/admin/generos", methods={"GET"}, name="adminGeneros")
      */
-    public function buscarGenero(): Response
+    public function listaGeneros()
     {
-//        $historias = $this->entityManager->getRepository(Historia::class)->findAll();
-
-        $id = 5;
-
-        $em = $this->entityManager;
-//        $qb = $em->createQuery("SELECT h FROM \App\Entity\Historia h Join:WITH \App\Entity\Genero g ON h.id=g.id WHERE h.id=5");
-        $qb=$em->createQueryBuilder();
-
-        $qb->select('h')
-           ->from('App\Entity\Historia','h')
-            ->innerJoin('h.historias','g','WITH','g.id = :genero_id')
-            ->setParameter('genero_id',$id);
-//        $result = $qb->getResult();
-
-
-        return $this->render('categoria/categorias-historias.html.twig', [
-            'historias' => $qb
+        $generoList = $this->entityManager->getRepository(Genero::class)->findAll();
+        return $this->render('genero/lista-generos.html.twig',[
+            'lista' => $generoList
         ]);
     }
 
+
     /**
-     * @Route("/generos/json/id", methods={"GET"})
+     * @Route("/generos/delete/{id}")
      */
-    public function buscarGeneroJson(): Response
+    public function delete(int $id)
     {
-//        $historias = $this->entityManager->getRepository(Historia::class)->findAll();
+        $genero =  $this->entityManager->getRepository(Genero::class)->find($id);
 
-        $id=5;
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($genero);
+        $entityManager->flush();
 
-        $em = $this->entityManager;
-        $qb=$em->createQueryBuilder()
-            ->select('h','g')
-            ->from('App\Entity\Genero','g')
-            ->leftJoin('g.idGenero','h')
-            ->where('g = :id')
-            ->setParameter('id',$id);
-
-        $qb->getQuery()->getResult();
-
-
-        return new JsonResponse($qb);
+        return $this->redirectToRoute('adminGeneros');
     }
 
+    /**
+     * @Route("/admin/generos/create")
+     */
+    public function create(Request $request)
+    {
+        $genero = new Genero();
 
+        $form = $this->createForm(GeneroFormType::class,$genero);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($genero);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('adminGeneros');
+        }
+        return $this->render('genero/genero-form.html.twig',[
+            'form' => $form->createView()
+        ]);
+    }
 }

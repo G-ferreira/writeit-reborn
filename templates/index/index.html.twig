@@ -12,6 +12,10 @@
         font-family: Abel, Arial, Verdana, sans-serif;
     }
 
+    .container{
+        width: 1400px;
+    }
+
     h2{
         margin-top: 10px;
     }
@@ -306,6 +310,21 @@
         color: #262626;
     }
 
+    img#image_autor.rounded-circle{
+        width: 80px;
+    }
+
+    a#autores.card2{
+      width: 180px;
+        height: 170px;
+        text-align: center;
+    }
+
+    h3#autores-titulo{
+        margin-top: 20px;
+    }
+
+
     /*.go-corner {*/
     /*    display: flex;*/
     /*    align-items: center;*/
@@ -329,7 +348,7 @@
 
 </style>
 
-<div class="container-fluid">
+<div class="container">
 
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -349,9 +368,10 @@
     <h1>Autores Recomendados</h1>
     <div class="row">
         {% for autor in autores %}
-            <a class="card2" href="/autores/{{ autor.id }}">
-                <h3>{{ autor.apelido }}</h3>
-                <p class="small">Card description with lots of great facts and interesting details.</p>
+            <a class="card2" href="/autores/{{ autor.id }}" id="autores">
+                <img src="/uploads/images/autores/{{ autor.image }}" id="image_autor" class="rounded-circle" alt="">
+                <h3 id="autores-titulo">{{ autor.apelido }}</h3>
+                <p class="small"></p>
 
                 <div class="go-corner" href="/autores/{{ autor.id }}">
                     <div class="go-arrow">
@@ -359,14 +379,14 @@
                 </div>
             </a>
         {% endfor %}
-        <a class="card2" href="/autores/">
-            <p class="small"></p>
-            <h2>Ver Mais Autores</h2>
-            <div class="go-corner" href="">
-                <div class="go-arrow">
-                </div>
-            </div>
-        </a>
+{#        <a class="card2" href="/autores/">#}
+{#            <p class="small"></p>#}
+{#            <h2>Ver Mais Autores</h2>#}
+{#            <div class="go-corner" href="">#}
+{#                <div class="go-arrow">#}
+{#                </div>#}
+{#            </div>#}
+{#        </a>#}
     </div>
     </div>
 

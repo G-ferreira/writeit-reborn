@@ -1,0 +1,58 @@
+{% extends 'nav-admin.html.twig' %}
+
+{% block title %}Autores{% endblock %}
+
+{% block body %}
+
+    <style>
+
+        main{
+            padding-top: 30px;
+        }
+
+        div#box{
+            width: 100%;
+            height: 2px;
+            background-color: #744e89;
+        }
+
+        div#lista{
+            padding-top: 30px;
+        }
+
+        p{
+
+        }
+
+    </style>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between">
+            <h1>Autores</h1>
+        </div>
+
+        <div id="box"></div>
+        <div id="lista">
+            <div class="table-responsive-md">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Apelido</th>
+                        <th scope="col">Email</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for autor in lista %}
+                    <tr>
+                        <th scope="row">{{ autor.id }}</th>
+                        <td>{{ autor.apelido|e }}</td>
+                        <td>{{ autor.email }}</td>
+                        {% endfor %}
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+{% endblock %}
