@@ -43,7 +43,10 @@ class GeneroController extends AbstractController
      */
     public function buscarPorId(int $id): Response
     {
-        $historias = $this->entityManager->getRepository(Historia::class)->findAll();
+
+        $genero = $this->entityManager->getRepository(Genero::class)->find($id);
+
+        $historias = $genero->getHistorias();
 
         return $this->render('categoria/categorias-historias.html.twig', [
             'historias' => $historias

@@ -14,7 +14,7 @@ class CategoriaFormType extends AbstractType
     {
         $builder
             ->add('titulo')
-            ->add('descricao')
+//            ->add('descricao')
             //->add('historias')
             ->add('save',SubmitType::class,['label' => 'Salvar'])
         ;

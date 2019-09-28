@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoriaRepository")
@@ -24,12 +25,7 @@ class Categoria
     private $titulo;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $descricao;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Historia", mappedBy="idCategoria")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Historia", inversedBy="categorias")
      */
     private $historias;
 
@@ -55,18 +51,6 @@ class Categoria
         return $this;
     }
 
-    public function getDescricao(): ?string
-    {
-        return $this->descricao;
-    }
-
-    public function setDescricao(?string $descricao): self
-    {
-        $this->descricao = $descricao;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Historia[]
      */
@@ -79,7 +63,6 @@ class Categoria
     {
         if (!$this->historias->contains($historia)) {
             $this->historias[] = $historia;
-            $historia->addIdCategorium($this);
         }
 
         return $this;
@@ -89,7 +72,6 @@ class Categoria
     {
         if ($this->historias->contains($historia)) {
             $this->historias->removeElement($historia);
-            $historia->removeIdCategorium($this);
         }
 
         return $this;

@@ -63,6 +63,17 @@ class HistoriaController extends AbstractController
             $classif = $form->get('classificacao')->getData();
             $historia->setClassificacao($classif);
 
+            $generos = $form->get('genero')->getData();
+            $categorias = $form->get('classificacao')->getData();
+
+            foreach ( $generos as $item) {
+                $historia->addGenero($item);
+            }
+
+            foreach ( $categorias as $item) {
+                $historia->addCategoria($item);
+            }
+
             $historia->setIdAutor($user);
 
             /** @var UploadedFile $uploadedFile */

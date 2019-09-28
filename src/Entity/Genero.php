@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GeneroRepository")
@@ -24,13 +25,7 @@ class Genero
     private $titulo;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $descricao;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Historia", mappedBy="idGenero")
-     * @ORM\JoinTable(name="id_genero")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Historia", inversedBy="generos")
      */
     private $historias;
 
@@ -56,18 +51,6 @@ class Genero
         return $this;
     }
 
-    public function getDescricao(): ?string
-    {
-        return $this->descricao;
-    }
-
-    public function setDescricao(?string $descricao): self
-    {
-        $this->descricao = $descricao;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Historia[]
      */
@@ -80,7 +63,6 @@ class Genero
     {
         if (!$this->historias->contains($historia)) {
             $this->historias[] = $historia;
-            $historia->addIdGenero($this);
         }
 
         return $this;
@@ -90,7 +72,6 @@ class Genero
     {
         if ($this->historias->contains($historia)) {
             $this->historias->removeElement($historia);
-            $historia->removeIdGenero($this);
         }
 
         return $this;
@@ -101,9 +82,5 @@ class Genero
         return $this->titulo;
         // to show the id of the Category in the select
         // return $this->id;
-    }
-
-    public function getHistoriasGeneros(){
-        return $this->historias->toArray();
     }
 }

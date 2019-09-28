@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\HistoriaRepository")
@@ -29,35 +30,25 @@ class Historia
     private $sinopse;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $status;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $classificacao;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Categoria", inversedBy="historias")
+     * @ORM\Column(type="boolean")
      */
-    private $categoria;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Genero", inversedBy="historias")
-     */
-    private $genero;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Capitulo", mappedBy="idHistoria")
-     */
-    private $capitulos;
+    private $status;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\LeitorAutor", inversedBy="historias")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idAutor;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Capitulo", mappedBy="idHistoria")
+     */
+    private $capitulos;
 
     /**
      * @ORM\Column(type="date")
@@ -74,12 +65,24 @@ class Historia
      */
     private $image;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Genero", mappedBy="historias")
+     */
+    private $generos;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Categoria", mappedBy="historias")
+     */
+    private $categorias;
+
     public function __construct()
     {
         $this->categoria = new ArrayCollection();
         $this->genero = new ArrayCollection();
         $this->capitulos = new ArrayCollection();
         $this->data_publicacao = new \DateTime();
+        $this->generos = new ArrayCollection();
+        $this->categorias = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -131,58 +134,6 @@ class Historia
     public function setClassificacao(string $classificacao): self
     {
         $this->classificacao = $classificacao;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Categoria[]
-     */
-    public function getCategoria(): Collection
-    {
-        return $this->categoria;
-    }
-
-    public function addCategorium(Categoria $categorium): self
-    {
-        if (!$this->categoria->contains($categorium)) {
-            $this->categoria[] = $categorium;
-        }
-
-        return $this;
-    }
-
-    public function removeCategorium(Categoria $categorium): self
-    {
-        if ($this->categoria->contains($categorium)) {
-            $this->categoria->removeElement($categorium);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Genero[]
-     */
-    public function getGenero(): Collection
-    {
-        return $this->genero;
-    }
-
-    public function addGenero(Genero $genero): self
-    {
-        if (!$this->genero->contains($genero)) {
-            $this->genero[] = $genero;
-        }
-
-        return $this;
-    }
-
-    public function removeIdGenero(Genero $genero): self
-    {
-        if ($this->genero->contains($genero)) {
-            $this->genero->removeElement($genero);
-        }
 
         return $this;
     }
@@ -261,10 +212,6 @@ class Historia
         return $this;
     }
 
-    public function getGeneros(){
-        return $this->genero;
-    }
-
     public function getImage(): ?string
     {
         return $this->image;
@@ -273,6 +220,62 @@ class Historia
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Genero[]
+     */
+    public function getGeneros(): Collection
+    {
+        return $this->generos;
+    }
+
+    public function addGenero(Genero $genero): self
+    {
+        if (!$this->generos->contains($genero)) {
+            $this->generos[] = $genero;
+            $genero->addHistoria($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGenero(Genero $genero): self
+    {
+        if ($this->generos->contains($genero)) {
+            $this->generos->removeElement($genero);
+            $genero->removeHistoria($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Categoria[]
+     */
+    public function getCategorias(): Collection
+    {
+        return $this->categorias;
+    }
+
+    public function addCategoria(Categoria $categoria): self
+    {
+        if (!$this->categorias->contains($categoria)) {
+            $this->categorias[] = $categoria;
+            $categoria->addHistoria($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategoria(Categoria $categoria): self
+    {
+        if ($this->categorias->contains($categoria)) {
+            $this->categorias->removeElement($categoria);
+            $categoria->removeHistoria($this);
+        }
 
         return $this;
     }

@@ -14,8 +14,8 @@ class GeneroFormType extends AbstractType
     {
         $builder
             ->add('titulo')
-            ->add('descricao')
-            //->add('historias')
+//            ->add('descricao')
+//            ->add('historias')
             ->add('save',SubmitType::class,['label' => 'Salvar'])
         ;
     }
