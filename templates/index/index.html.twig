@@ -315,6 +315,10 @@
         margin-top: 40px;
     }
 
+    a:hover{
+        text-decoration: none;
+    }
+
 </style>
 
 <div class="container">
@@ -347,13 +351,13 @@
     <div id="categorias">
         <h1>Categorias</h1>
         <div class="row">
-                <a class="card2" href="/gategorias">
+                <a class="card2" href="/categorias">
                     <div class="text-center">
                     <h3>Mangas/HQs</h3>
                     <img src="/icons/comic.png" alt="">
                     </div>
                 </a>
-                <a class="card2" href="/gategorias/">
+                <a class="card2" href="/categorias/">
                     <div class="text-center">
                         <h3>Games</h3>
                         <img src="/icons/gamepad.png" alt="">
@@ -410,7 +414,6 @@
                                 <div class="stats">
                                     <div>
                                         <div class="title">Finalizada?</div>
-                                        <i class="fas fa-check-circle"></i>
                                         <div class="value">{% if  historia.getStatus == 1 %}
                                                 Sim
                                             {% else %}
@@ -420,7 +423,6 @@
                                     </div>
                                     <div>
                                         <div class="title">Capitulos</div>
-                                        <i class="fas fa-file-alt"></i>
                                         <div class="value">{{ historia.getCapitulos|length }}</div>
                                     </div>
                                 </div>
@@ -479,7 +481,6 @@
                                 <div class="stats">
                                     <div>
                                         <div class="title">Finalizada?</div>
-                                        <i class="fas fa-check-circle"></i>
                                         <div class="value">{% if  historia.getStatus == 1 %}
                                                 Sim
                                             {% else %}
@@ -489,7 +490,6 @@
                                     </div>
                                     <div>
                                         <div class="title">Capitulos</div>
-                                        <i class="fas fa-file-alt"></i>
                                         <div class="value">{{ historia.getCapitulos|length }}</div>
                                     </div>
                                 </div>

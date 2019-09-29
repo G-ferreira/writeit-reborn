@@ -42,10 +42,10 @@
                 <div class="card-header">
                     <ul class="nav nav-pills card-header-pills">
                         <li class="nav-item">
-                            <a class="nav-link active" href="/contribuicao/lista" id="button-nav">Recebidas</a>
+                            <a class="nav-link" href="/contribuicao/lista">Recebidas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/contribuicao/feitas">Feitas</a>
+                            <a class="nav-link active" href="/contribuicao/feitas" id="button-nav">Feitas</a>
                         </li>
                     </ul>
                 </div>
@@ -56,7 +56,7 @@
                             <li  class="list-group-item">
                                 <div class="d-flex justify-content-between">
                                     <div class="p-2 bd-highlight">R${{ item.getValor }}</div>
-                                    <div class="p-2 bd-highlight">{{ item.getNomePagador }}</div>
+                                    <div class="p-2 bd-highlight">{{ item.getNomeAutor }}</div>
                                 </div>
                             </li>
                         {% endfor %}

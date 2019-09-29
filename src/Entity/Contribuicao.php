@@ -61,6 +61,11 @@ class Contribuicao
      */
     private $nomePagador;
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $nomeAutor;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -176,6 +181,22 @@ class Contribuicao
         $this->nomePagador = $nomePagador;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNomeAutor()
+    {
+        return $this->nomeAutor;
+    }
+
+    /**
+     * @param mixed $nomeAutor
+     */
+    public function setNomeAutor($nomeAutor): void
+    {
+        $this->nomeAutor = $nomeAutor;
     }
 
 }

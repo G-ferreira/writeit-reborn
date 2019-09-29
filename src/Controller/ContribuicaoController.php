@@ -47,6 +47,24 @@ class ContribuicaoController extends AbstractController
         $contribuicoes = $this->entityManager->getRepository(Contribuicao::class)->findBy(["idAutor" => $user->getId()]);
 
         return $this->render('contribuicao/contribuicao-lista.html.twig', [
+            'lista' => $contribuicoes,
+
+        ]);
+    }
+
+    /**
+     * @Route("/contribuicao/feitas", name="contribuicaoFeita")
+     */
+    public function listaContribuicoesFeitas()
+    {
+        $user = $this->security->getUser();
+        if(!$user){
+            return $this->redirectToRoute('login');
+        }
+
+        $contribuicoes = $this->entityManager->getRepository(Contribuicao::class)->findBy(["idPagador" => $user->getId()]);
+
+        return $this->render('contribuicao/contribuicoes-feitas.html.twig', [
             'lista' => $contribuicoes
         ]);
     }
@@ -72,6 +90,7 @@ class ContribuicaoController extends AbstractController
         {
             $entityManager = $this->getDoctrine()->getManager();
             $contribuicao->setIdAutor($autor->getId());
+            $contribuicao->setNomeAutor($autor->getApelido());
             $contribuicao->setIdPagador($user->getId());
             $contribuicao->setNomePagador($user->getApelido());
             $entityManager->persist($contribuicao);
