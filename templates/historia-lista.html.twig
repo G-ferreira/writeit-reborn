@@ -191,6 +191,11 @@
             font-size: 0.9em;
         }
 
+        img.center.logo.image-resize{
+            object-fit: cover;
+            object-position: center;
+        }
+
     </style>
 <div class="container">
     <div class="row">
@@ -202,7 +207,7 @@
                             <div class="level center">
                                 {{ historia.getIdAutor.getApelido }}
                             </div>
-                            <img width="110" height="200" src="/uploads/images/historias/{{ historia.image }}" class="center logo">
+                            <img width="110" height="200" src="/uploads/images/historias/{{ historia.image }}" class="center logo image-resize">
 
                         </div>
                         <a href="/historia/{{ historia.getId }}">

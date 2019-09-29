@@ -78,7 +78,6 @@
         right: -2px;
         height: 80%;
         border-left: 2px solid rgba(0, 0, 0, 0.025);
-        */
     }
 
     .card .additional .user-card .level,
@@ -190,6 +189,11 @@
         bottom: 1rem;
         right: 1rem;
         font-size: 0.9em;
+    }
+
+    img.center.logo.image-resize{
+        object-fit: cover;
+        object-position: center;
     }
 
     div#autores{
@@ -319,6 +323,12 @@
         text-decoration: none;
     }
 
+    a#ver-mais{
+        padding-right: 120px;
+        padding-top: 15px;
+        font-size: larger;
+    }
+
 </style>
 
 <div class="container">
@@ -385,7 +395,10 @@
     </div>
 
     <div id="historiasAcao">
-    <h1>Histórias de Ação</h1>
+        <div class="d-flex justify-content-between">
+            <h1>Historias de Ação</h1>
+            <a href="/categorias/1" id="ver-mais">Ver mais</a>
+        </div>
     <div class="row">
         {% for historia in historiasAcao %}
             <div class="col">
@@ -398,7 +411,7 @@
                             <div class="points center">
 
                             </div>
-                            <img width="110" height="200" src="/uploads/images/historias/{{ historia.image }}" class="center logo">
+                            <img width="110" height="200" src="/uploads/images/historias/{{ historia.image }}" class="center logo image-resize">
                         </div>
                         <a href="/historia/{{ historia.getId }}">
                             <div class="more-info">
@@ -452,7 +465,10 @@
     </div>
 
     <div id="historiasAventura">
-    <h1>Histórias de Aventura</h1>
+        <div class="d-flex justify-content-between">
+            <h1>Historias de Aventura</h1>
+            <a href="/categorias/2" id="ver-mais">Ver mais</a>
+        </div>
     <div class="row">
         {% for historia in historiasAventura %}
             <div class="col">
@@ -465,7 +481,7 @@
                             <div class="points center">
 
                             </div>
-                            <img width="110" height="200" src="/uploads/images/historias/{{ historia.image }}" class="center logo">
+                            <img width="110" height="200" src="/uploads/images/historias/{{ historia.image }}" class="center logo image-resize">
                         </div>
                         <a href="/historia/{{ historia.getId }}">
                             <div class="more-info">
@@ -532,7 +548,7 @@
                                 <div class="points center">
 
                                 </div>
-                                <img width="110" height="200" src="/uploads/images/historias/{{ historia.image }}" class="center logo">
+                                <img width="110" height="200" src="/uploads/images/historias/{{ historia.image }}" class="center logo image-resize">
                             </div>
                             <a href="/historia/{{ historia.getId }}">
                                 <div class="more-info">
