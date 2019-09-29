@@ -29,6 +29,11 @@ class Categoria
      */
     private $historias;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
     public function __construct()
     {
         $this->historias = new ArrayCollection();
@@ -82,5 +87,17 @@ class Categoria
         return $this->titulo;
         // to show the id of the Category in the select
         // return $this->id;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }

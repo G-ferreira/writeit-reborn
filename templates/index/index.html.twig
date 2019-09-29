@@ -335,7 +335,7 @@
     <div class="row">
         {% for autor in autores %}
             <a class="card2" href="/autores/{{ autor.id }}" id="autores">
-{#                <img src="/uploads/images/autores/{{ autor.image }}" id="image_autor" class="rounded-circle" alt="">#}
+                <img src="/uploads/images/autores/{{ autor.image }}" id="image_autor" class="rounded-circle" alt="">
                 <h3 id="autores-titulo">{{ autor.apelido }}</h3>
                 <p class="small"></p>
 
@@ -351,43 +351,23 @@
     <div id="categorias">
         <h1>Categorias</h1>
         <div class="row">
-                <a class="card2" href="/categorias">
+            {% for item in categorias %}
+                <a class="card2" href="/categorias/{{ item.getId }}">
                     <div class="text-center">
-                    <h3>Mangas/HQs</h3>
-                    <img src="/icons/comic.png" alt="">
+                        <h3>{{ item.getTitulo }}</h3>
+                        <img src="/uploads/images/categoria/{{ item.getImage }}" alt="">
                     </div>
                 </a>
-                <a class="card2" href="/categorias/">
-                    <div class="text-center">
-                        <h3>Games</h3>
-                        <img src="/icons/gamepad.png" alt="">
-                    </div>
-                </a>
-                <a class="card2" href="/categorias/">
-                    <div class="text-center">
-                        <h3>Filmes</h3>
-                        <img src="/icons/film.png" alt="">
-                    </div>
-                </a>
-                <a class="card2" href="/categorias/">
-                    <div class="text-center">
-                        <h3>Música</h3>
-                        <img src="/icons/piano.png" alt="">
-                    </div>
-                </a>
-                <a class="card2" href="/categorias/">
-                    <div class="text-center">
-                        <h3>Originais</h3>
-                        <img src="/icons/notebook.png" alt="">
-                    </div>
-                </a>
+            {% endfor %}
         </div>
     </div>
 
     <div id="historiasAcao">
-    <h1>Histórias de Ação</h1>
-    <div class="row">
-        {% for historia in historiasAcao %}
+    <h1>Histórias de {{ nameGenero1 }}</h1>
+        {% for historia in genero1 %}
+            {% if historia.getCapitulos|length > 0 and  historia.getRascunho == 1%}
+        <div class="row">
+
             <div class="col">
                 <div class="card">
                     <div class="additional">
@@ -447,14 +427,17 @@
                     </div>
                 </div>
             </div>
+        </div>
+            {% endif %}
         {% endfor %}
-    </div>
+
     </div>
 
     <div id="historiasAventura">
-    <h1>Histórias de Aventura</h1>
+    <h1>Histórias de {{ nameGenero2 }} </h1>
     <div class="row">
-        {% for historia in historiasAventura %}
+        {% for historia in genero2 %}
+            {% if historia.getCapitulos|length > 0 and  historia.getRascunho == 1%}
             <div class="col">
                 <div class="card">
                     <div class="additional">
@@ -514,6 +497,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
         {% endfor %}
     </div>
     </div>
@@ -522,6 +506,7 @@
         <h1>Histórias</h1>
         <div class="row">
             {% for historia in historias %}
+                {% if historia.getCapitulos|length > 0 and  historia.getRascunho == 1%}
                 <div class="col">
                     <div class="card">
                         <div class="additional">
@@ -581,6 +566,7 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
             {% endfor %}
         </div>
         </div>
