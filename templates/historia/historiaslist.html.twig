@@ -274,11 +274,17 @@
             color: #666666;
         }
 
+        img.center.logo.image-resize{
+
+            object-fit: cover;
+            object-position: center;
+        }
+
     </style>
 
     <div class="container">
         <div class="d-flex justify-content-between">
-            <h1>Minhas Histórias</h1>
+            <h1>Histórias</h1>
             <a href="{{ path('historiaCreate') }}" id="icon-add"><i class="fas fa-plus"></i></a>
         </div>
         <div id="box"></div>
@@ -288,7 +294,7 @@
                 <div class="card mb-3 shadow-sm p-3 mb-5 bg-white rounded" style="width: auto">
                     <div class="row no-gutters">
                         <div class="col-md-2">
-                            <img src="/uploads/images/historias/{{ historia.image }}" alt="">
+                            <img src="/uploads/images/historias/{{ historia.image }}" class="center logo image-resize">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">

@@ -78,7 +78,6 @@
         right: -2px;
         height: 80%;
         border-left: 2px solid rgba(0, 0, 0, 0.025);
-        */
     }
 
     .card .additional .user-card .level,
@@ -190,6 +189,11 @@
         bottom: 1rem;
         right: 1rem;
         font-size: 0.9em;
+    }
+
+    img.center.logo.image-resize{
+        object-fit: cover;
+        object-position: center;
     }
 
     div#autores{
@@ -319,6 +323,12 @@
         text-decoration: none;
     }
 
+    a#ver-mais{
+        padding-right: 120px;
+        padding-top: 15px;
+        font-size: larger;
+    }
+
 </style>
 
 <div class="container">
@@ -363,11 +373,13 @@
     </div>
 
     <div id="historiasAcao">
-    <h1>Histórias de {{ nameGenero1 }}</h1>
-        {% for historia in genero1 %}
-            {% if historia.getCapitulos|length > 0 and  historia.getRascunho == 1%}
-        <div class="row">
-
+        <div class="d-flex justify-content-between">
+            <h1>Histórias de {{ nameGenero1 }}</h1>
+            <a href="/categorias/1" id="ver-mais">Ver mais</a>
+        </div>
+        {% for key, historia in genero1 %}
+            {% if historia.getCapitulos|length > 0 and  historia.getRascunho == 1 and key < 4%}
+                <div class="row">
             <div class="col">
                 <div class="card">
                     <div class="additional">
@@ -378,7 +390,7 @@
                             <div class="points center">
 
                             </div>
-                            <img width="110" height="200" src="/uploads/images/historias/{{ historia.image }}" class="center logo">
+                            <img width="110" height="200" src="/uploads/images/historias/{{ historia.image }}" class="center logo image-resize">
                         </div>
                         <a href="/historia/{{ historia.getId }}">
                             <div class="more-info">
@@ -434,79 +446,13 @@
     </div>
 
     <div id="historiasAventura">
-    <h1>Histórias de {{ nameGenero2 }} </h1>
-    <div class="row">
-        {% for historia in genero2 %}
-            {% if historia.getCapitulos|length > 0 and  historia.getRascunho == 1%}
-            <div class="col">
-                <div class="card">
-                    <div class="additional">
-                        <div class="user-card">
-                            <div class="level center">
-                                {{ historia.getIdAutor.getApelido }}
-                            </div>
-                            <div class="points center">
-
-                            </div>
-                            <img width="110" height="200" src="/uploads/images/historias/{{ historia.image }}" class="center logo">
-                        </div>
-                        <a href="/historia/{{ historia.getId }}">
-                            <div class="more-info">
-                                <h1>{{ historia.getTitulo }}</h1>
-                                <div class="coords">
-                                    <span>Gênero</span>
-                                    <span>Gênero</span>
-                                </div>
-                                <div class="coords">
-                                    <span>Categoria</span>
-                                    <span>Categoria</span>
-                                </div>
-                                <div class="stats">
-                                    <div>
-                                        <div class="title">Finalizada?</div>
-                                        <div class="value">{% if  historia.getStatus == 1 %}
-                                                Sim
-                                            {% else %}
-                                                Nao
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="title">Capitulos</div>
-                                        <div class="value">{{ historia.getCapitulos|length }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="general">
-                        <h1>{{ historia.getTitulo }}</h1>
-                        <p>{{ historia.getSinopse }}</p>
-                        <span class="more">Ver Mais</span>
-                    </div>
-
-
-                    <div>
-                        <h2></h2><br>
-                        <h3>Sinopse</h3>
-                        <p></p><br>
-                        <h3>Status</h3>
-                        <p></p><br>
-                        <h3>Classificacao</h3>
-                        <p>{{ historia.getClassificacao }}</p><br>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-        {% endfor %}
-    </div>
-    </div>
-
-    <div id="historias">
-        <h1>Histórias</h1>
+        <div class="d-flex justify-content-between">
+            <h1>Histórias de {{ nameGenero2 }} </h1>
+            <a href="/categorias/2" id="ver-mais">Ver mais</a>
+        </div>
         <div class="row">
-            {% for historia in historias %}
-                {% if historia.getCapitulos|length > 0 and  historia.getRascunho == 1%}
+            {% for key,historia in genero2 %}
+                {% if historia.getCapitulos|length > 0 and  historia.getRascunho == 1 and key < 4%}
                 <div class="col">
                     <div class="card">
                         <div class="additional">
@@ -517,7 +463,79 @@
                                 <div class="points center">
 
                                 </div>
-                                <img width="110" height="200" src="/uploads/images/historias/{{ historia.image }}" class="center logo">
+                                <img width="110" height="200" src="/uploads/images/historias/{{ historia.image }}" class="center logo image-resize">
+                            </div>
+                            <a href="/historia/{{ historia.getId }}">
+                                <div class="more-info">
+                                    <h1>{{ historia.getTitulo }}</h1>
+                                    <div class="coords">
+                                        <span>Gênero</span>
+                                        <span>Gênero</span>
+                                    </div>
+                                    <div class="coords">
+                                        <span>Categoria</span>
+                                        <span>Categoria</span>
+                                    </div>
+                                    <div class="stats">
+                                        <div>
+                                            <div class="title">Finalizada?</div>
+                                            <div class="value">{% if  historia.getStatus == 1 %}
+                                                    Sim
+                                                {% else %}
+                                                    Nao
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="title">Capitulos</div>
+                                            <div class="value">{{ historia.getCapitulos|length }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="general">
+                            <h1>{{ historia.getTitulo }}</h1>
+                            <p>{{ historia.getSinopse }}</p>
+                            <span class="more">Ver Mais</span>
+                        </div>
+
+
+                        <div>
+                            <h2></h2><br>
+                            <h3>Sinopse</h3>
+                            <p></p><br>
+                            <h3>Status</h3>
+                            <p></p><br>
+                            <h3>Classificacao</h3>
+                            <p>{{ historia.getClassificacao }}</p><br>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="historias">
+        <div class="d-flex justify-content-between">
+            <h1>Histórias</h1>
+            <a href="/categorias/2" id="ver-mais">Ver mais</a>
+        </div>
+        <div class="row">
+            {% for key,historia in historias %}
+                {% if historia.getCapitulos|length > 0 and  historia.getRascunho == 1 and key < 4 %}
+                <div class="col">
+                    <div class="card">
+                        <div class="additional">
+                            <div class="user-card">
+                                <div class="level center">
+                                    {{ historia.getIdAutor.getApelido }}
+                                </div>
+                                <div class="points center">
+
+                                </div>
+                                <img width="110" height="200" src="/uploads/images/historias/{{ historia.image }}" class="center logo image-resize">
                             </div>
                             <a href="/historia/{{ historia.getId }}">
                                 <div class="more-info">

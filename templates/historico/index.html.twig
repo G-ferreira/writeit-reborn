@@ -44,13 +44,8 @@
         {% for item in historico.getCapitulo %}
             <div class="card mb-3" style="width: auto">
                 <div class="row no-gutters">
-                    <div class="col-md-2">
-{#                        <img src="/uploads/images/autores/{{ item.getImage }}" class="card-img" alt="...">#}
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <a href="/capitulo/{{ item.getId }}" class="card-title" id="link-historia">{{ item.getTitulo }}</a>
-                        </div>
+                    <div class="card-body">
+                        <a href="/capitulo/{{ item.getId }}" class="card-title" id="link-historia">{{ item.getTitulo }}</a>
                     </div>
                 </div>
             </div>

@@ -27,9 +27,11 @@
             padding-bottom: 80px;
         }
 
-        img.rounded-circle{
-            width: 50%;
-            height: auto;
+        img.img-responsive.image-resize{
+            height: 200px;
+            width: 200px;
+            object-fit: cover;
+            object-position: center;
         }
 
     </style>
@@ -39,7 +41,7 @@
             <div class="col" id="col-img">
                 <div class="text-center">
                     <h1>Contribuição</h1>
-                    <img src="/uploads/images/autores/{{ autor.getImage }}" class="rounded-circle">
+                    <img src="/uploads/images/autores/{{ autor.getImage }}" class="img-responsive image-resize">
                     <h4 class="font-weight-light">{{ autor.getApelido }}</h4>
                 </div>
             </div>
