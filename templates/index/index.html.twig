@@ -259,12 +259,6 @@
     .card2:before {
          content: "";
          position: absolute;
-         /*z-index: -1;*/
-         /*top: -16px;*/
-         /*right: -16px;*/
-         /*background: #00838d;*/
-         /*height: 32px;*/
-         /*width: 32px;*/
          border-radius: 32px;
          transform: scale(2);
          transform-origin: 50% 50%;
@@ -298,10 +292,6 @@
         height: 80px;
     }
 
-    div.row{
-        /*padding-left: 30px;*/
-    }
-
     div.col{
         max-width: 500px;
     }
@@ -325,32 +315,9 @@
         margin-top: 40px;
     }
 
-
-    /*.go-corner {*/
-    /*    display: flex;*/
-    /*    align-items: center;*/
-    /*    justify-content: center;*/
-    /*    position: absolute;*/
-    /*    width: 32px;*/
-    /*    height: 32px;*/
-    /*    overflow: hidden;*/
-    /*    top: 0;*/
-    /*    right: 0;*/
-    /*    background-color: #00838d;*/
-    /*    border-radius: 0 4px 0 32px;*/
-    /*}*/
-
-    /*.go-arrow {*/
-    /*    margin-top: -4px;*/
-    /*    margin-right: -4px;*/
-    /*    color: white;*/
-    /*    font-family: courier, sans;*/
-    /*}*/
-
 </style>
 
 <div class="container">
-
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -374,55 +341,37 @@
                 </div>
             </a>
         {% endfor %}
-{#        <a class="card2" href="/autores/">#}
-{#            <p class="small"></p>#}
-{#            <h2>Ver Mais Autores</h2>#}
-{#            <div class="go-corner" href="">#}
-{#                <div class="go-arrow">#}
-{#                </div>#}
-{#            </div>#}
-{#        </a>#}
     </div>
     </div>
 
     <div id="categorias">
         <h1>Categorias</h1>
         <div class="row">
-                <a class="card2" href="/generos">
+                <a class="card2" href="/gategorias">
                     <div class="text-center">
                     <h3>Mangas/HQs</h3>
                     <img src="/icons/comic.png" alt="">
                     </div>
-{#                    <p class="small">Card description with lots of great facts and interesting details.</p>#}
-{#                    <div>Icons made by#}
-{#                        <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>#}
-{#                    </div>#}
                 </a>
-                <a class="card2" href="/generos/">
+                <a class="card2" href="/gategorias/">
                     <div class="text-center">
                         <h3>Games</h3>
                         <img src="/icons/gamepad.png" alt="">
                     </div>
                 </a>
-                <a class="card2" href="/generos/">
+                <a class="card2" href="/categorias/">
                     <div class="text-center">
                         <h3>Filmes</h3>
                         <img src="/icons/film.png" alt="">
                     </div>
                 </a>
-                <a class="card2" href="/generos/">
+                <a class="card2" href="/categorias/">
                     <div class="text-center">
                         <h3>Música</h3>
                         <img src="/icons/piano.png" alt="">
                     </div>
                 </a>
-{#                <a class="card2" href="/autores/">#}
-{#                    <div class="text-center">#}
-{#                        <h3>Desenhos</h3>#}
-{#                        <img src="/uploads/images/icons/michaelangelo.png" alt="">#}
-{#                    </div>#}
-{#                </a>#}
-                <a class="card2" href="/generos/">
+                <a class="card2" href="/categorias/">
                     <div class="text-center">
                         <h3>Originais</h3>
                         <img src="/icons/notebook.png" alt="">
@@ -599,7 +548,6 @@
                                     <div class="stats">
                                         <div>
                                             <div class="title">Finalizada?</div>
-                                            <i class="fas fa-check-circle"></i>
                                             <div class="value">{% if  historia.getStatus == 1 %}
                                                     Sim
                                                 {% else %}
@@ -609,7 +557,6 @@
                                         </div>
                                         <div>
                                             <div class="title">Capitulos</div>
-                                            <i class="fas fa-file-alt"></i>
                                             <div class="value">{{ historia.getCapitulos|length }}</div>
                                         </div>
                                     </div>
@@ -637,6 +584,5 @@
             {% endfor %}
         </div>
         </div>
-
 </div>
 {% endblock %}

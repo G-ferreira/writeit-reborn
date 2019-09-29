@@ -42,7 +42,9 @@ class CategoriaController extends AbstractController
      */
     public function buscarPorId(int $id): Response
     {
-        $historias = $this->entityManager->getRepository(Historia::class)->findAll();
+        $categoria = $this->entityManager->getRepository(Categoria::class)->find($id);
+
+        $historias = $categoria->getHistorias();
 
         return $this->render('categoria/categorias-historias.html.twig', [
             'historias' => $historias

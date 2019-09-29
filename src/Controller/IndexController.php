@@ -65,7 +65,7 @@ class IndexController extends AbstractController
 
         return $this->render('index/index.html.twig', [
             'variavel' => [],
-            'autores' => $autores,
+            'autores' => $autoresRecomendados,
             'historiasAcao' => $historiasAcao,
             'historiasAventura' => $historiasAventura,
             'historias' => $historias
