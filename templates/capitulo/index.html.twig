@@ -38,6 +38,10 @@
             background-color: var(--background);
         }
 
+        html,body{
+            height: 100%;
+        }
+
         .container{
             padding-top: 40px;
             max-height: 100%;
@@ -83,17 +87,18 @@
     <script type="text/javascript">
         {
             let currentTheme = "light";
+            document.body.classList.add('theme--light');
 
-            const updateBtn = (className, theme) => {
-                let btns = [...document.querySelectorAll(className)];
-                let currentTheme = className.split("-").pop();
-                let classNameText = className.replace(/\./g, "");
-                let classNameUpdated = classNameText.replace(currentTheme, theme);
-                btns.forEach((btn) => {
-                    btn.classList.remove(classNameText);
-                    btn.classList.add(classNameUpdated);
-                });
-            }
+            // const updateBtn = (className, theme) => {
+            //     let btns = [...document.querySelectorAll(className)];
+            //     let currentTheme = className.split("-").pop();
+            //     let classNameText = className.replace(/\./g, "");
+            //     let classNameUpdated = classNameText.replace(currentTheme, theme);
+            //     btns.forEach((btn) => {
+            //         btn.classList.remove(classNameText);
+            //         btn.classList.add(classNameUpdated);
+            //     });
+            // }
 
             const setLightTheme = () => {
                 currentTheme = 'light';
