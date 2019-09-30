@@ -106,7 +106,7 @@ class HistoriaController extends AbstractController
     {
         $historias = $this->entityManager->getRepository(Historia::class)->findBy(["rascunho" => 1]);
 
-        return $this->render('historia/historiaslist.html.twig', [
+        return $this->render('historia/historia-all.html.twig', [
             'historias' => $historias
         ]);
     }

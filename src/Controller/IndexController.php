@@ -34,7 +34,7 @@ class IndexController extends AbstractController
     {
         $autores = $this->entityManager->getRepository(LeitorAutor::class)->findAll();
 
-        $historias = $this->entityManager->getRepository(Historia::class)->findBy(["rascunho" => 1]);
+        $historias = $this->entityManager->getRepository(Historia::class)->findAll();
 
         $autoresRecomendados = $this->entityManager->createQueryBuilder()
             ->select('a')

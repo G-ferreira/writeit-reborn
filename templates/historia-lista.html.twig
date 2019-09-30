@@ -200,6 +200,7 @@
 <div class="container">
     <div class="row">
         {% for historia in historias %}
+            {% if historia.getCapitulos|length > 0 %}
             <div class="col">
                 <div class="card">
                     <div class="additional">
@@ -213,6 +214,30 @@
                         <a href="/historia/{{ historia.getId }}">
                             <div class="more-info">
                                 <h2>{{ historia.getTitulo }}</h2>
+                                <div class="row">
+                                    <div class="col">
+                                        {% for key,categoria in historia.getCategorias %}
+                                            {% if key < 5%}
+                                                <div class="coords" id="span-categorias">
+
+                                                    <span>{{ categoria.getTitulo }} </span>
+
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <div class="col">
+                                        {% for key,genero in historia.getGeneros %}
+                                            {% if key < 5%}
+                                                <div class="coords" id="span-generos">
+
+                                                    <span>{{ genero.getTitulo }}</span>
+
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
                                 <div class="stats">
                                     <div>
                                         <div class="title">Finalizada?</div>
@@ -227,6 +252,10 @@
                                         <div class="title">Capitulos</div>
                                         <div class="value">{{ historia.getCapitulos|length }}</div>
                                     </div>
+                                    <div>
+                                        <div class="title">Classifição</div>
+                                        <div class="value">{{ historia.getClassificacao }}</div>
+                                    </div>
                                 </div>
                             </div>
                         </a>
@@ -239,6 +268,7 @@
 
                 </div>
             </div>
+            {% endif %}
         {% endfor %}
         {% endblock %}
     </div>
