@@ -35,7 +35,9 @@ class HistoricoController extends AbstractController
 
         $historico = $this->entityManager->getRepository(Historico::class)->findOneBy(["autor"=>$user]);
 
-
+        if(!$historico){
+            return $this->redirectToRoute('home');
+        }
         return $this->render('historico/index.html.twig', [
             'historico' => $historico,
         ]);
