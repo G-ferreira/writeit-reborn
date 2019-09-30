@@ -28,22 +28,29 @@
 
         body.theme--light {
             --background: var(--white);
+            max-height: 100%;
         }
         body.theme--dark {
             --background: var(--dark);
             color: #ffffff;
+            max-height: 100%;
         }
 
         body.theme {
             background-color: var(--background);
+            max-height: 100%;
         }
 
         html,body{
-            height: 100%;
+            max-height: 100%;
         }
 
         .container{
             padding-top: 40px;
+            max-height: 100%;
+        }
+
+        div#divContent{
             max-height: 100%;
         }
 
@@ -89,16 +96,16 @@
             let currentTheme = "light";
             document.body.classList.add('theme--light');
 
-            // const updateBtn = (className, theme) => {
-            //     let btns = [...document.querySelectorAll(className)];
-            //     let currentTheme = className.split("-").pop();
-            //     let classNameText = className.replace(/\./g, "");
-            //     let classNameUpdated = classNameText.replace(currentTheme, theme);
-            //     btns.forEach((btn) => {
-            //         btn.classList.remove(classNameText);
-            //         btn.classList.add(classNameUpdated);
-            //     });
-            // }
+            const updateBtn = (className, theme) => {
+                let btns = [...document.querySelectorAll(className)];
+                let currentTheme = className.split("-").pop();
+                let classNameText = className.replace(/\./g, "");
+                let classNameUpdated = classNameText.replace(currentTheme, theme);
+                btns.forEach((btn) => {
+                    btn.classList.remove(classNameText);
+                    btn.classList.add(classNameUpdated);
+                });
+            }
 
             const setLightTheme = () => {
                 currentTheme = 'light';
