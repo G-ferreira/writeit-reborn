@@ -53,7 +53,6 @@ class AutorLeitorController extends AbstractController
         {
             $user->setPassword($passwordEncoder->encodePassword($user,$form->get('password')->getData()));
             $user->setEmail($form->get('email')->getData());
-            $user->setSma('USER');
 
             $entityManager = $this->getDoctrine()->getManager();
 
