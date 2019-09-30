@@ -135,6 +135,10 @@ class HistoriaController extends AbstractController
     {
         $historia = $this->entityManager->getRepository(Historia::class)->find($id);
 
+        $generos = $historia->getGeneros();
+
+        $categorias = $historia->getCategorias();
+
         $autor = $historia->getIdAutor();
 
         $nome_autor = $autor->getApelido();
@@ -145,7 +149,9 @@ class HistoriaController extends AbstractController
             'historia' => $historia,
             'capitulos' =>$capitulos,
             'nome_autor' => $nome_autor,
-            'autor' => $autor
+            'autor' => $autor,
+            'generos' => $generos,
+            'categorias' => $categorias
         ]);
     }
 

@@ -54,6 +54,7 @@ class IndexController extends AbstractController
         $nameGenero2 = $genero2->getTitulo();
         $historias2 = $genero2->getHistorias();
 
+
         $user = $this->security->getUser();
         if ($user) {
             return $this->render('index/index.html.twig', [

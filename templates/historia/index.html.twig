@@ -42,23 +42,18 @@
             background-color: #744e89;
         }
 
+        a{
+            color: #313131;
+        }
+
+        a:hover{
+            color: #666666;
+            text-decoration: none;
+        }
+
     </style>
 
     <div class="d-flex flex-column bd-highlight mb-3">
-{#        <div class="p-2 bd-highlight">#}
-{#            <ul class="list-group">#}
-{#                <li class="list-group-item d-flex justify-content-between">#}
-{#                    <h4>#}
-{#                        Historia#}
-{#                    </h4>#}
-{#                    <span>#}
-{#                    <a href="/denuncia" class="btn btn-info btn-sm">#}
-{#                        Denunciar História#}
-{#                    </a>#}
-{#                </span>#}
-{#                </li>#}
-{#            </ul>#}
-{#        </div>#}
 
             <div class="container-fluid" id="divTitulo">
                 <div class="d-flex justify-content-between">
@@ -76,11 +71,7 @@
                     <h4>{{ historia.getTitulo }}</h4>
                     <h4 class="font-weight-light"><a href="/autores/{{ autor.getId }}" class="font-weight-light">{{ nome_autor }}</a></h4>
 
-{#<<<<<<< HEAD#}
-
-{#=======#}
                     <img src="/uploads/images/historias/{{ historia.image }}" alt="">
-{#>>>>>>> a5a694afecb0164b232f33dd975542d78f4d9554#}
                     <h5 class="font-weight-light">{{ historia.getDataPublicacao|date('d/m/Y') }}</h5>
                 </div>
             </div>
@@ -89,6 +80,20 @@
                     <p>
                         {{ historia.getSinopse }}
                     </p>
+                </div>
+            </div>
+            <div class="p-2 bd-highlight">
+                <div class="text-center">
+                    {% for categoria in categorias %}
+                        <a href="/categorias/{{ categoria.id }}" class="badge badge-secondary">{{ categoria.titulo }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="p-2 bd-highlight">
+                <div class="text-center">
+                    {% for genero in generos %}
+                        <a href="/generos/{{ genero.id }}" class="badge badge-info">{{ genero.titulo }}</a>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -107,24 +112,6 @@
             <div id="box"></div>
         </div>
 
-{#        <div class="p-2 bd-highlight">#}
-{#            <ul class="list-group">#}
-{#                <li class="list-group-item d-flex justify-content-between">#}
-{#                    <h4>#}
-{#                        Capitulos#}
-{#                    </h4>#}
-{#                    <span>#}
-{#                    <h4>#}
-{#                        Status:{% if  historia.getStatus == 1 %}#}
-{#                            Concluída#}
-{#                        {% else %}#}
-{#                            Em andamento#}
-{#                        {% endif %}#}
-{#                    </h4>#}
-{#                </span>#}
-{#                </li>#}
-{#            </ul>#}
-{#        </div>#}
         <div class="p-2 bd-highlight">
             <div class="list-group">
                     {% for capitulo in capitulos %}
