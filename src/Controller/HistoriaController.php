@@ -3,11 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Capitulo;
+use App\Entity\Comentario;
 use App\Entity\Genero;
 use App\Entity\Historia;
 use App\Entity\LeitorAutor;
+use App\Form\ComentarioFormType;
 use App\Form\HistoriaAtualizaFormType;
 use App\Form\HistoriaCadastroType;
+use DateTime;
 use Gedmo\Sluggable\Util\Urlizer;
 use App\Service\AutorLeitorService\AutorLeitorData;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -133,6 +136,11 @@ class HistoriaController extends AbstractController
      */
     public function historiaHome(int $id)
     {
+        $user = $this->security->getUser();
+        if(!$user){
+            return $this->redirectToRoute('home');
+        }
+
         $historia = $this->entityManager->getRepository(Historia::class)->find($id);
 
         $generos = $historia->getGeneros();

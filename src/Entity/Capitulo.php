@@ -53,11 +53,17 @@ class Capitulo
      * @ORM\ManyToOne(targetEntity="App\Entity\LeitorAutor", inversedBy="capitulos")
      */
     private $idAutor;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comentario", mappedBy="idCapitulo")
+     */
+    private $comentarios;
     
 
     public function __construct()
     {
         $this->historicos = new ArrayCollection();
+        $this->comentarios = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -161,6 +167,37 @@ class Capitulo
     public function setIdAutor(?LeitorAutor $idAutor): self
     {
         $this->idAutor = $idAutor;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comentario[]
+     */
+    public function getComentarios(): Collection
+    {
+        return $this->comentarios;
+    }
+
+    public function addComentario(Comentario $comentario): self
+    {
+        if (!$this->comentarios->contains($comentario)) {
+            $this->comentarios[] = $comentario;
+            $comentario->setIdCapitulo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComentario(Comentario $comentario): self
+    {
+        if ($this->comentarios->contains($comentario)) {
+            $this->comentarios->removeElement($comentario);
+            // set the owning side to null (unless already changed)
+            if ($comentario->getIdCapitulo() === $this) {
+                $comentario->setIdCapitulo(null);
+            }
+        }
 
         return $this;
     }

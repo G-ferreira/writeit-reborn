@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Capitulo;
+use App\Entity\Comentario;
 use App\Entity\Historia;
 use App\Entity\Historico;
 use App\Entity\LeitorAutor;
 use App\Form\CapituloAtualizaFormType;
 use App\Form\CapituloCadastroFormType;
 use App\Form\CapituloFormType;
+use App\Form\ComentarioFormType;
 use App\Service\AutorLeitorService\AutorLeitorData;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -42,13 +44,16 @@ class CapituloController extends AbstractController
     }
 
     /**
-     * @Route("/capitulo/{id}", name="capituloPorId", methods={"GET"}))
+     * @Route("/capitulo/{id}", name="capituloPorId"))
      */
-    public function capituloHome(int $id)
+    public function capituloHome(int $id, Request $request)
     {
+        $user = $this->security->getUser();
+
         $capitulo = $this->entityManager->getRepository(Capitulo::class)->find($id);
 
-        $user = $this->security->getUser();
+        $comentarios = $capitulo->getComentarios();
+
         if($user){
             $entityManager = $this->getDoctrine()->getManager();
             $leitor = $this->entityManager->getRepository(Historico::class)->findOneBy(["autor"=>$user]);
@@ -66,8 +71,27 @@ class CapituloController extends AbstractController
 
         }
 
+        $comentario = new Comentario();
+
+        $form = $this->createForm(ComentarioFormType::class,$comentario);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $comentario->setDataPublicacao(new DateTime("now"));
+            $comentario->setIdCapitulo($capitulo);
+            $comentario->setIdLeitor($user);
+            $entityManager->persist($comentario);
+            $entityManager->flush();
+
+            //return $this->redirectToRoute('capituloPorId');
+        }
+
         return $this->render('capitulo/index.html.twig', [
             'capitulo' => $capitulo,
+            'comentarios' => $comentarios,
+            'form' => $form->createView()
         ]);
     }
 
