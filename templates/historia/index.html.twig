@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <style>
+    <style xmlns:http="http://www.w3.org/1999/xhtml">
         h4,h5{
             text-align: center;
         }
@@ -63,6 +63,10 @@
             font-size: medium;
         }
 
+        div#divLike{
+            margin-top: 30px;
+        }
+
     </style>
 
     <div class="d-flex flex-column bd-highlight mb-3">
@@ -108,20 +112,27 @@
                     {% endfor %}
                 </div>
             </div>
+
+            <div class="p-2 bd-highlight" id="divLike">
+            <div class="text-center">
+                {% if avaliacao != null %}
+                    <h5><span><a href="/unlike/{{ historia.id }}" class="unlike" id="button-unlike"><i class="fas fa-heart"></i></a></span></h5>
+                {%  endif %}
+                {% if avaliacao == null %}
+                    <h5><span><a href="/like/{{ historia.id }}" class="like" id="button-like"><i class="far fa-heart"></i></a></span></h5>
+                {% endif %}
+
+                <p>{{ avaliacoes|length }} Likes</p>
+            </div>
+            </div>
         </div>
 
-        <h3>{{ avaliacoes|length }} Likes</h3>
-
-        {% if avaliacao != null %}
-        <h3><span><a href="/unlike/{{ historia.id }}" class="unlike" id="button-unlike"><i class="fas fa-heart"></i></a></span></h3>
-        {%  endif %}
-        {% if avaliacao == null %}
-        <h3><span><a href="/like/{{ historia.id }}" class="like" id="button-like"><i class="far fa-heart"></i></a></span></h3>
-        {% endif %}
-
-        <a class="twitter-hashtag-button"
-           href="https://twitter.com/intent/tweet?button_hashtag=WriteIt&text=Lendo%20{{ historia.getTitulo }}">
-            Tweet #WriteIt</a>
+        <div class="text-center">
+            <a class="btn btn-info"
+               href="http://twitter.com/share?text=Lendo%20{{ historia.getTitulo }}&hashtags=WriteIt&url=https://t.co/">
+                Tweet <i class="fab fa-twitter"></i>
+            </a>
+        </div>
 
         <div class="container-fluid" id="divTitulo">
             <div class="d-flex justify-content-between">
@@ -151,23 +162,7 @@
     </div>
 
     <script type="text/javascript">
-        // $(document).ready(function () {
-        //     $('like').click(function () {
-        //         var idHistoria = $(this).attributes('id');
-        //         $.ajax({
-        //             url: '/index.html.twig',
-        //             type: 'post',
-        //             async: false,
-        //             data:{
-        //                 'liked': 1,
-        //                 'idHistoria':idHistoria
-        //             },
-        //             success:function () {
-        //
-        //             }
-        //         })
-        //     })
-        // })
+
     </script>
 
 {% endblock %}

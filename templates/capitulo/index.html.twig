@@ -79,6 +79,9 @@
 
         div#divFormComentario button{
             float: right;
+            margin-bottom: 30px;
+            background-color: #636163;
+            border-color: #636163;
         }
 
         div#box{
@@ -98,6 +101,10 @@
 
         div.row#rowComentarios{
             margin-top: 40px;
+        }
+
+        div#divFooter{
+            height: 100px;
         }
 
     </style>
@@ -154,6 +161,10 @@
         <div id="divFormComentario">
             {{ form(form) }}
         </div>
+
+        <div id="divFooter">
+
+        </div>
 {#                <ul class="nav justify-content-between">#}
 {#                    <li class="nav-item">#}
 {#                        <button class="btn btn-outline-secondary"><i class="fas fa-arrow-left"></i></button>#}
@@ -162,6 +173,7 @@
 {#                        <button class="btn btn-outline-secondary" id="escuro"><i class="fas fa-arrow-right"></i></button>#}
 {#                    </li>#}
 {#                </ul>#}
+
     </div>
 
     <script type="text/javascript">

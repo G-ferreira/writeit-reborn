@@ -327,18 +327,6 @@ class HistoriaController extends AbstractController
 
         $avaliacao = $this->entityManager->getRepository(Avaliacao::class)->findBy(["idHistoria" => $historia->getId(),"idLeitor" => $user->getId()]);
 
-        $generos = $historia->getGeneros();
-
-        $categorias = $historia->getCategorias();
-
-        $autor = $historia->getIdAutor();
-
-        $nome_autor = $autor->getApelido();
-
-        $capitulos = $this->entityManager->getRepository(Capitulo::class)->findBy(["idHistoria" => $id, "status" => 1]);
-
-        $avalicoes = $historia->getAvaliacaos();
-
         if ($avaliacao == null){
             $votoLeitor = new Avaliacao();
             $entityManager = $this->getDoctrine()->getManager();
@@ -351,16 +339,6 @@ class HistoriaController extends AbstractController
 
         return $this->redirectToRoute('historiaPorId',array('id'=>$id));
 
-//        return $this->render('historia/index.html.twig', [
-//            'historia' => $historia,
-//            'capitulos' =>$capitulos,
-//            'nome_autor' => $nome_autor,
-//            'autor' => $autor,
-//            'generos' => $generos,
-//            'categorias' => $categorias,
-//            'avaliacoes' => $avalicoes,
-//            'avaliacao' => $avaliacao
-//        ]);
     }
 
     /**
@@ -374,18 +352,6 @@ class HistoriaController extends AbstractController
 
         $avaliacao = $this->entityManager->getRepository(Avaliacao::class)->findOneBy(["idHistoria" => $historia->getId(), "idLeitor" => $user]);
 
-        $generos = $historia->getGeneros();
-
-        $categorias = $historia->getCategorias();
-
-        $autor = $historia->getIdAutor();
-
-        $nome_autor = $autor->getApelido();
-
-        $capitulos = $this->entityManager->getRepository(Capitulo::class)->findBy(["idHistoria" => $id, "status" => 1]);
-
-        $avalicoes = $historia->getAvaliacaos();
-
         if ($avaliacao != null){
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($avaliacao);
@@ -394,16 +360,5 @@ class HistoriaController extends AbstractController
 
         return $this->redirectToRoute('historiaPorId',array('id'=>$id));
 
-
-//        return $this->render('historia/index.html.twig', [
-//            'historia' => $historia,
-//            'capitulos' =>$capitulos,
-//            'nome_autor' => $nome_autor,
-//            'autor' => $autor,
-//            'generos' => $generos,
-//            'categorias' => $categorias,
-//            'avaliacoes' => $avalicoes,
-//            'avaliacao' => $avaliacao
-//        ]);
     }
 }
