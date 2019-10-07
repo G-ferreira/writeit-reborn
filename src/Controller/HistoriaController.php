@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Avaliacao;
 use App\Entity\Capitulo;
 use App\Entity\Comentario;
 use App\Entity\Genero;
@@ -153,13 +154,19 @@ class HistoriaController extends AbstractController
 
         $capitulos = $this->entityManager->getRepository(Capitulo::class)->findBy(["idHistoria" => $id, "status" => 1]);
 
+        $avaliacao = $this->entityManager->getRepository(Avaliacao::class)->findOneBy(["idHistoria" => $historia->getId(), "idLeitor" => $user]);
+
+        $avalicoes = $historia->getAvaliacaos();
+
         return $this->render('historia/index.html.twig', [
             'historia' => $historia,
             'capitulos' =>$capitulos,
             'nome_autor' => $nome_autor,
             'autor' => $autor,
             'generos' => $generos,
-            'categorias' => $categorias
+            'categorias' => $categorias,
+            'avaliacoes' => $avalicoes,
+            'avaliacao' => $avaliacao
         ]);
     }
 
@@ -307,5 +314,96 @@ class HistoriaController extends AbstractController
         }else{
             return $this->redirectToRoute('home');
         }
+    }
+
+    /**
+     * @Route("/like/{id}")
+     */
+    public function like(int $id)
+    {
+        $user = $this->security->getUser();
+
+        $historia = $this->entityManager->getRepository(Historia::class)->find($id);
+
+        $avaliacao = $this->entityManager->getRepository(Avaliacao::class)->findBy(["idHistoria" => $historia->getId(),"idLeitor" => $user->getId()]);
+
+        $generos = $historia->getGeneros();
+
+        $categorias = $historia->getCategorias();
+
+        $autor = $historia->getIdAutor();
+
+        $nome_autor = $autor->getApelido();
+
+        $capitulos = $this->entityManager->getRepository(Capitulo::class)->findBy(["idHistoria" => $id, "status" => 1]);
+
+        $avalicoes = $historia->getAvaliacaos();
+
+        if ($avaliacao == null){
+            $votoLeitor = new Avaliacao();
+            $entityManager = $this->getDoctrine()->getManager();
+            $votoLeitor->setIdHistoria($historia);
+            $votoLeitor->setIdLeitor($user);
+            $votoLeitor->setVoto(1);
+            $entityManager->persist($votoLeitor);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('historiaPorId',array('id'=>$id));
+
+//        return $this->render('historia/index.html.twig', [
+//            'historia' => $historia,
+//            'capitulos' =>$capitulos,
+//            'nome_autor' => $nome_autor,
+//            'autor' => $autor,
+//            'generos' => $generos,
+//            'categorias' => $categorias,
+//            'avaliacoes' => $avalicoes,
+//            'avaliacao' => $avaliacao
+//        ]);
+    }
+
+    /**
+     * @Route("/unlike/{id}")
+     */
+    public function unlike(int $id)
+    {
+        $user = $this->security->getUser();
+
+        $historia = $this->entityManager->getRepository(Historia::class)->find($id);
+
+        $avaliacao = $this->entityManager->getRepository(Avaliacao::class)->findOneBy(["idHistoria" => $historia->getId(), "idLeitor" => $user]);
+
+        $generos = $historia->getGeneros();
+
+        $categorias = $historia->getCategorias();
+
+        $autor = $historia->getIdAutor();
+
+        $nome_autor = $autor->getApelido();
+
+        $capitulos = $this->entityManager->getRepository(Capitulo::class)->findBy(["idHistoria" => $id, "status" => 1]);
+
+        $avalicoes = $historia->getAvaliacaos();
+
+        if ($avaliacao != null){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($avaliacao);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('historiaPorId',array('id'=>$id));
+
+
+//        return $this->render('historia/index.html.twig', [
+//            'historia' => $historia,
+//            'capitulos' =>$capitulos,
+//            'nome_autor' => $nome_autor,
+//            'autor' => $autor,
+//            'generos' => $generos,
+//            'categorias' => $categorias,
+//            'avaliacoes' => $avalicoes,
+//            'avaliacao' => $avaliacao
+//        ]);
     }
 }

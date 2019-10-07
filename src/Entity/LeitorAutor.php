@@ -77,10 +77,21 @@ class LeitorAutor implements UserInterface
      */
     private $SMFA;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Avaliacao", inversedBy="idLeitor")
+     */
+    private $avaliacao;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Avaliacao", mappedBy="idLeitor")
+     */
+    private $avaliacaos;
+
     public function __construct()
     {
         $this->historias = new ArrayCollection();
         $this->capitulos = new ArrayCollection();
+        $this->avaliacaos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -292,6 +303,49 @@ class LeitorAutor implements UserInterface
     public function setSMFA(?string $SMFA): self
     {
         $this->SMFA = $SMFA;
+
+        return $this;
+    }
+
+    public function getAvaliacao(): ?Avaliacao
+    {
+        return $this->avaliacao;
+    }
+
+    public function setAvaliacao(?Avaliacao $avaliacao): self
+    {
+        $this->avaliacao = $avaliacao;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Avaliacao[]
+     */
+    public function getAvaliacaos(): Collection
+    {
+        return $this->avaliacaos;
+    }
+
+    public function addAvaliacao(Avaliacao $avaliacao): self
+    {
+        if (!$this->avaliacaos->contains($avaliacao)) {
+            $this->avaliacaos[] = $avaliacao;
+            $avaliacao->setIdLeitor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvaliacao(Avaliacao $avaliacao): self
+    {
+        if ($this->avaliacaos->contains($avaliacao)) {
+            $this->avaliacaos->removeElement($avaliacao);
+            // set the owning side to null (unless already changed)
+            if ($avaliacao->getIdLeitor() === $this) {
+                $avaliacao->setIdLeitor(null);
+            }
+        }
 
         return $this;
     }

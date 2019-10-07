@@ -75,6 +75,11 @@ class Historia
      */
     private $categorias;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Avaliacao", mappedBy="idHistoria")
+     */
+    private $avaliacaos;
+
     public function __construct()
     {
         $this->categoria = new ArrayCollection();
@@ -83,6 +88,7 @@ class Historia
         $this->data_publicacao = new \DateTime();
         $this->generos = new ArrayCollection();
         $this->categorias = new ArrayCollection();
+        $this->avaliacaos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -275,6 +281,37 @@ class Historia
         if ($this->categorias->contains($categoria)) {
             $this->categorias->removeElement($categoria);
             $categoria->removeHistoria($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Avaliacao[]
+     */
+    public function getAvaliacaos(): Collection
+    {
+        return $this->avaliacaos;
+    }
+
+    public function addAvaliacao(Avaliacao $avaliacao): self
+    {
+        if (!$this->avaliacaos->contains($avaliacao)) {
+            $this->avaliacaos[] = $avaliacao;
+            $avaliacao->setIdHistoria($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvaliacao(Avaliacao $avaliacao): self
+    {
+        if ($this->avaliacaos->contains($avaliacao)) {
+            $this->avaliacaos->removeElement($avaliacao);
+            // set the owning side to null (unless already changed)
+            if ($avaliacao->getIdHistoria() === $this) {
+                $avaliacao->setIdHistoria(null);
+            }
         }
 
         return $this;

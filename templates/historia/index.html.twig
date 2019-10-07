@@ -51,8 +51,16 @@
             text-decoration: none;
         }
 
-        button#comentario_form_save.btn-primary.btn{
-            float: right;
+        h3{
+            text-align: center;
+        }
+
+        a.badge.badge-secondary{
+            font-size: medium;
+        }
+
+        a.badge.badge-info{
+            font-size: medium;
         }
 
     </style>
@@ -72,7 +80,7 @@
         <div class="container-fluid" id="divCorpo">
             <div class="d-flex justify-content-center">
                 <div class="d-flex flex-column bd-highlight mb-3">
-                    <h4>{{ historia.getTitulo }}</h4>
+                    <h3>{{ historia.getTitulo }}</h3>
                     <h4 class="font-weight-light"><a href="/autores/{{ autor.getId }}" class="font-weight-light">{{ nome_autor }}</a></h4>
 
                     <img src="/uploads/images/historias/{{ historia.image }}" alt="">
@@ -102,6 +110,19 @@
             </div>
         </div>
 
+        <h3>{{ avaliacoes|length }} Likes</h3>
+
+        {% if avaliacao != null %}
+        <h3><span><a href="/unlike/{{ historia.id }}" class="unlike" id="button-unlike"><i class="fas fa-heart"></i></a></span></h3>
+        {%  endif %}
+        {% if avaliacao == null %}
+        <h3><span><a href="/like/{{ historia.id }}" class="like" id="button-like"><i class="far fa-heart"></i></a></span></h3>
+        {% endif %}
+
+        <a class="twitter-hashtag-button"
+           href="https://twitter.com/intent/tweet?button_hashtag=WriteIt&text=Lendo%20{{ historia.getTitulo }}">
+            Tweet #WriteIt</a>
+
         <div class="container-fluid" id="divTitulo">
             <div class="d-flex justify-content-between">
                 <h4>Capítulos</h4>
@@ -129,4 +150,26 @@
 
     </div>
 
+    <script type="text/javascript">
+        // $(document).ready(function () {
+        //     $('like').click(function () {
+        //         var idHistoria = $(this).attributes('id');
+        //         $.ajax({
+        //             url: '/index.html.twig',
+        //             type: 'post',
+        //             async: false,
+        //             data:{
+        //                 'liked': 1,
+        //                 'idHistoria':idHistoria
+        //             },
+        //             success:function () {
+        //
+        //             }
+        //         })
+        //     })
+        // })
+    </script>
+
 {% endblock %}
+
+
