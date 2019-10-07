@@ -85,7 +85,7 @@ class CapituloController extends AbstractController
             $entityManager->persist($comentario);
             $entityManager->flush();
 
-            //return $this->redirectToRoute('capituloPorId');
+            return $this->redirectToRoute('capituloPorId',array('id'=>$id));
         }
 
         return $this->render('capitulo/index.html.twig', [
