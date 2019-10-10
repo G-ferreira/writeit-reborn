@@ -9,6 +9,18 @@
                         padding-top: 30px;
                 }
 
+                div#formHistoria button{
+                        float: right;
+                        background-color: #636163;
+                        border-color: #636163;
+                        margin-bottom: 30px;
+                }
+
+                div#formHistoria button:hover{
+                        background-color: #878587;
+                        border-color: #878587;
+                }
+
         </style>
 
         <div class="container">
@@ -17,7 +29,9 @@
                         Para publicar história é necessário publicar pelo menos um capítulo!
                 </div>
 
-                {{ form(form) }}
+                <div id="formHistoria">
+                        {{ form(form) }}
+                </div>
         </div>
 
 {% endblock %}

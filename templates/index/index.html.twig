@@ -315,6 +315,8 @@
     img#image_autor.rounded-circle{
         width: 80px;
         height: 80px;
+        object-fit: cover;
+        object-position: center;
     }
 
     a#autores.card2{
@@ -573,7 +575,7 @@
         </div>
         <div class="row">
             {% for key,historia in historias %}
-                {% if historia.getCapitulos|length > 0 and  historia.getRascunho == 1 and key < 5 %}
+                {% if historia.getCapitulos|length > 0 and  historia.getRascunho == 1 and key < 6 %}
                 <div class="col">
                     <div class="card">
                         <div class="additional">

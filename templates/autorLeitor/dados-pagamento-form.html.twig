@@ -8,13 +8,28 @@
         .container{
             padding-top: 30px;
         }
+
+        div#form button{
+            float: right;
+            background-color: #636163;
+            border-color: #636163;
+            margin-bottom: 30px;
+        }
+
+        div#form button:hover{
+            background-color: #878587;
+            border-color: #878587;
+        }
+
     </style>
 
     <div class="container">
 
         <h1>Dados Pagamento</h1>
 
-        {{ form(form) }}
+        <div id="form">
+            {{ form(form) }}
+        </div>
     </div>
 
 {% endblock %}

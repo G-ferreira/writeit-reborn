@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Categoria;
+use App\Entity\Denuncia;
 use App\Entity\Genero;
 use App\Entity\Historia;
 use App\Entity\LeitorAutor;
@@ -60,9 +61,15 @@ class AdminController extends AbstractController
 
         $historias = $this->entityManager->getRepository(Historia::class)->findAll();
 
+        $denunciasPendentes = $this->entityManager->getRepository(Denuncia::class)->findBy(["status" => 0]);
+
+        $denunciasAprovadas = $this->entityManager->getRepository(Denuncia::class)->findBy(["status" => 1]);
+
         return $this->render('index/index-admin.html.twig',[
             'autores' => $autores,
-            'historias' => $historias
+            'historias' => $historias,
+            'denunciasPendentes' => $denunciasPendentes,
+            'denunciasAprovadas' => $denunciasAprovadas
         ]);
     }
 

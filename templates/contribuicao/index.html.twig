@@ -31,7 +31,19 @@
             height: 200px;
             width: 200px;
             object-fit: cover;
-            object-position: center;
+        }
+
+        div#formContribuicao button{
+            background-color: #63a563;
+            color: white;
+            border-color: #63a563;
+            width: 100%;
+        }
+
+        div#formContribuicao button:hover{
+            background-color: #09863e;
+            color: white;
+            border-color: #09863e;
         }
 
     </style>
@@ -47,7 +59,9 @@
             </div>
             <div class="col">
                 <div class="shadow p-3 mb-5 bg-white rounded">
+                    <div id="formContribuicao">
                         {{ form(form) }}
+                    </div>
                 </div>
             </div>
         </div>

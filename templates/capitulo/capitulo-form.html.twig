@@ -8,10 +8,25 @@
         .container{
             padding-top: 40px;
         }
+
+        div#form button{
+            float: right;
+            background-color: #636163;
+            border-color: #636163;
+            margin-bottom: 30px;
+        }
+
+        div#form button:hover{
+            background-color: #878587;
+            border-color: #878587;
+        }
+
     </style>
 
     <div class="container">
-        {{ form(form) }}
+        <div id="form">
+            {{ form(form) }}
+        </div>
     </div>
 
 {% endblock %}
